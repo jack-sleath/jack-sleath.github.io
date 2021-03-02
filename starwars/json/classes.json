@@ -1,6 +1,6 @@
 [
   {
-    "classname": "B1 Engineer",
+    "classname": "CIS - B1 Engineer",
     "classStats": {
       "skills": {
         "str": "",
@@ -46,7 +46,7 @@
     }
   },
   {
-    "classname": "B1 Sniper",
+    "classname": "CIS - B1 Sniper",
     "classStats": {
       "skills": {
         "str": "",
@@ -92,7 +92,7 @@
     }
   },
   {
-    "classname": "Assault Clone DC-15a",
+    "classname": "GAR - Assault Clone DC-15a",
     "classStats": {
       "skills": {
         "str": "",
@@ -138,7 +138,7 @@
     }
   },
   {
-    "classname": "Assault Clone DC-15s",
+    "classname": "GAR - Assault Clone DC-15s",
     "classStats": {
       "skills": {
         "str": "",
@@ -184,7 +184,7 @@
     }
   },
   {
-    "classname": "Assault Clone Dual DC-17",
+    "classname": "GAR - Assault Clone Dual DC-17",
     "classStats": {
       "skills": {
         "str": "",
@@ -230,7 +230,7 @@
     }
   },
   {
-    "classname": "Heavy Clone Z-6",
+    "classname": "GAR - Heavy Clone Z-6",
     "classStats": {
       "skills": {
         "str": "",
@@ -276,7 +276,7 @@
     }
   },
   {
-    "classname": "Heavy Clone DC-15s",
+    "classname": "GAR - Heavy Clone DC-15s",
     "classStats": {
       "skills": {
         "str": "",
