@@ -93,6 +93,8 @@ function loadClassFromJSON(jsonText) {
     setValueFromName('secondarybonus', jsonText.weapons.secondary.bonus);
     setValueFromName('secondarytype', jsonText.weapons.secondary.type);
     setValueFromName('extraskills', jsonText.extraSkills);
+    setValueFromName('background', jsonText.background);
+    setValueFromName('alignment', jsonText.alignment);
 }
 
 function getValueFromName(name) {
