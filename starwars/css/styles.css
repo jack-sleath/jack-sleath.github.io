@@ -208,14 +208,16 @@ form.charsheet {
                     }
 
                         form.charsheet main > section section.attributes div.scores ul li {
-                            height: 80px;
-                            width: 95%;
+                            height: 70px;
+                            width: 90%;
                             background-color: white;
                             border: 1px solid black;
                             text-align: center;
                             display: flex;
                             flex-direction: column;
                             border-radius: 10px;
+                            margin-top: 5px;
+                            margin-bottom: 5px;
                         }
 
                             form.charsheet main > section section.attributes div.scores ul li input {
@@ -403,7 +405,7 @@ form.charsheet {
                         border: 1px solid black;
                         margin: 10px;
                         margin-bottom: 5px;
-                        border-radius: 10px 10px 0 0;
+                        border-radius: 10px;
                     }
 
                         form.charsheet main section.combat > div.hp > div.regular > div.max {
