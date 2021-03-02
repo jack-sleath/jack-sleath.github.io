@@ -117,9 +117,7 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (result) {
             classes = result;
+            populateClassesDropdown();
         },
-    }).then(function () {
-        console.log('2');
-        populateClassesDropdown();
     });
 });
