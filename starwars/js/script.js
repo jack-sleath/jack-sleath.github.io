@@ -115,10 +115,7 @@ $(document).ready(function () {
         beforeSend: function () {/*loading*/ },
         dataType: 'json',
         success: function (result) {
-
             classes = result;
-            console.log(classes);
-
         },
     }).then(function () {
         populateClassesDropdown();
