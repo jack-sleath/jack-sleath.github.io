@@ -132,8 +132,7 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (result) {
             classes = result;
+            populateClassesDropdown();
         },
-    }).then(function () {
-        populateClassesDropdown();
     });
 });
