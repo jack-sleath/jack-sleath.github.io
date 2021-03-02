@@ -105,6 +105,7 @@ function setValueFromName(name, value) {
 }
 
 function populateClassesDropdown() {
+    console.log('populateClassesDropdown');
     let dropdown = $('#preBuiltClasses');
 
     dropdown.empty();
