@@ -228,5 +228,97 @@
       "credits": "",
       "backstory": ""
     }
+  },
+  {
+    "classname": "Heavy Clone Z-6",
+    "classStats": {
+      "skills": {
+        "str": "",
+        "dex": "",
+        "con": "",
+        "wis": "",
+        "int": "",
+        "cha": ""
+      },
+      "health": {
+        "max": "12",
+        "current": "12"
+      },
+      "weapons": {
+        "primary": {
+          "name": "Z-6",
+          "bonus": "2d6 35rng",
+          "type": "AOE 5m Radius"
+        },
+        "secondary": {
+          "name": "DC-17",
+          "bonus": "1d6 30rng",
+          "type": ""
+        }
+      },
+      "personality": {
+        "traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": ""
+      },
+      "characterName": "",
+      "class": "Heavy Clone",
+      "background": "Clone",
+      "playername": "",
+      "species": "Clone",
+      "alignment": "GAR",
+      "ac": "10",
+      "speed": "25",
+      "extraSkills": "",
+      "credits": "",
+      "backstory": ""
+    }
+  },
+  {
+    "classname": "Heavy Clone DC-15s",
+    "classStats": {
+      "skills": {
+        "str": "",
+        "dex": "",
+        "con": "",
+        "wis": "",
+        "int": "",
+        "cha": ""
+      },
+      "health": {
+        "max": "12",
+        "current": "12"
+      },
+      "weapons": {
+        "primary": {
+          "name": "DC-15s",
+          "bonus": "1d6 40rng",
+          "type": "Can attack twice per turn"
+        },
+        "secondary": {
+          "name": "Rocket Launcher",
+          "bonus": "3d4 50rng",
+          "type": ""
+        }
+      },
+      "personality": {
+        "traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": ""
+      },
+      "characterName": "",
+      "class": "Heavy Clone",
+      "background": "Clone",
+      "playername": "",
+      "species": "Clone",
+      "alignment": "GAR",
+      "ac": "10",
+      "speed": "25",
+      "extraSkills": "",
+      "credits": "",
+      "backstory": ""
+    }
   }
 ]
