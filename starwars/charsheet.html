@@ -1,0 +1,188 @@
+﻿<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>GAR vs CIS Character Sheet</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+</head>
+
+<body>
+    <div>
+
+        <form class="charsheet">
+            <header>
+                <section class="charname">
+                    <label for="charname">Character Name</label><input name="charname" placeholder="'Nickname' XX-9999" />
+                </section>
+                <section class="misc">
+                    <ul>
+                        <li>
+                            <label for="class">Class</label><input name="class" placeholder="Class" />
+                        </li>
+                        <li>
+                            <label for="background">Background</label><input name="background" placeholder="Clone/Droid" />
+                        </li>
+                        <li>
+                            <label for="playername">Player Name</label><input name="playername" placeholder="Discord Username">
+                        </li>
+                        <li>
+                            <label for="species">Species</label><input name="species" placeholder="Species" />
+                        </li>
+                        <li>
+                            <label for="alignment">Alignment</label><input name="alignment" placeholder="GAR/CIS" />
+                        </li>
+                    </ul>
+                </section>
+            </header>
+            <main>
+                <section>
+                    <section class="attributes">
+                        <div class="scores">
+                            <ul>
+                                <li>
+                                    <div class="score">
+                                        <label for="Strengthscore">Strength</label><input name="Strengthscore" placeholder="10" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="score">
+                                        <label for="Dexterityscore">Dexterity</label><input name="Dexterityscore" placeholder="10" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="score">
+                                        <label for="Constitutionscore">Constitution</label><input name="Constitutionscore" placeholder="10" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="score">
+                                        <label for="Wisdomscore">Wisdom</label><input name="Wisdomscore" placeholder="10" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="score">
+                                        <label for="Intelligencescore">Intelligence</label><input name="Intelligencescore" placeholder="10" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="score">
+                                        <label for="Charismascore">Charisma</label><input name="Charismascore" placeholder="10" />
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section class="combat">
+                        <div class="armorclass">
+                            <div>
+                                <label for="ac">Armor Class</label><input name="ac" placeholder="10" type="text" />
+                            </div>
+                        </div>
+                        <div class="speed">
+                            <div>
+                                <label for="speed">Speed</label><input name="speed" placeholder="10" type="text" />
+                            </div>
+                        </div>
+                        <div class="hp">
+                            <div class="regular">
+                                <div class="max">
+                                    <label for="maxhp">Hit Point Maximum</label><input name="maxhp" placeholder="10" type="text" />
+                                </div>
+                                <div class="current">
+                                    <label for="currenthp">Current Hit Points</label><input name="currenthp" type="number" />
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="attacksandskills">
+                        <div>
+                            <label>Attacks & Skills</label>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Atk Bonus
+                                        </th>
+                                        <th>
+                                            Damage/Type
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input name="primaryname" type="text" />
+                                        </td>
+                                        <td>
+                                            <input name="primarybonus" type="text" />
+                                        </td>
+                                        <td>
+                                            <input name="primarytype" type="text" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input name="secondaryname" type="text" />
+                                        </td>
+                                        <td>
+                                            <input name="secondarybonus" type="text" />
+                                        </td>
+                                        <td>
+                                            <input name="secondarytype" type="text" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <textarea name="extraskills"></textarea>
+                        </div>
+                    </section>
+                    <section class="equipment">
+                        <div>
+                            <label>Equipment</label>
+                            <div class="money">
+                                <ul>
+                                    <li>
+                                        <label for="credits">Cred</label><input name="credits" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <textarea naem="equipment" placeholder="Equipment list here"></textarea>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section class="flavor">
+                        <div class="personality">
+                            <label for="traits">Traits</label><textarea name="traits"></textarea>
+                        </div>
+                        <div class="ideals">
+                            <label for="ideals">Ideals</label><textarea name="ideals"></textarea>
+                        </div>
+                        <div class="bonds">
+                            <label for="bonds">Bonds</label><textarea name="bonds"></textarea>
+                        </div>
+                        <div class="flaws">
+                            <label for="flaws">Flaws</label><textarea name="flaws"></textarea>
+                        </div>
+                    </section>
+                    <section class="features">
+                        <div>
+                            <label for="backstory">Backstory</label><textarea name="backstory"></textarea>
+                        </div>
+                    </section>
+                </section>
+            </main>
+        </form>
+        <button onclick="generateJSON()">Generate JSON</button>
+    </div>
+    <a href="../index.md">Home...</a>
+</body>
+</html>
