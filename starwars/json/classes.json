@@ -40,7 +40,7 @@
       "alignment": "CIS",
       "ac": "5",
       "speed": "15",
-      "extraSkills": "Can use action to ‘Build’ a droid: Takes entire turn (can only have two creations on the field, modified droids are considered a creation)\n\tChoose one until next loadout change:\nCreates Auto Turret (Speed:0 AC 4 HP 6; Action Attack: B-2)\nDeploy Squad Shield (Ac 3, HP 40) (can not be shot through while inside) lasts 1 turn",
+      "extraSkills": "Can use action to 'Build' a droid: Takes entire turn (can only have two creations on the field, modified droids are considered a creation)\n\tChoose one until next loadout change:\nCreates Auto Turret (Speed:0 AC 4 HP 6; Action Attack: B-2)\nDeploy Squad Shield (Ac 3, HP 40) (can not be shot through while inside) lasts 1 turn",
       "credits": "",
       "backstory": ""
     }
