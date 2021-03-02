@@ -123,9 +123,6 @@ function loadFromDropdown() {
 }
 
 $(document).ready(function () {
-
-
-
     $.ajax({
         type: 'GET',
         url: 'json/classes.json',
