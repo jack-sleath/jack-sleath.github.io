@@ -181,51 +181,52 @@
       "extraSkills": "",
       "credits": "",
       "backstory": ""
-    },
-    {
-      "classname": "Assault Clone Dual DC-17",
-      "classStats": {
-        "skills": {
-          "str": "",
-          "dex": "",
-          "con": "",
-          "wis": "",
-          "int": "",
-          "cha": ""
-        },
-        "health": {
-          "max": "10",
-          "current": "10"
-        },
-        "weapons": {
-          "primary": {
-            "name": "DC-17",
-            "bonus": "2d6 30rng",
-            "type": "Dual Wielded"
-          },
-          "secondary": {
-            "name": "DC-17",
-            "bonus": "1d6 30rng",
-            "type": ""
-          }
-        },
-        "personality": {
-          "traits": "",
-          "ideals": "",
-          "bonds": "",
-          "flaws": ""
-        },
-        "characterName": "",
-        "class": "Assault Clone",
-        "background": "Clone",
-        "playername": "",
-        "species": "Clone",
-        "alignment": "GAR",
-        "ac": "8",
-        "speed": "30",
-        "extraSkills": "",
-        "credits": "",
-        "backstory": ""
-      }
     }
+  },
+  {
+    "classname": "Assault Clone Dual DC-17",
+    "classStats": {
+      "skills": {
+        "str": "",
+        "dex": "",
+        "con": "",
+        "wis": "",
+        "int": "",
+        "cha": ""
+      },
+      "health": {
+        "max": "10",
+        "current": "10"
+      },
+      "weapons": {
+        "primary": {
+          "name": "DC-17",
+          "bonus": "2d6 30rng",
+          "type": "Dual Wielded"
+        },
+        "secondary": {
+          "name": "DC-17",
+          "bonus": "1d6 30rng",
+          "type": ""
+        }
+      },
+      "personality": {
+        "traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": ""
+      },
+      "characterName": "",
+      "class": "Assault Clone",
+      "background": "Clone",
+      "playername": "",
+      "species": "Clone",
+      "alignment": "GAR",
+      "ac": "8",
+      "speed": "30",
+      "extraSkills": "",
+      "credits": "",
+      "backstory": ""
+    }
+  }
 ]
