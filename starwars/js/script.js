@@ -129,5 +129,5 @@ $(document).ready(function () {
         classes = result;
         console.log('classes loaded', classes);
         populateClassesDropdown();
-    };
+    });
 });
