@@ -89,6 +89,7 @@ function setValueFromName(name, value) {
 }
 
 function populateClassesDropdown() {
+    console.log('3');
     let dropdown = $('#preBuiltClasses');
 
     dropdown.empty();
@@ -107,6 +108,7 @@ function loadFromDropdown() {
 }
 
 $(document).ready(function () {
+    console.log('1');
     $.ajax({
         type: 'GET',
         url: 'json/classes.json',
@@ -117,6 +119,7 @@ $(document).ready(function () {
             classes = result;
         },
     }).then(function () {
+        console.log('2');
         populateClassesDropdown();
     });
 });
