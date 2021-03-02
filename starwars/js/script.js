@@ -124,6 +124,7 @@ function loadFromDropdown() {
 }
 
 $(document).ready(function () {
+    console.log('document ready');
     $.ajax({
         type: 'GET',
         url: 'json/classes.json',
@@ -131,7 +132,9 @@ $(document).ready(function () {
         beforeSend: function () {/*loading*/ },
         dataType: 'json',
         success: function (result) {
+
             classes = result;
+            console.log('classes loaded', classes);
             populateClassesDropdown();
         },
     });
