@@ -86,9 +86,28 @@ function setValueFromName(name, value) {
     return $('[name = "' + name + '"]').val(value);
 }
 
+function populateClassesDropdown() {
+    let dropdown = $('#preBuiltClasses');
 
+    dropdown.empty();
+
+    dropdown.append('<option selected="true" disabled>Choose PrebuiltClass</option>');
+    dropdown.prop('selectedIndex', 0);
+
+    // Populate dropdown with list of provinces
+    $.each(classes, function (key, entry) {
+        dropdown.append($('<option></option>').attr('value', JSON.stringify(entry.classStats)).text(entry.classname));
+    });
+}
+
+function loadFromDropdown() {
+    loadPageFromJSON($.parseJSON(getValueFromName('preBuiltClasses')));
+}
 
 $(document).ready(function () {
+    
+
+    
     $.ajax({
         type: 'GET',
         url: 'json/classes.json',
@@ -101,5 +120,7 @@ $(document).ready(function () {
             console.log(classes);
 
         },
+    }).then(function () {
+        populateClassesDropdown();
     });
 });
