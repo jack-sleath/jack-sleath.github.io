@@ -55,11 +55,11 @@ function loadPageFromJSON(jsonText) {
     setValueFromName('Strengthscore', jsonText.skills.str);
     setValueFromName('Dexterityscore', jsonText.skills.dex);
     setValueFromName('Constitutionscore', jsonText.skills.con);
-    setValueFromName('Wisdomscore', jsonText.skills.wis );
+    setValueFromName('Wisdomscore', jsonText.skills.wis);
     setValueFromName('Intelligencescore', jsonText.skills.int);
     setValueFromName('Charismascore', jsonText.skills.cha);
-    setValueFromName('ac', jsonText.ac );
-    setValueFromName('speed', jsonText.speed );
+    setValueFromName('ac', jsonText.ac);
+    setValueFromName('speed', jsonText.speed);
     setValueFromName('maxhp', jsonText.health.max);
     setValueFromName('currenthp', jsonText.health.current);
     setValueFromName('primaryname', jsonText.weapons.primary.name);
@@ -68,7 +68,7 @@ function loadPageFromJSON(jsonText) {
     setValueFromName('secondaryname', jsonText.weapons.secondary.name);
     setValueFromName('secondarybonus', jsonText.weapons.secondary.bonus);
     setValueFromName('secondarytype', jsonText.weapons.secondary.type);
-    setValueFromName('extraskills', jsonText.extraSkills );
+    setValueFromName('extraskills', jsonText.extraSkills);
     setValueFromName('credits', jsonText.credits);
     setValueFromName('equipment', jsonText.equipment);
     setValueFromName('traits', jsonText.personality.traits);
@@ -76,6 +76,24 @@ function loadPageFromJSON(jsonText) {
     setValueFromName('bonds', jsonText.personality.bonds);
     setValueFromName('flaws', jsonText.personality.flaws);
     setValueFromName('backstory', jsonText.backstory);
+}
+
+function loadClassFromJSON(jsonText) {
+    setValueFromName('class', jsonText.class);
+    setValueFromName('species', jsonText.species);
+    setValueFromName('alignment', jsonText.alignment);
+    setValueFromName('ac', jsonText.ac);
+    setValueFromName('speed', jsonText.speed);
+    setValueFromName('maxhp', jsonText.health.max);
+    setValueFromName('currenthp', jsonText.health.current);
+    setValueFromName('primaryname', jsonText.weapons.primary.name);
+    setValueFromName('primarybonus', jsonText.weapons.primary.bonus);
+    setValueFromName('primarytype', jsonText.weapons.primary.type);
+    setValueFromName('secondaryname', jsonText.weapons.secondary.name);
+    setValueFromName('secondarybonus', jsonText.weapons.secondary.bonus);
+    setValueFromName('secondarytype', jsonText.weapons.secondary.type);
+    setValueFromName('extraskills', jsonText.extraSkills);
+    setValueFromName('equipment', jsonText.equipment);
 }
 
 function getValueFromName(name) {
@@ -101,13 +119,13 @@ function populateClassesDropdown() {
 }
 
 function loadFromDropdown() {
-    loadPageFromJSON($.parseJSON(getValueFromName('preBuiltClasses')));
+    loadClassFromJSON($.parseJSON(getValueFromName('preBuiltClasses')));
 }
 
 $(document).ready(function () {
-    
 
-    
+
+
     $.ajax({
         type: 'GET',
         url: 'json/classes.json',
