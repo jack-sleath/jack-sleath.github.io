@@ -90,5 +90,51 @@
       "credits": "",
       "backstory": ""
     }
+  },
+  {
+    "classname": "Assault Clone DC-15a",
+    "classStats": {
+      "skills": {
+        "str": "",
+        "dex": "",
+        "con": "",
+        "wis": "",
+        "int": "",
+        "cha": ""
+      },
+      "health": {
+        "max": "10",
+        "current": "10"
+      },
+      "weapons": {
+        "primary": {
+          "name": "DC-15a",
+          "bonus": "1d8 75rng",
+          "type": "Scope: If turn spent with no movement, +2 to hit; 1d10 for damage"
+        },
+        "secondary": {
+          "name": "DC-17",
+          "bonus": "1d6 30rng",
+          "type": ""
+        }
+      },
+      "personality": {
+        "traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": ""
+      },
+      "characterName": "",
+      "class": "Assault Clone",
+      "background": "Clone",
+      "playername": "",
+      "species": "Clone",
+      "alignment": "GAR",
+      "ac": "8",
+      "speed": "30",
+      "extraSkills": "",
+      "credits": "",
+      "backstory": ""
+    }
   }
 ]
