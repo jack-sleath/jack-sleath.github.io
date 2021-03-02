@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\js",
+    "\\starwars",
+    "\\starwars\\css",
+    "\\starwars\\js",
+    "\\starwars\\json"
   ],
+  "SelectedNode": "\\starwars\\css\\styles.css",
   "PreviewInSolutionExplorer": false
 }

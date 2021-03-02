@@ -1,1 +1,94 @@
-[ {} ]
+[
+  {
+    "classname": "B1 Engineer",
+    "classStats": {
+      "skills": {
+        "str": "",
+        "dex": "",
+        "con": "",
+        "wis": "",
+        "int": "",
+        "cha": ""
+      },
+      "health": {
+        "max": "10",
+        "current": "10"
+      },
+      "weapons": {
+        "primary": {
+          "name": "E-5",
+          "bonus": "1d6 40rng",
+          "type": "2 per turn"
+        },
+        "secondary": {
+          "name": "Repair Tool",
+          "bonus": "Repair",
+          "type": "Slice"
+        }
+      },
+      "personality": {
+        "traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": ""
+      },
+      "characterName": "",
+      "class": "B1 Engineer",
+      "background": "Droid",
+      "playername": "",
+      "species": "Droid",
+      "alignment": "CIS",
+      "ac": "5",
+      "speed": "15",
+      "extraSkills": "Can use action to ‘Build’ a droid: Takes entire turn (can only have two creations on the field, modified droids are considered a creation)\n\tChoose one until next loadout change:\nCreates Auto Turret (Speed:0 AC 4 HP 6; Action Attack: B-2)\nDeploy Squad Shield (Ac 3, HP 40) (can not be shot through while inside) lasts 1 turn",
+      "credits": "",
+      "backstory": ""
+    }
+  },
+  {
+    "classname": "B1 Sniper",
+    "classStats": {
+      "skills": {
+        "str": "",
+        "dex": "",
+        "con": "",
+        "wis": "",
+        "int": "",
+        "cha": ""
+      },
+      "health": {
+        "max": "8",
+        "current": "8"
+      },
+      "weapons": {
+        "primary": {
+          "name": "E-5s",
+          "bonus": "1d12 200rng",
+          "type": ""
+        },
+        "secondary": {
+          "name": "",
+          "bonus": "",
+          "type": ""
+        }
+      },
+      "personality": {
+        "traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": ""
+      },
+      "characterName": "",
+      "class": "B1 Engineer",
+      "background": "Droid",
+      "playername": "",
+      "species": "Droid",
+      "alignment": "CIS",
+      "ac": "8",
+      "speed": "40",
+      "extraSkills": "-5 on atk to hit 10m or less\n+1d6 when 40m+ on atk & dmg",
+      "credits": "",
+      "backstory": ""
+    }
+  }
+]

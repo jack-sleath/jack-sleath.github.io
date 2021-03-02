@@ -4,8 +4,8 @@
 
     <title>GAR vs CIS Character Sheet</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
 
 </head>
 
@@ -119,40 +119,29 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input name="atkname1" type="text" />
+                                            <input name="primaryname" type="text" />
                                         </td>
                                         <td>
-                                            <input name="atkbonus1" type="text" />
+                                            <input name="primarybonus" type="text" />
                                         </td>
                                         <td>
-                                            <input name="atkdamage1" type="text" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input name="atkname2" type="text" />
-                                        </td>
-                                        <td>
-                                            <input name="atkbonus2" type="text" />
-                                        </td>
-                                        <td>
-                                            <input name="atkdamage2" type="text" />
+                                            <input name="primarytype" type="text" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input name="atkname3" type="text" />
+                                            <input name="secondaryname" type="text" />
                                         </td>
                                         <td>
-                                            <input name="atkbonus3" type="text" />
+                                            <input name="secondarybonus" type="text" />
                                         </td>
                                         <td>
-                                            <input name="atkdamage3" type="text" />
+                                            <input name="secondarytype" type="text" />
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <textarea></textarea>
+                            <textarea name="extraskills"></textarea>
                         </div>
                     </section>
                     <section class="equipment">
@@ -165,14 +154,14 @@
                                     </li>
                                 </ul>
                             </div>
-                            <textarea placeholder="Equipment list here"></textarea>
+                            <textarea naem="equipment" placeholder="Equipment list here"></textarea>
                         </div>
                     </section>
                 </section>
                 <section>
                     <section class="flavor">
                         <div class="personality">
-                            <label for="personality">Personality</label><textarea name="personality"></textarea>
+                            <label for="traits">Traits</label><textarea name="traits"></textarea>
                         </div>
                         <div class="ideals">
                             <label for="ideals">Ideals</label><textarea name="ideals"></textarea>
@@ -186,13 +175,13 @@
                     </section>
                     <section class="features">
                         <div>
-                            <label for="features">Backstory</label><textarea name="features"></textarea>
+                            <label for="backstory">Backstory</label><textarea name="backstory"></textarea>
                         </div>
                     </section>
                 </section>
             </main>
         </form>
-        <button onclick="generateJSON()">Test</button>
+        <button onclick="generateJSON()">Generate JSON</button>
     </div>
     <a href="../index.md">Home...</a>
 </body>

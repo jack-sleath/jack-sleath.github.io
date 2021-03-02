@@ -1,5 +1,16 @@
+var classes = {};
+
 function generateJSON() {
-    var userSheet = { skills: [] };
+    var userSheet = {
+        skills: {},
+        health: {},
+        weapons: {
+            primary: {},
+            secondary: {}
+        },
+        personality: {}
+    };
+
     userSheet.characterName = getValueFromName('charname');
     userSheet.class = getValueFromName('class');
     userSheet.background = getValueFromName('background');
@@ -13,8 +24,58 @@ function generateJSON() {
     userSheet.skills.int = getValueFromName('Intelligencescore');
     userSheet.skills.cha = getValueFromName('Charismascore');
     userSheet.ac = getValueFromName('ac');
-    usedNames.speed = getValueFromName('speed');
+    userSheet.speed = getValueFromName('speed');
+    userSheet.health.max = getValueFromName('maxhp');
+    userSheet.health.current = getValueFromName('currenthp');
+    userSheet.weapons.primary.name = getValueFromName('primaryname');
+    userSheet.weapons.primary.bonus = getValueFromName('primarybonus');
+    userSheet.weapons.primary.type = getValueFromName('primarytype');
+    userSheet.weapons.secondary.name = getValueFromName('secondaryname');
+    userSheet.weapons.secondary.bonus = getValueFromName('secondarybonus');
+    userSheet.weapons.secondary.type = getValueFromName('secondarytype');
+    userSheet.extraSkills = getValueFromName('extraskills');
+    userSheet.credits = getValueFromName('credits');
+    userSheet.equipment = getValueFromName('equipment');
+    userSheet.personality.traits = getValueFromName('traits');
+    userSheet.personality.ideals = getValueFromName('ideals');
+    userSheet.personality.bonds = getValueFromName('bonds');
+    userSheet.personality.flaws = getValueFromName('flaws');
+    userSheet.backstory = getValueFromName('backstory');
+
     console.log(userSheet);
+}
+
+function loadPageFromJSON(jsonText) {
+    setValueFromName('charname', jsonText.characterName);
+    setValueFromName('class', jsonText.class);
+    setValueFromName('background', jsonText.background);
+    setValueFromName('playername', jsonText.playername);
+    setValueFromName('species', jsonText.species);
+    setValueFromName('alignment', jsonText.alignment);
+    setValueFromName('Strengthscore', jsonText.skills.str);
+    setValueFromName('Dexterityscore', jsonText.skills.dex);
+    setValueFromName('Constitutionscore', jsonText.skills.con);
+    setValueFromName('Wisdomscore', jsonText.skills.wis );
+    setValueFromName('Intelligencescore', jsonText.skills.int);
+    setValueFromName('Charismascore', jsonText.skills.cha);
+    setValueFromName('ac', jsonText.ac );
+    setValueFromName('speed', jsonText.speed );
+    setValueFromName('maxhp', jsonText.health.max);
+    setValueFromName('currenthp', jsonText.health.current);
+    setValueFromName('primaryname', jsonText.weapons.primary.name);
+    setValueFromName('primarybonus', jsonText.weapons.primary.bonus);
+    setValueFromName('primarytype', jsonText.weapons.primary.type);
+    setValueFromName('secondaryname', jsonText.weapons.secondary.name);
+    setValueFromName('secondarybonus', jsonText.weapons.secondary.bonus);
+    setValueFromName('secondarytype', jsonText.weapons.secondary.type);
+    setValueFromName('extraskills', jsonText.extraSkills );
+    setValueFromName('credits', jsonText.credits);
+    setValueFromName('equipment', jsonText.equipment);
+    setValueFromName('traits', jsonText.personality.traits);
+    setValueFromName('ideals', jsonText.personality.ideals);
+    setValueFromName('bonds', jsonText.personality.bonds);
+    setValueFromName('flaws', jsonText.personality.flaws);
+    setValueFromName('backstory', jsonText.backstory);
 }
 
 function getValueFromName(name) {
@@ -25,6 +86,20 @@ function setValueFromName(name, value) {
     return $('[name = "' + name + '"]').val(value);
 }
 
-$(document).ready(function () {
 
+
+$(document).ready(function () {
+    $.ajax({
+        type: 'GET',
+        url: 'json/classes.json',
+        async: false,
+        beforeSend: function () {/*loading*/ },
+        dataType: 'json',
+        success: function (result) {
+
+            classes = result;
+            console.log(classes);
+
+        },
+    });
 });
