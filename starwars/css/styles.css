@@ -363,7 +363,7 @@ form.charsheet {
             }
 
                 form.charsheet main section.combat > div.armorclass, form.charsheet main section.combat > div.initiative, form.charsheet main section.combat > div.speed {
-                    flex-basis: 33.333%;
+                    flex-basis: 50%;
                 }
 
                     form.charsheet main section.combat > div.armorclass > div, form.charsheet main section.combat > div.initiative > div, form.charsheet main section.combat > div.speed > div {
@@ -585,33 +585,33 @@ form.charsheet {
                                     background-color: black;
                                 }
 
-        form.charsheet main section.attacksandspellcasting {
+        form.charsheet main section.attacksandskills {
             border: 1px solid black;
             border-radius: 10px;
             margin-top: 10px;
         }
 
-            form.charsheet main section.attacksandspellcasting > div {
+            form.charsheet main section.attacksandskills > div {
                 margin: 10px;
                 display: flex;
                 flex-direction: column;
             }
 
-                form.charsheet main section.attacksandspellcasting > div > label {
+                form.charsheet main section.attacksandskills > div > label {
                     order: 3;
                     text-align: center;
                 }
 
-                form.charsheet main section.attacksandspellcasting > div > table {
+                form.charsheet main section.attacksandskills > div > table {
                     width: 100%;
                 }
 
-                    form.charsheet main section.attacksandspellcasting > div > table th {
+                    form.charsheet main section.attacksandskills > div > table th {
                         font-size: 10px;
                         color: #ddd;
                     }
 
-                    form.charsheet main section.attacksandspellcasting > div > table input {
+                    form.charsheet main section.attacksandskills > div > table input {
                         width: calc(100% - 4px);
                         border: 0;
                         background-color: #eee;
@@ -619,7 +619,7 @@ form.charsheet {
                         padding: 3px;
                     }
 
-                form.charsheet main section.attacksandspellcasting > div textarea {
+                form.charsheet main section.attacksandskills > div textarea {
                     border: 0;
                 }
 
