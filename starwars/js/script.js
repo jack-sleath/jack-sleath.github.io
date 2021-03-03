@@ -136,7 +136,7 @@ $(document).ready(function () {
         beforeSend: function () {/*loading*/ },
         dataType: 'json',
         success: function (result) {
-            classes = result;
+            classes = result.sort();
         },
     }).then(function () {
         populateClassesDropdown();
