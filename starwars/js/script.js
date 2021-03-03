@@ -1,6 +1,7 @@
 var classes = {};
 
 function generateJSON() {
+    //This is the base user sheet that has nested objects
     var userSheet = {
         skills: {},
         health: {},
@@ -11,6 +12,7 @@ function generateJSON() {
         personality: {}
     };
 
+    //This generates the JSON based off the values in the form.
     userSheet.characterName = getValueFromName('charname');
     userSheet.class = getValueFromName('class');
     userSheet.background = getValueFromName('background');
@@ -42,6 +44,7 @@ function generateJSON() {
     userSheet.personality.flaws = getValueFromName('flaws');
     userSheet.backstory = getValueFromName('backstory');
 
+    //This is a dirty hack to copy the JSON
     $('.jsonToSave').show();
     setValueFromName('jsonToSave', JSON.stringify(userSheet));
     $('[name="jsonToSave"]').select();
@@ -49,13 +52,13 @@ function generateJSON() {
     setValueFromName('jsonToSave', '');
     $('.jsonToSave').hide();
 
-
+    //This is used to generate a save link for the JSON
     var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userSheet));
-
     $('<a href="data:' + data + '" download="player.json">download JSON</a>').appendTo('#jsonSave');
 }
 
 function loadPageFromJSON(jsonText) {
+    //This sets all the fields from the passed in JSON
     setValueFromName('charname', jsonText.characterName);
     setValueFromName('class', jsonText.class);
     setValueFromName('background', jsonText.background);
@@ -89,6 +92,7 @@ function loadPageFromJSON(jsonText) {
 }
 
 function loadClassFromJSON(jsonText) {
+    //This only sets the required fields based on the JSON that is passed in
     setValueFromName('class', jsonText.class);
     setValueFromName('species', jsonText.species);
     setValueFromName('alignment', jsonText.alignment);
@@ -108,28 +112,30 @@ function loadClassFromJSON(jsonText) {
 }
 
 function getValueFromName(name) {
+    //Takes a name and uses that to find the value in the form
     return $('[name = "' + name + '"]').val();
 }
 
 function setValueFromName(name, value) {
+    //Takes a name and uses that to input the value in the form
     return $('[name = "' + name + '"]').val(value);
 }
 
 function populateClassesDropdown() {
+    //Finds the item with the ID and sets it for use
     let dropdown = $('#preBuiltClasses');
-
     dropdown.empty();
-
-    dropdown.append('<option selected="true" disabled>Choose PrebuiltClass</option>');
+    dropdown.append('<option selected="true" disabled>Choose Prebuilt Class</option>');
     dropdown.prop('selectedIndex', 0);
 
-    // Populate dropdown with list of provinces
+    //Populate dropdown with list of classes
     $.each(classes, function (key, entry) {
         dropdown.append($('<option></option>').attr('value', JSON.stringify(entry.classStats)).text(entry.classname));
     });
 }
 
 function loadFromDropdown() {
+    //This uses the the selected prebuilt class and the other function
     loadClassFromJSON($.parseJSON(getValueFromName('preBuiltClasses')));
 }
 
