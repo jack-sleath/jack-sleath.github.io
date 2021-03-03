@@ -140,8 +140,9 @@ function loadFromDropdown() {
 }
 
 
-
+//When the document loads this runs
 $(document).ready(function () {
+    //This request gets the Classes JSON
     $.ajax({
         type: 'GET',
         url: 'https://raw.githubusercontent.com/jacksleath/classes/main/classes.json',
@@ -149,12 +150,14 @@ $(document).ready(function () {
         beforeSend: function () {/*loading*/ },
         dataType: 'json',
         success: function (result) {
+            //This sets the classes file to the JSON got earlier but sorted
             classes = result.sort();
         },
     }).then(function () {
+        //Once the last function finishes this runs
         populateClassesDropdown();
     });
 
-
+    //This is needed to be hidden on page load
     $('.jsonToSave').hide();
 });
