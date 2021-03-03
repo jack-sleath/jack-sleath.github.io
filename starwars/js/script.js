@@ -136,21 +136,19 @@ function loadFromDropdown() {
 
 
 $(document).ready(function () {
-    //$.ajax({
-    //    type: 'GET',
-    //    url: 'https://raw.githubusercontent.com/jacksleath/classes/main/classes.json',
-    //    async: false,
-    //    beforeSend: function () {/*loading*/ },
-    //    dataType: 'json',
-    //    success: function (result) {
-    //        classes = result.sort();
-    //    },
-    //}).then(function () {
-    //    populateClassesDropdown();
-    //});
+    $.ajax({
+        type: 'GET',
+        url: 'https://raw.githubusercontent.com/jacksleath/classes/main/classes.json',
+        async: false,
+        beforeSend: function () {/*loading*/ },
+        dataType: 'json',
+        success: function (result) {
+            classes = result.sort();
+        },
+    }).then(function () {
+        populateClassesDropdown();
+    });
 
-    classes = [];
-    populateClassesDropdown();
 
     $('.jsonToSave').hide();
 });
