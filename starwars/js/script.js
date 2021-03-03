@@ -42,7 +42,12 @@ function generateJSON() {
     userSheet.personality.flaws = getValueFromName('flaws');
     userSheet.backstory = getValueFromName('backstory');
 
-    console.log(userSheet);
+    $('.jsonToSave').show();
+    setValueFromName('jsonToSave', JSON.stringify(userSheet));
+    $('[name="jsonToSave"]').select();
+    document.execCommand('copy');
+    setValueFromName('jsonToSave', '');
+    $('.jsonToSave').hide();
 }
 
 function loadPageFromJSON(jsonText) {
@@ -136,4 +141,6 @@ $(document).ready(function () {
     }).then(function () {
         populateClassesDropdown();
     });
+
+    $('.jsonToSave').hide();
 });
