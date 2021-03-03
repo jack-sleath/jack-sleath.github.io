@@ -48,6 +48,11 @@ function generateJSON() {
     document.execCommand('copy');
     setValueFromName('jsonToSave', '');
     $('.jsonToSave').hide();
+
+
+    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userSheet));
+
+    $('<a href="data:' + data + '" download="player.json">download JSON</a>').appendTo('#jsonSave');
 }
 
 function loadPageFromJSON(jsonText) {
@@ -128,19 +133,24 @@ function loadFromDropdown() {
     loadClassFromJSON($.parseJSON(getValueFromName('preBuiltClasses')));
 }
 
+
+
 $(document).ready(function () {
-    $.ajax({
-        type: 'GET',
-        url: 'https://raw.githubusercontent.com/jacksleath/classes/main/classes.json',
-        async: false,
-        beforeSend: function () {/*loading*/ },
-        dataType: 'json',
-        success: function (result) {
-            classes = result.sort();
-        },
-    }).then(function () {
-        populateClassesDropdown();
-    });
+    //$.ajax({
+    //    type: 'GET',
+    //    url: 'https://raw.githubusercontent.com/jacksleath/classes/main/classes.json',
+    //    async: false,
+    //    beforeSend: function () {/*loading*/ },
+    //    dataType: 'json',
+    //    success: function (result) {
+    //        classes = result.sort();
+    //    },
+    //}).then(function () {
+    //    populateClassesDropdown();
+    //});
+
+    classes = [];
+    populateClassesDropdown();
 
     $('.jsonToSave').hide();
 });

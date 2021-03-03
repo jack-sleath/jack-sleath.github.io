@@ -181,9 +181,11 @@
                 </section>
             </main>
         </form>
-        <button onclick="generateJSON()">Generate JSON save from sheet</button>
-        <textarea class="jsonToSave" name="jsonToSave"></textarea>
-        <button class="jsonToSave" onclick="closeJsonToSave()">Close JSON</button>
+        <div id="jsonSave">
+            <button onclick="generateJSON()">Generate JSON save from sheet</button>
+            <textarea class="jsonToSave" name="jsonToSave"></textarea>
+            <button class="jsonToSave" onclick="closeJsonToSave()">Close JSON</button>
+        </div>
     </div>
 </body>
 </html>
