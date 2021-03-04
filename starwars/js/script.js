@@ -158,6 +158,17 @@ function loadFromDropdown() {
 }
 
 
+$(document).on('change', '.file-upload-button', function (event) {
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+        var jsonObj = JSON.parse(event.target.result);
+        alert(jsonObj.name);
+    }
+
+    reader.readAsText(event.target.files[0]);
+});
+
 //Comparer Function    
 function GetSortOrder(prop) {
     return function (a, b) {
