@@ -158,13 +158,12 @@ function loadFromDropdown() {
     loadClassFromJSON($.parseJSON(getValueFromName('preBuiltClasses')));
 }
 
-
+//On file load run this function
 $(document).on('change', '.file-upload-button', function (event) {
     var reader = new FileReader();
 
     reader.onload = function (event) {
         var jsonObj = JSON.parse(event.target.result);
-        console.log(jsonObj);
         loadPageFromJSON(jsonObj);
     }
 
