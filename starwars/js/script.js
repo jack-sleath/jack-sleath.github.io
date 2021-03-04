@@ -164,7 +164,8 @@ $(document).on('change', '.file-upload-button', function (event) {
 
     reader.onload = function (event) {
         var jsonObj = JSON.parse(event.target.result);
-        alert(jsonObj.name);
+        console.log(jsonObj);
+        loadPageFromJSON(jsonObj);
     }
 
     reader.readAsText(event.target.files[0]);
