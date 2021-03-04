@@ -169,6 +169,7 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (result) {
             //This sets the classes file to the JSON got earlier but sorted
+            console.log(result, result.sort());
             classes = result.sort();
         },
     }).then(function () {
