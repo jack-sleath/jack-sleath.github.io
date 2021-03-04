@@ -1,6 +1,7 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .red {
     background: red;
 }
@@ -600,7 +601,7 @@ form.charsheet {
             }
 
                 form.charsheet main section.attacksandskills > div > label {
-                    order: 3;
+                    order: 5;
                     text-align: center;
                 }
 
@@ -614,16 +615,25 @@ form.charsheet {
                     }
 
                     form.charsheet main section.attacksandskills > div > table input {
-                        width: calc(100% - 4px);
+                        width: calc(100%);
                         border: 0;
                         background-color: #eee;
                         font-size: 10px;
-                        padding: 3px;
+                        padding: 1px;
                     }
 
-                form.charsheet main section.attacksandskills > div textarea {
-                    border: 0;
-                }
+        form.charsheet main .attacksandskills .extras {
+            width: 545%;
+            height: 10em;
+            background-color: #eee;
+            font-size: 10px;
+            padding: 1px;
+            border-radius: 2px;
+        }
+
+        form.charsheet main section.attacksandskills > div textarea {
+            border: 0;
+        }
 
         form.charsheet main section.equipment {
             border: 1px solid black;
