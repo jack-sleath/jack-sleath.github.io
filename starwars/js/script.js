@@ -118,12 +118,12 @@ function loadClassFromJSON(jsonText) {
     setValueFromName('primaryammo', jsonText.weapons.primary.ammo);
     setValueFromName('primarymaxammo', jsonText.weapons.primary.maxammo);
     setValueFromName('primaryextra', jsonText.weapons.primary.extra);
-    setValueFromName('secondaryname', jsonText.weapons.primary.name);
-    setValueFromName('secondarydice', jsonText.weapons.primary.dice);
-    setValueFromName('secondaryrange', jsonText.weapons.primary.range);
-    setValueFromName('secondaryammo', jsonText.weapons.primary.ammo);
-    setValueFromName('secondarymaxammo', jsonText.weapons.primary.maxammo);
-    setValueFromName('secondaryextra', jsonText.weapons.primary.extra);
+    setValueFromName('secondaryname', jsonText.weapons.secondary.name);
+    setValueFromName('secondarydice', jsonText.weapons.secondary.dice);
+    setValueFromName('secondaryrange', jsonText.weapons.secondary.range);
+    setValueFromName('secondaryammo', jsonText.weapons.secondary.ammo);
+    setValueFromName('secondarymaxammo', jsonText.weapons.secondary.maxammo);
+    setValueFromName('secondaryextra', jsonText.weapons.secondary.extra);
     setValueFromName('extraskills', jsonText.extraSkills);
     setValueFromName('background', jsonText.background);
     setValueFromName('alignment', jsonText.alignment);
