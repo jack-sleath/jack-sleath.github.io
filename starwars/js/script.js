@@ -158,6 +158,18 @@ function loadFromDropdown() {
 }
 
 
+//Comparer Function    
+function GetSortOrder(prop) {
+    return function (a, b) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
+}  
+
 //When the document loads this runs
 $(document).ready(function () {
     //This request gets the Classes JSON
@@ -169,8 +181,7 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (result) {
             //This sets the classes file to the JSON got earlier but sorted
-            console.log(result, result.sort());
-            classes = result.sort();
+            classes = result.sort(GetSortOrder("classname")); 
         },
     }).then(function () {
         //Once the last function finishes this runs
