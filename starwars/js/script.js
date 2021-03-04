@@ -58,9 +58,10 @@ function generateJSON() {
     setValueFromName('jsonToSave', '');
     $('.jsonToSave').hide();
 
+    $('#downloadLink').remove();
     //This is used to generate a save link for the JSON
     var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userSheet));
-    $('<a href="data:' + data + '" download="player.json">download JSON</a>').appendTo('#jsonSave');
+    $('<a id="downloadLink" href="data:' + data + '" download="player.json">download JSON</a>').appendTo('#jsonSave');
 }
 
 function loadPageFromJSON(jsonText) {
