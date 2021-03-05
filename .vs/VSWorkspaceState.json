@@ -4,8 +4,7 @@
     "\\js",
     "\\starwars",
     "\\starwars\\css",
-    "\\starwars\\js",
-    "\\starwars\\json"
+    "\\starwars\\js"
   ],
   "SelectedNode": "\\starwars\\charsheet.html",
   "PreviewInSolutionExplorer": false
