@@ -8,5 +8,6 @@
 <body>
     <h1>Sites</h1>
     <a href="/datasetmaker.html">DataSet Maker</a>
+    <a href="starwars/charsheet.html">Star Wars D&D Character Sheet</a>
 </body>
 </html>
