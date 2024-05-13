@@ -1,9 +1,22 @@
-<div>
-    <textarea class="boxsizingBorder" id="HtmlInput" name="HTML Input" placeholder="Enter HTML here..."></textarea>
-</div>
-<div>
-    <textarea class="boxsizingBorder" id="CssInput" name="CSS Input" placeholder="Enter CSS here..."></textarea>
-</div>
-<div>
-    <textarea class="boxsizingBorder" id="JsInput" name="JS Input" placeholder="Enter JS here..."></textarea>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CodePen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="editor">
+        <textarea id="html-code" placeholder="Enter HTML code here..."></textarea>
+        <textarea id="css-code" placeholder="Enter CSS code here..."></textarea>
+        <textarea id="js-code" placeholder="Enter JavaScript code here..."></textarea>
+        <button onclick="runCode()">Run</button>
+    </div>
+    <div class="output">
+        <iframe id="output-frame"></iframe>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
