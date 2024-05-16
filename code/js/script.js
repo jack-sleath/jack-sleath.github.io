@@ -20,7 +20,7 @@ function runCode() {
 }
 
 // Fetch and parse the JSON file
-fetch('../JSON/code.json')
+fetch('../json/code.json')
   .then(response => response.json())
   .then(data => {
     const dropdown = document.getElementById('example-dropdown');
