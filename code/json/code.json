@@ -8,11 +8,11 @@
     }
   },
   {
-    "option": "example2",
+    "option": "Birthday Colour",
     "code": {
-      "html": "<h1>Hello, Example 2!</h1>",
-      "css": "h1 { color: red; }",
-      "js": "console.log('Example 2 JS');"
+      "html": "<input type=\"number\" id=\"day\" min=\"1\" max=\"31\" value=\"1\"/>\n<input type=\"number\" id=\"month\" min=\"1\" max=\"12\" value=\"1\"/>\n<input type=\"number\" id=\"year\" min=\"0\" max=\"99\" value=\"0\"/>\n<button id=\"update\" onclick=\"birf()\">Birf Colour</button>\n<div class=\"box\" id=\"norm\"></div>\n<div class=\"box\" id=\"invert\"></div>",
+      "css": ".box{\n  width:500px;\n  height:500px;\n}",
+      "js": "function birf() {\n  var day = document.getElementById(\"day\").value;\n  var month = document.getElementById(\"month\").value;\n  var year = document.getElementById(\"year\").value;\n\n  var styleColor = getRgb(day, month, year);\n  var invertedStyleColor = getRgb();\n\n  console.log(styleColor);\n  console.log(invertedStyleColor);\n  document.getElementById(\"norm\").style.backgroundColor = styleColor;\n  document.getElementById(\"invert\").style.backgroundColor = invertedStyleColor;\n}\n\nfunction rgbInverter(value)\n{\n  return Math.abs((value-255));\n}\n\nfunction getRgb(day, month, year) {\n  console.log(\"getRgb\");\n  var maxRgb = 255;\n  var dayMultiplyer = maxRgb / 31;\n  var monthMultiplyer = maxRgb / 12;\n  var yearMultiplyer = maxRgb / 99;\n\n  var blah = \"rgb(\" +\n    (day * dayMultiplyer) +\n    \",\" +\n    (month * monthMultiplyer) +\n    \",\" +\n    (year * yearMultiplyer) +\n    \")\";\n  \n  console.log(blah);\n  \n  return blah; \n}"
     }
   }
 ]
