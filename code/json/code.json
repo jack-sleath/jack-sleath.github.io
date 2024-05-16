@@ -14,5 +14,13 @@
       "css": ".box{\n  width:500px;\n  height:500px;\n}",
       "js": "function birf() {\n  var day = document.getElementById(\"day\").value;\n  var month = document.getElementById(\"month\").value;\n  var year = document.getElementById(\"year\").value;\n\n  var styleColor = getRgb(day, month, year);\n  var invertedStyleColor = getRgb();\n\n  console.log(styleColor);\n  console.log(invertedStyleColor);\n  document.getElementById(\"norm\").style.backgroundColor = styleColor;\n  document.getElementById(\"invert\").style.backgroundColor = invertedStyleColor;\n}\n\nfunction rgbInverter(value)\n{\n  return Math.abs((value-255));\n}\n\nfunction getRgb(day, month, year) {\n  console.log(\"getRgb\");\n  var maxRgb = 255;\n  var dayMultiplyer = maxRgb / 31;\n  var monthMultiplyer = maxRgb / 12;\n  var yearMultiplyer = maxRgb / 99;\n\n  var blah = \"rgb(\" +\n    (day * dayMultiplyer) +\n    \",\" +\n    (month * monthMultiplyer) +\n    \",\" +\n    (year * yearMultiplyer) +\n    \")\";\n  \n  console.log(blah);\n  \n  return blah; \n}"
     }
+  },
+  {
+    "option": "Fizz Buzz",
+    "code": {
+      "html": "<form>\n  <label>\n    Divisible number:\n    <input type=\"number\" name=\"num\">\n  </label>\n  <label>\n    Word to display:\n    <input type=\"text\" name=\"word\">\n  </label>\n  <button type=\"button\" id=\"add-btn\">Add</button>\n  <button type=\"submit\" id=\"display-btn\">Display FizzBuzz</button>\n</form>\n<hr>\n<h2>Expanded FizzBuzz Words: <span id=\"firstNumber\"></span></h2>\n<ul id=\"output\">\n  <li>3 - fizz</li>\n  <li>5 - buzz</li>\n</ul>\n\n<h2>Expanded FizzBuzz sequence:</h2>\n<ul id=\"sequence\"></ul>",
+      "css": "label {\n  display: block;\n  margin-bottom: 10px;\n}\ninput[type=\"number\"] {\n  width: 50px;\n}\ninput[type=\"text\"] {\n  width: 150px;\n}\nbutton {\n  margin-top: 10px;\n}",
+      "js": "//Using https://github.com/RobinHerbots/Inputmask for currency input mask\n$(\".currency-input\").inputmask(\"currency\", {\n  prefix: \"£\"\n});\n\nfunction calculateTotals() {\n  //Percentage can be changed quickly if needed.\n  var vatPercentage = 20;\n  var firstValue = currencyToNumber($(\"#FirstValue\").val());\n  var secondValue = currencyToNumber($(\"#SecondValue\").val());\n  var totalValue = firstValue + secondValue;\n  var vatValue = (totalValue / 100) * vatPercentage;\n  var grandTotalValue = totalValue + vatValue;\n  $(\"#TotalValue\").val(totalValue);\n  $(\"#VatValue\").val(vatValue);\n  $(\"#GrandTotalValue\").val(grandTotalValue);\n}\n\nfunction currencyToNumber(currencyText) {\n  //Removing the '£ and ',' then converting text to float for mathematical equations\n  return parseFloat(currencyText.replace(\"£\", \"\").replace(\",\", \"\"));\n}"
+    }
   }
 ]
