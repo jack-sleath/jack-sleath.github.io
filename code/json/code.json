@@ -32,11 +32,19 @@
     }
   },
   {
-    "option":"SqlGenerator"
+    "option":"SqlGenerator",
   "code": {
     "html": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js\"></script>\n\n<h1>CSV to SQL Insert Generator</h1>\n<input type=\"file\" id=\"csvFileInput\" accept=\".csv\" />\n<button onclick=\"generateSQL()\">Generate SQL</button>\n\n<h2>SQL Insert Queries</h2>\n<textarea id=\"sqlOutput\" readonly></textarea>",
     "css": "body {\n  font-family: Arial, sans-serif;\n  margin: 20px;\n}\ntextarea {\n  width: 100%;\n  height: 200px;\n}\ninput[type=\"file\"] {\n  margin-bottom: 20px;\n}",
     "js": "function generateSQL() {\n  const fileInput = document.getElementById('csvFileInput');\n  if (!fileInput.files.length) {\n    alert(\"Please choose a CSV file first.\");\n    return;\n  }\n\n  const file = fileInput.files[0];\n  Papa.parse(file, {\n    header: true,\n    complete: function(results) {\n      const data = results.data;\n      const tableName = \"local_page_rollout\"; // Change table name if needed\n      const columns = Object.keys(data[0]);\n      let sqlQueries = `INSERT INTO ${tableName} (${columns.join(\", \")}) VALUES\\n`;\n\n      const values = data.map(row => {\n        const rowValues = columns.map(col => {\n          const value = row[col];\n          if (value === undefined || value === null || value === \"\") {\n            return \"NULL\";\n          } else if (typeof value === 'string') {\n            return `'${value.replace(/'/g, \"''\")}'`;\n          } else {\n            return value;\n          }\n        });\n        return `(${rowValues.join(\", \")})`;\n      });\n\n      sqlQueries += values.join(\",\\n\") + \";\";\n      document.getElementById('sqlOutput').textContent = sqlQueries;\n    }\n  });\n}"
+  }},
+   
+{
+  "option": "CodePenGen",
+  "code": {
+    "html": " <h1>Code to JSON Formatter</h1>\n    <label for=\"optionName\">Option Name:</label>\n    <input type=\"text\" id=\"optionName\" placeholder=\"Enter option name\"><br><br>\n\n    <label for=\"htmlCode\">HTML Code:</label>\n    <textarea id=\"htmlCode\" rows=\"10\" cols=\"50\" placeholder=\"Enter HTML code\"></textarea><br><br>\n\n    <label for=\"cssCode\">CSS Code:</label>\n    <textarea id=\"cssCode\" rows=\"10\" cols=\"50\" placeholder=\"Enter CSS code\"></textarea><br><br>\n\n    <label for=\"jsCode\">JavaScript Code:</label>\n    <textarea id=\"jsCode\" rows=\"10\" cols=\"50\" placeholder=\"Enter JavaScript code\"></textarea><br><br>\n\n    <button onclick=\"formatToJson()\">Generate JSON</button>\n    <h2>Output:</h2>\n    <textarea id=\"output\" rows=\"10\" cols=\"50\" readonly></textarea>",
+    "css": "",
+    "js": "function formatToJson() {\n            const option = document.getElementById('optionName').value;\n            const html = document.getElementById('htmlCode').value;\n            const css = document.getElementById('cssCode').value;\n            const js = document.getElementById('jsCode').value;\n\n            const jsonObject = {\n                option: option,\n                code: {\n                    html: html,\n                    css: css,\n                    js: js\n                }\n            };\n\n            document.getElementById('output').value = JSON.stringify(jsonObject, null, 2);\n        }"
   }
 }
 ]
