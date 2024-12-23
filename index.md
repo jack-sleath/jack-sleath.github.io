@@ -11,6 +11,7 @@
             <li><a href="/datasetmaker.html">DataSet Maker</a></li>
             <li> <a href="starwars/charsheet.html">Star Wars D&D Character Sheet</a></li>
             <li> <a href="code/code.html">Demo Code</a></li>
+            <li> <a href="sonic-font/sonic.html">Sonic Titles</a></li>
         </ul>
     </body>
 </html>
