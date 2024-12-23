@@ -16,33 +16,53 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
-            background-color: #000000; /* Light background for visibility */
+            background-color: #000000;
+            position: relative; /* Create a containing block for absolute positioning */
+            padding: 50px; /* Add padding to ensure glow isn't cut off */
         }
 
         .glowing-text {
-            font-family: 'CustomFont', Arial, sans-serif; /* Use custom font */
-            font-size: 10vw; /* Font size scales with viewport width */
+            font-family: 'CustomFont', Arial, sans-serif;
+            font-size: 10vw;
             font-weight: bold;
-            color: black; /* Always black font */
-            -webkit-text-stroke: 2px white; /* Always white stroke */
+            color: black;
+            -webkit-text-stroke: 2px white;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
-            white-space: nowrap; /* Prevent text from wrapping */
-            overflow: hidden; /* Prevent overflow */
-            text-align: center; /* Optional: Center align the text */
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative; /* Ensure it's above duplicates */
+            z-index: 10; /* Place above duplicates */
+            display: inline-block; /* Keep it inline for easier alignment */
+            padding: 50px;
+        }
+
+        .invisible-text {
+            font-family: 'CustomFont', Arial, sans-serif;
+            font-size: 10vw;
+            font-weight: bold;
+            color: transparent; /* Fully transparent text */
+            -webkit-text-stroke: 2px white; /* Default stroke color */
+            position: absolute; /* Enable positioning behind and offsetting */
+            top: 0; /* Align vertically with the original text */
+            left: 50%; /* Center align with the original text */
+            transform: translate(-50%, 0); /* Correct centering horizontally */
+            z-index: 5; /* Place behind the original text */
+            padding: 50px;
         }
     </style>
 </head>
 <body>
-    <h1 class="glowing-text">Default Text</h1>
+    <div style="position: relative;">
+        <h1 class="glowing-text">Default Text</h1>
+        <div id="duplicates-container"></div> <!-- Container for duplicate texts -->
+    </div>
 
     <script>
-        // Helper to get URL parameters
         function getUrlParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
-            
-            if (urlParams.size == 0) {
-                console.log(urlParams);
-                var url = new URL(window.location.href);
+
+            if (urlParams.size === 0) {
+                const url = new URL(window.location.href);
                 url.searchParams.set('text', 'SONIc');
                 url.searchParams.set('glow', '0000FF');
                 window.location.replace(url.toString());
@@ -50,18 +70,28 @@
             return urlParams.get(name);
         }
 
-        // Get the text and glow color from URL parameters
-        const text = getUrlParameter('text') || 'SONIc'; // Default if no text provided
-        const glowColor = '#' + getUrlParameter('glow') || '#0000FF'; // Default glow is white
+        const text = getUrlParameter('text') || 'SONIc'; // Default text
+        const glowColor = '#' + (getUrlParameter('glow') || '0000FF'); // Default glow color
 
-        // Update the text content and glow effect
-        console.log(glowColor, text);
         const textElement = document.querySelector('.glowing-text');
-        textElement.textContent = decodeURIComponent(text); // Update text, decode URL-encoded characters
+        textElement.textContent = decodeURIComponent(text);
         textElement.style.textShadow = `
-              0 0 10px ${glowColor},
-              0 0 20px ${glowColor},
-              0 0 30px ${glowColor}`;
+                          0 0 10px ${glowColor},
+                          0 0 20px ${glowColor},
+                          0 0 30px ${glowColor}`;
+
+        // Create duplicates
+        const duplicatesContainer = document.getElementById('duplicates-container');
+
+        for (let i = 1; i <= 3; i++) {
+            const duplicate = document.createElement('h1');
+            duplicate.className = 'invisible-text';
+            duplicate.textContent = decodeURIComponent(text);
+            duplicate.style.webkitTextStrokeColor = glowColor; // Set stroke color to glow color
+            duplicate.style.opacity = 1 / i; // Gradually decrease opacity
+            duplicate.style.transform = `translate(-${50 + i * .7}%, 0)`; // Offset slightly to the left
+            duplicatesContainer.appendChild(duplicate);
+        }
     </script>
 </body>
 </html>
