@@ -39,11 +39,19 @@
         // Helper to get URL parameters
         function getUrlParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            if (urlParams.size == 0) {
+                console.log(urlParams);
+                var url = new URL(window.location.href);
+                url.searchParams.set('text', 'SONIc');
+                url.searchParams.set('glow', '0000FF');
+                window.location.replace(url.toString());
+            }
             return urlParams.get(name);
         }
 
         // Get the text and glow color from URL parameters
-        const text = getUrlParameter('text') || '?text=SONIc&glow=0000FF'; // Default if no text provided
+        const text = getUrlParameter('text') || 'SONIc'; // Default if no text provided
         const glowColor = '#' + getUrlParameter('glow') || '#0000FF'; // Default glow is white
 
         // Update the text content and glow effect
