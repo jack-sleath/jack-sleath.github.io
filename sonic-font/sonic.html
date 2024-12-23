@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Glow via URL</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('Sonic Movie logo font.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #000000; /* Light background for visibility */
+        }
+
+        .glowing-text {
+            font-family: 'CustomFont', Arial, sans-serif; /* Use custom font */
+            font-size: 10vw; /* Font size scales with viewport width */
+            font-weight: bold;
+            color: black; /* Always black font */
+            -webkit-text-stroke: 2px white; /* Always white stroke */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+            white-space: nowrap; /* Prevent text from wrapping */
+            overflow: hidden; /* Prevent overflow */
+            text-align: center; /* Optional: Center align the text */
+        }
+    </style>
+</head>
+<body>
+    <h1 class="glowing-text">Default Text</h1>
+
+    <script>
+        // Helper to get URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Get the text and glow color from URL parameters
+        const text = getUrlParameter('text') || 'Default Text'; // Default if no text provided
+        const glowColor = '#' + getUrlParameter('glow') || '#ffffff'; // Default glow is white
+
+        // Update the text content and glow effect
+        console.log(glowColor, text);
+        const textElement = document.querySelector('.glowing-text');
+        textElement.textContent = decodeURIComponent(text); // Update text, decode URL-encoded characters
+        textElement.style.textShadow = `
+              0 0 10px ${glowColor},
+              0 0 20px ${glowColor},
+              0 0 30px ${glowColor}`;
+    </script>
+</body>
+</html>
