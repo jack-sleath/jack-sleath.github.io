@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Random Cat Glide</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      height: 100vh; /* Ensure the body takes full viewport height */
+    }
+    /* The cat image is absolutely positioned and will animate when its 'left' and 'top' values change */
+    #cat {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      transition: top 1s ease, left 1s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Ensure that "cat.jpg" exists or update the src attribute accordingly -->
+  <img id="cat" src="cat.gif" alt="Cute Cat">
+
+  <script>
+    const cat = document.getElementById('cat');
+
+    cat.addEventListener('click', () => {
+      // Determine the maximum allowed x and y positions so that the image stays within the viewport
+      const maxX = window.innerWidth - cat.clientWidth;
+      const maxY = window.innerHeight - cat.clientHeight;
+
+      // Generate random coordinates within the allowed range
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      // Set the new position using CSS left and top properties
+      cat.style.left = randomX + 'px';
+      cat.style.top = randomY + 'px';
+    });
+  </script>
+</body>
+</html>
