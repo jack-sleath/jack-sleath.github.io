@@ -1,0 +1,134 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*My Stylesheet starts here*/
+
+
+/*Creating the Font*/
+
+@font-face {
+	font-family: pixel;
+	src: url(pixeled/Pixeled.ttf);
+}
+
+/*Making the background repeat whilst maintaining the pixel size*/
+
+body {
+	overflow: hidden;
+	background-image: url("images/stars.png");
+	background-repeat: repeat-y;
+	background-size: cover;
+}
+
+/*Initial page where the user can select the location is set to visible*/
+
+#Home {
+	visibility: visible;
+}
+#England {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 1;
+}
+
+/*Secondary page for once location is selected is hidden*/
+
+#Display {
+	visibility: hidden;
+}
+#Sky {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 1;
+}
+#Atmosphere {
+	position: absolute;
+	left: 0px;
+	bottom: 1080px;
+	z-index: 1;
+}
+#Sun {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 2;
+}
+#Moon {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 3;
+}
+#Scene {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 4;
+}
+#Sign {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 5;
+}
+#SignText {
+	position: absolute;
+	z-index: 6;
+	font-family: pixel;
+	font-size: 16px;
+	font-size: 3vw;
+}
+#SignEffects {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 7;
+}
+#Weather {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 8;
+}
+#Clouds {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	z-index: 9;
+}

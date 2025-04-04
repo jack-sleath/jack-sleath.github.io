@@ -1,14 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\code",
-    "\\code\\css",
-    "\\code\\js",
-    "\\code\\json",
-    "\\starwars",
-    "\\starwars\\css",
-    "\\starwars\\js"
+    ""
   ],
-  "SelectedNode": "\\code\\json\\code.json",
   "PreviewInSolutionExplorer": false
 }
