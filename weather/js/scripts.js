@@ -24,7 +24,7 @@ function init() {
     
     //Anonymous mousedown event for when the user selects their location
     $('#England').mousedown(function (event) {
-        if (!window.screenTop && !window.screenY) {
+        if (document.fullscreenElement) {
             //Gets width and height of the images
             var width = $(window).width();
             var height = 1080 * (width / 1920);
