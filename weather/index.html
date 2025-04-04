@@ -2,35 +2,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!--This section is setting up the page-->
-	<meta charset="utf-8">
-	<title>Presenting Data without Numbers</title>
-	<meta content="Artistic Weather" name="description">
-	<link href="css/styles.css" rel="stylesheet">
-	<!--Here I am importing jQuery and then my own JavaScript file-->
-	<script src="js/jquery-3.1.1.min.js">
-	</script>
-	<script src="js/scripts.js">
-	</script>
+    <!--This section is setting up the page-->
+    <meta charset="utf-8">
+    <title>Presenting Data without Numbers</title>
+    <meta content="Artistic Weather" name="description">
+    <link href="css/styles.css" rel="stylesheet">
+    <!--Here I am importing jQuery and then my own JavaScript file-->
+    <script src="js/jquery-3.1.1.min.js">
+    </script>
+    <script src="js/scripts.js">
+    </script>
+    <script>
+        /* Get the documentElement (<html>) to display the page in fullscreen */
+        var elem = document.documentElement;
+
+        /* View in fullscreen */
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        }
+    </script>
 </head>
 <body>
-	<!--This is the home page where the map loads before a place is selected-->
-	<div id="Home">
-		<div id="England"><img alt="image" src="css/images/england.png" width="1920"></div>
-	</div><!--Here is the section of HTML which contains all the divs needed to display the weather-->
-	<div id="Display">
-		<div id="Clouds"><img alt="image" id="CloudsImage" src="css/images/rain.png" width="1920"></div>
-		<div id="Weather"><img alt="image" id="WeatherImage" src="css/images/snow.gif" width="1920"></div>
-		<div id="SignEffects"><img alt="image" id="SignEffectsImage" src="css/images/signsnow.gif" width="1920"></div>
-		<div id="SignText">
-			<p>Blank</p>
-		</div>
-		<div id="Sign"><img alt="image" src="css/images/sign.png" width="1920"></div>
-		<div id="Scene"><img alt="image" id="SceneImage" src="css/images/town.png" width="1920"></div>
-		<div id="Moon"><img alt="image" id="MoonImage" src="css/images/clear.png" width="1920"></div>
-		<div id="Sun"><img alt="image" src="css/images/sun.png" width="1920"></div>
-		<div id="Atmosphere"><img alt="image" id="AtmosImage" src="css/images/skyatmosphere.png" width="1920"></div>
-		<div id="Sky"><img alt="image" id="SkyImage" src="css/images/sky.png" width="1920"></div>
-	</div>
+    <!--This is the home page where the map loads before a place is selected-->
+    <div id="Home">
+        <div id="England"><img alt="image" src="css/images/england.png" width="1920"></div>
+    </div><!--Here is the section of HTML which contains all the divs needed to display the weather-->
+    <div id="Display">
+        <div id="Clouds"><img alt="image" id="CloudsImage" src="css/images/rain.png" width="1920"></div>
+        <div id="Weather"><img alt="image" id="WeatherImage" src="css/images/snow.gif" width="1920"></div>
+        <div id="SignEffects"><img alt="image" id="SignEffectsImage" src="css/images/signsnow.gif" width="1920"></div>
+        <div id="SignText">
+            <p>Blank</p>
+        </div>
+        <div id="Sign"><img alt="image" src="css/images/sign.png" width="1920"></div>
+        <div id="Scene"><img alt="image" id="SceneImage" src="css/images/town.png" width="1920"></div>
+        <div id="Moon"><img alt="image" id="MoonImage" src="css/images/clear.png" width="1920"></div>
+        <div id="Sun"><img alt="image" src="css/images/sun.png" width="1920"></div>
+        <div id="Atmosphere"><img alt="image" id="AtmosImage" src="css/images/skyatmosphere.png" width="1920"></div>
+        <div id="Sky"><img alt="image" id="SkyImage" src="css/images/sky.png" width="1920"></div>
+    </div>
 </body>
 </html>
