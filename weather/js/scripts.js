@@ -21,6 +21,7 @@ var updateNow = 0;
 //Page Set Up
 function init() {
     resizeEverything();
+    openFullscreen();
     //Anonymous mousedown event for when the user selects their location
     $('#England').mousedown(function(event) {
         //Gets width and height of the images
@@ -35,6 +36,21 @@ function init() {
         launchLocation();
     });
 }
+
+/* Get the documentElement (<html>) to display the page in fullscreen */
+var elem = document.documentElement;
+
+/* View in fullscreen */
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+
 //Function needed to begin the weather process
 function launchLocation() {
     //Runs functions needed to begin the weather process
