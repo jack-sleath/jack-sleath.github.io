@@ -95,19 +95,19 @@ function runWeather() {
             fakeTime = 0;
         }
         //This changes all the images that display the weather
-        $('#CloudsImage').attr('src', 'css/images/' + completeWeatherArray[fakeTime].weather + '.png');
-        $('#WeatherImage').attr('src', 'css/images/' + completeWeatherArray[fakeTime].weather + '.gif');
-        $('#SignEffectsImage').attr('src', 'css/images/sign' + completeWeatherArray[fakeTime].weather + '.gif');
+        $('#CloudsImage').attr('src', 'css/images/' + completeWeatherArray[fakeTime].weather.toLowerCase() + '.png');
+        $('#WeatherImage').attr('src', 'css/images/' + completeWeatherArray[fakeTime].weather.toLowerCase() + '.gif');
+        $('#SignEffectsImage').attr('src', 'css/images/sign' + completeWeatherArray[fakeTime].weather.toLowerCase() + '.gif');
         //This is an equation to show dawn dusk day and night
         if (sunArray[0].split(':')[0] === fakeTime || sunArray[1].split(':')[0] === fakeTime) {
-            $('#SkyImage').attr('src', 'css/images/SkyDawnDusk.png');
-            $('#AtmosImage').attr('src', 'css/images/SkyAtmosphereDawnDusk.png');
+            $('#SkyImage').attr('src', 'css/images/skydawndusk.png');
+            $('#AtmosImage').attr('src', 'css/images/skyatmospheredawndusk.png');
         } else if (sunArray[0].split(':')[0] > fakeTime && sunArray[1].split(':')[0] < fakeTime) {
-            $('#SkyImage').attr('src', 'css/images/Sky.png');
-            $('#AtmosImage').attr('src', 'css/images/SkyAtmosphere.png');
+            $('#SkyImage').attr('src', 'css/images/sky.png');
+            $('#AtmosImage').attr('src', 'css/images/skyatmosphere.png');
         } else if (sunArray[0].split(':')[0] < fakeTime || sunArray[1].split(':')[0] > fakeTime) {
-            $('#SkyImage').attr('src', 'css/images/SkyNight.png');
-            $('#AtmosImage').attr('src', 'css/images/SkyAtmosphereNight.png');
+            $('#SkyImage').attr('src', 'css/images/skynight.png');
+            $('#AtmosImage').attr('src', 'css/images/skyatmospherenight.png');
         }
         //functions needed for sun height during the day
         var width = $(window).width();
