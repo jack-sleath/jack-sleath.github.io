@@ -21,9 +21,10 @@ var updateNow = 0;
 //Page Set Up
 function init() {
     resizeEverything();
-    openFullscreen();
+    
     //Anonymous mousedown event for when the user selects their location
-    $('#England').mousedown(function(event) {
+    $('#England').mousedown(function (event) {
+        openFullscreen();
         //Gets width and height of the images
         var width = $(window).width();
         var height = 1080 * (width / 1920);
