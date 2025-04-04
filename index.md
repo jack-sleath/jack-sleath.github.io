@@ -12,6 +12,7 @@
             <li> <a href="starwars/charsheet.html">Star Wars D&D Character Sheet</a></li>
             <li> <a href="code/code.html">Demo Code</a></li>
             <li> <a href="sonic-font/sonic.html">Sonic Titles</a></li>
+            <li> <a href="weather/index.html">Presenting Data without Numbers - 2017 University Final Project</a></li>
         </ul>
     </body>
 </html>
