@@ -24,17 +24,20 @@ function init() {
     
     //Anonymous mousedown event for when the user selects their location
     $('#England').mousedown(function (event) {
+        if (!window.screenTop && !window.screenY) {
+            //Gets width and height of the images
+            var width = $(window).width();
+            var height = 1080 * (width / 1920);
+            //Gets mouse location for the mousedown
+            var xMouse = event.pageX;
+            var yMouse = event.pageY;
+            //Uses pre-determined longitude and latitude that I calculated to figure our long lat of map at any size
+            longitude = -10.14 + (16.32 * (xMouse / width));
+            latitude = 55.89 - (6.09 * (yMouse / height));
+            launchLocation();
+        }
         openFullscreen();
-        //Gets width and height of the images
-        var width = $(window).width();
-        var height = 1080 * (width / 1920);
-        //Gets mouse location for the mousedown
-        var xMouse = event.pageX;
-        var yMouse = event.pageY;
-        //Uses pre-determined longitude and latitude that I calculated to figure our long lat of map at any size
-        longitude = -10.14 + (16.32 * (xMouse / width));
-        latitude = 55.89 - (6.09 * (yMouse / height));
-        launchLocation();
+        resizeEverything();
     });
 }
 
