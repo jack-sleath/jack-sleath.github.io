@@ -1,0 +1,338 @@
+var dataset = [
+    {
+        "machine": [
+            {
+                "name": "Alpha",
+                "network": {
+                    "interface_count": 3,
+                    "interface_data": [
+                        {
+                            "name": "eth0",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        },
+                        {
+                            "name": "eth1",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249364,
+                            "total_tx": 53523
+                        },
+                        {
+                            "name": "eth2",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249328,
+                            "total_tx": 53302
+                        }
+                    ]
+                },
+                "CPU": {
+                    "core_count": 4,
+                    "core_load_instant": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_5m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_15m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ]
+                },
+                "disk": {
+                    "drive_count": 2,
+                    "drive_data": [
+                        {
+                            "disk_name": "sda4",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda8",
+                            "disk_capacity": 80000000000,
+                            "free_capacity": 80000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Bravo",
+                "network": {
+                    "interface_count": 4,
+                    "interface_data": [
+                        {
+                            "name": "eth0",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        },
+                        {
+                            "name": "eth1",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        },
+                        {
+                            "name": "eth2",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        },
+                        {
+                            "name": "eth3",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        }
+                    ]
+                },
+                "CPU": {
+                    "core_count": 6,
+                    "core_load_instant": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_5m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_15m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ]
+                },
+                "disk": {
+                    "drive_count": 2,
+                    "drive_data": [
+                        {
+                            "disk_name": "sda4",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda12",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Charlie",
+                "network": {
+                    "interface_count": 2,
+                    "interface_data": [
+                        {
+                            "name": "eth0",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        },
+                        {
+                            "name": "eth1",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        }
+                    ]
+                },
+                "CPU": {
+                    "core_count": 2,
+                    "core_load_instant": [
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_5m": [
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_15m": [
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ]
+                },
+                "disk": {
+                    "drive_count": 3,
+                    "drive_data": [
+                        {
+                            "disk_name": "sda4",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda12",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda2",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Delta",
+                "network": {
+                    "interface_count": 1,
+                    "interface_data": [
+                        {
+                            "name": "eth0",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        }
+                    ]
+                },
+                "CPU": {
+                    "core_count": 3,
+                    "core_load_instant": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_5m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_15m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ]
+                },
+                "disk": {
+                    "drive_count": 3,
+                    "drive_data": [
+                        {
+                            "disk_name": "sda4",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda12",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda2",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        }
+                    ]
+                }
+            },
+			{
+                "name": "Echo",
+                "network": {
+                    "interface_count": 1,
+                    "interface_data": [
+                        {
+                            "name": "eth0",
+                            "rx_bytes": 1200 * Math.random(),
+                            "tx_bytes": 10 * Math.random(),
+                            "total_rx": 1249327,
+                            "total_tx": 53424
+                        }
+                    ]
+                },
+                "CPU": {
+                    "core_count": 3,
+                    "core_load_instant": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_5m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ],
+                    "core_load_15m": [
+                        32 * Math.random(),
+                        32 * Math.random(),
+                        32 * Math.random()
+                    ]
+                },
+                "disk": {
+                    "drive_count": 3,
+                    "drive_data": [
+                        {
+                            "disk_name": "sda4",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda12",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        },
+                        {
+                            "disk_name": "sda2",
+                            "disk_capacity": 50000000000,
+                            "free_capacity": 50000000000 * Math.random(),
+                            "write_iops": 50 * Math.random(),
+                            "read_iops": 9000 * Math.random()
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+]

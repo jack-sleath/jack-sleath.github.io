@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Weather\\css",
+    "\\Weather\\css\\images",
+    "\\Weather\\js"
   ],
+  "SelectedNode": "\\Weather",
   "PreviewInSolutionExplorer": false
 }

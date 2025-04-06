@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+			<meta http-equiv="refresh" content="15" />
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+			<script src="js/jquery2.knob.js"></script>
+			<script src="data.json"></script>
+			<script src="js/fn_CPU.js"></script>
+			<script src="js/fn_network.js"></script>
+			<script src="js/fn_disk.js"></script>
+			<script>
+			function create_html (title, value){
+			var ret = '<div class="demo"><p>' + title + '</p>';
+			ret += '<input class="knob" data-angleOffset=-125 data-angleArc=250 readonly value="' + value + '"></div>';
+			return (ret);
+			}
+			$(function($) {
+				for (var i=0; i<dataset[0].machine.length; i++) {
+				
+					$( '#dials' ).append( create_html(dataset[0].machine[i].name + " network", calc_network_load(dataset[0].machine[i].network, 1)));
+					$( '#dials' ).append( create_html(dataset[0].machine[i].name + " CPU", calc_CPU_load(dataset[0].machine[i].CPU)));
+					$( '#dials' ).append( create_html(dataset[0].machine[i].name + " disk", calc_disk_load(dataset[0].machine[i].disk)));
+
+				}
+					$(".knob").knob({
+						change : function (value) {
+                        //console.log("change : " + value);
+						},
+						release : function (value) {
+                        //console.log(this.$.attr('value'));
+                        console.log("release : " + value);
+						},
+						cancel : function () {
+                        console.log("cancel : ", this);
+						},
+						format : function (value) {
+                        return value + '%';
+						},
+						draw : function () {
+                        // "tron" case
+                        if(this.$.data('skin') == 'tron') {
+                            this.cursorExt = 0.3;
+                            var a = this.arc(this.cv)  // Arc
+                                , pa                   // Previous arc
+                                , r = 1;
+                            this.g.lineWidth = this.lineWidth;
+                            if (this.o.displayPrevious) {
+                                pa = this.arc(this.v);
+                                this.g.beginPath();
+                                this.g.strokeStyle = this.pColor;
+                                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                                this.g.stroke();
+                            }
+                            this.g.beginPath();
+                            this.g.strokeStyle = r ? this.o.fColor : this.fColor ;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                            this.g.stroke();
+                            this.g.lineWidth = 2;
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.o.fColor;
+                            this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                            this.g.stroke();
+                            return false;
+                        } else 	{
+									if (this.v < 40) {
+										this.o.fgColor = "limegreen";
+									}
+									if ((this.v >= 40) && (this.v < 60)) {
+									this.o.fgColor = "greenyellow";
+									}
+									if ((this.v >= 60) && (this.v < 75)) {
+										this.o.fgColor = "gold";
+									}
+									if ((this.v >= 75) && (this.v < 90)) {
+										this.o.fgColor = "darkorange";
+									}
+									if (this.v >= 90) {
+										this.o.fgColor = "firebrick";
+									}
+								}
+						}
+					});
+				});	
+			</script>
+			<style>
+            body{
+              padding: 0;
+              margin: 0px 50px;
+              font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+              font-weight: 300;
+			  color: #d5d5de;
+              text-rendering: optimizelegibility;
+            }
+            p{font-size: 40px; line-height: 30px}
+            div.demo{text-align: center; width: 280px; float: left}
+            div.demo > p{font-size: 20px}
+        </style>
+	</head>
+	<body style="background-color:#444458;">
+		<div style="width:100%;font-size:20px;letter-spacing:-2px;line-height:20px;">
+            <h1>Server Dials</h1>
+        </div>
+        <div style="clear:both"></div>
+		<div id="dials">
+		</div>
+	</body>
+</html>

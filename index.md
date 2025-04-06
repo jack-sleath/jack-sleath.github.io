@@ -13,6 +13,7 @@
             <li> <a href="code/code.html">Demo Code</a></li>
             <li> <a href="sonic-font/sonic.html">Sonic Titles</a></li>
             <li> <a href="weather/index.html">Presenting Data without Numbers - 2017 University Final Project</a></li>
+            <li> <a href="intern/dashboard.html">ARM Server Dashboard - 2013 Internship</a></li>
         </ul>
     </body>
 </html>

@@ -1,0 +1,257 @@
+1 Introduction 
+This project will explore the way data can be presented without using numbers to do so. This will be explored by the creation of a weather application that will present the next twenty four hours of weather without the use of numbers. This will provide a more unique way of representing the weather. The project itself will consist of an application presenting the weather of England and also a survey to determine whether the method of displaying data is viable. 
+1.1 Project Scope 
+The project will show the weather for a location selected by the user and it will display it in a way that does not require numbers to display that information. 
+1.1.1 Product Requirements 
+The requirements for the project will be that it can show the weather without presenting any numbers to the user. The data that would be displayed to the user would be 
+● The weather for the next 24 hours 
+● The moon phases 
+● The position of the Sun 
+● The sunset and sunrise times 
+All of these should be displayed through images that maintain a consistent style. 1.1.2 Process Requirements 
+The processes that will be used in this project will be the user interacting with an app that will allow them to select a location within England. Then that location will appear on the screen in a stylized presentation of the location, with all of the information necessary to show the current weather. 
+The processes behind that will be - 
+● A function that converts a mouse click to a coordinate, consisting of a longitude and latitude within England. 
+● A process that will get the weather data from an external source 
+● A method that will display all of the information collected onto the application for the user to see the weather for the next twenty four hours. 
+1.1.3 Limitations 
+Limitations of the project will be that not every single city or town within England will have their own customised image. In the final product the plan is to have three locations with custom images. The final step of the project will be having a look up system to determine whether it is a city, village or coastal town. This is something that will be added if time is available but as it is unnecessary for the displaying of the weather it will not be the primary objective. 
+1.1.4 Competitors 
+After looking at the currently provided apps available on Android and it was noted that they all follow very similar, and number heavy, ways of presenting their data. The project will explore whether it is viable for the current systems to be replaced with a more visual representation of the weather. (See 9.17) 
+1.2 Project Choices 
+These are choices that have been made that will affect how the project develops and how each stage of development is approached. 
+1.2.1 Technological Choices 
+The project itself will be developed using JavaScript, JSON, HTML and CSS to make the application. The program that will be used to develop the project will be Notepad++ to do all of the coding and Photoshop to make all of the assets needed. The reasons these languages and programs were chosen to develop the project was because the developer has had past experience in them. 
+1.2.2 Design Choices 
+Originally there were two concepts as designs for the application. The two designs were a sketch based design that was very similar to a notepad that had been doodled on. The other design being a pixelated representation of each location and the weather within it. 
+Originally there was a focus group to decide on which design would be used. This focus group was presented with two designs one of each style originally discussed. The focus group found the sketch based design was easy to understand but was not actually appealing to the eye. The pixelated design was easy to determine location but it took much longer to create the assets. (See 9.11) This lead the developer to find a more efficient method of making the pixel art style as it was a longer process. This will be discussed in the graphics section (See 5.1). 
+
+2 Research 
+Originally different texts and images were looked through to research various topics related to the project. In this section all the information is looked at and gathered to see how it impacted the project and how the developer feels about it now. Also discussed in this section is how the research has expanded and also how the developer implemented the various items that were researched. 
+2.1 Beaufort Scale 
+The Beaufort scale is a system that shows wind speed using visual aspects to depict the wind speed. Originally the scale was developed for the sea and it was later developed for use on land in 1906 by George Simpson who was the Director of the UK Meteorological Office (Met Office, 2016a). 
+2.1.1 Original Thoughts 
+The original research showed that all of the levels of the beaufort scale can be displayed using smoke and leaves (Royal Meteorological Society, 2013). This would allow for the project to display the wind speed whilst maintaining the goal of not showing any numerical data. When implemented this would need a graphic that would fit every scene, which could have posed an issue as a tree or smoke may not fit into every environment naturally. 
+2.1.2 Current Thoughts 
+Originally in the project it was noted that this would be a very easy way to display the speed of the wind but, although that was true, it was realised that the general public would not know the Beaufort scale as it is primarily used by sailors and not used in many weather applications (Weather Window, 2001). Also after creating the assets for the scenes the original fear that the assets would not fit into many of the scenes at all was confirmed. 
+2.1.3 Implementation 
+As discussed in the previous section the general public would not know the Beaufort scale so the graphics were not created for every level of the scale and the scale was not implemented. The survey did not include the tree that would represent the Beaufort scale. This will all be discussed further in the conclusion (See 7). 
+2.2 Interface Design 
+The interface of the application was decided upon early in the process, as discussed (See 1.2.2) in the design choice section of the report. Many design patterns are available to follow which have many rules that can link with each other. 
+The designer has an ability to contribute to the meaning using the tools available to them, such as intensification, clarification and association (Bierut and Rand, 2014). 
+2.2.1 Original Thoughts 
+Designing the application with plans to follow Shneiderman’s Eight Golden Rules of Interface Design will allow a good interface for the users to experience (Shneiderman and Plaisant, 2005). Choosing to follow the Eight Golden Rules of Interface Design, and not Jakob Nielsen’s 10 Usability Heuristics for User Interface Design (Nielsen, 1995) will lead to a simpler development process the application as Nielsens rules are broader and more set in the past whereas Shneiderman's are more prescriptive and up to date. 
+2.2.2 Current Thoughts 
+The visual perception of data is hugely important for people to understand what is being shown. There are several differences that the human eye can perceive easily, these are referred to as preattentive attributes. These attributes are shape, line length, orientation, colour and hue. (Few, 2004). Using these attributes and Shneiderman's principles (Shneiderman and Plaisant, 2005), the project will be an application that allows users to absorb the data that will be presented passively. 
+"Visual displays rich with data are not only an appropriate and proper complement to human capabilities, but also such designs are frequently optimal.” (Tufte, 1990). 
+2.2.3 Implementation 
+Following Shneiderman's rules, the implementation of a simple interface was added to the project. The rules were simple to follow which lead to an easy way to maintain a good interface. The way each rule was used is as follows: 
+To strive for consistency, all of the assets were created using the same action through Photoshop which is discussed later on in the graphic section of the project (See 5.1). Using the same action repeatedly leads to all of the assets fitting the same style. 
+As the project only has two screens available to it with minimal interaction due to its design there was no need to enable use shortcuts for frequent users. Considering this, only one shortcut was implemented, which was the ability to refresh the page in order to allow a user to select a new location by clicking on the town image provided. 
+To offer informative feedback the town name is presented to the user via a sign. As this is the only information presented in a textual format. The rest of the informative feedback will be tested in the survey section of the project. 
+In the project there are no dialogues needed to yield closure as the site features very few interactive elements. 
+The system is designed to be usable for first time users as well as long time users. A good way to support the internal locus of control that will allow the experienced users to have a sense that they are in charge of the system and that the system responds to their actions is the fact that a user will eventually learn where they are on the map meaning that they can identify the pixel square that represents their town the closest. This was shown in the tests discussed in the unit testing section (See 6.2). 
+There was minimal error handling put into the project as the only way of it having an error would be based upon the API not returning any information. 
+To allow for easy reversal of actions as stated in Shneiderman's rules the project had one way of reversing actions. That is the ability to click on the town to return back to the select location page. 
+To reduce short-term memory load the information is presented over forty eight seconds to represent the next twenty four hours and that is on loop so if a user doesn't recall everything it will be presented again. There is no need for that presented information to be stored in their short term memory. 
+2.3 Semiotics of Weather Symbols 
+Weather symbols can be easily recognised because they fall into three categories. These categories are icon, index or symbol and each one uses a different technique to be recognised. Icon uses similarity, this means it is a symbol that is similar to the real life equivalent, common examples of this are the sun, rain and snow (Met Office, 2016b). Indexes use causality to be recognisable, this would be like wind direction being symbolised by a weather vane, or the strength being shown in a manner similar to the Beaufort Scale. The final technique used is symbol, this uses convention. An example of symbol would be degrees centigrade, although not completely understandable without prior knowledge, it is something that can be easily explained. (Papadopoulou, 2009). 
+2.3.1 Original Thoughts 
+In Papadopoulou’s journal it was found that children can understand semiotics, although some of the examples provided confused them as they had not encountered it in real life so they had no prior experience. This is where the project should differ to conventional weather applications as it should be a more life like representation of the weather. (Papadopoulou, 2009). 
+2.3.2 Current Thoughts 
+As the project will not contain any weather symbols itself, investigation of the functionality of replacing symbols will be done in the testing phase of the project. The project will replace the need for symbols, meaning that people who had struggled previously with the unknown symbols would have an easier time with the weather application. 
+2.4 Moon Phases 
+Although moon phases are not crucial to the weather, it was originally planned to be added to the application as an aid in immersion. Although the phases would not affect the user, it would be a nice way of the user feeling more connected with the scene. Also it would allow the user to see if the sun and moon would be out at the same time. 
+2.4.1 Original Thoughts 
+The original plan for the moon phases,moonrise and moonset was to use calculations to know when and what they would be. This was originally thought to be simple as a moon cycle is a set period of time. Upon further research it was discovered that a cycle lasts 29.5 days, and as there are eight phases to the moon it means that each phase of the moon lasts approximately 3.7 days (Moon Phases, 2016a). Using a predetermined date and a moonphase for that date it would be possible to calculate the current moon phase (SkyTellers, 2007). Also during this research it was found that the moonrise and moonset is different based on your longitude and latitude (Moon Phases, 2016b). This would be an issue to implement the moon rise and set and it be accurate as well. 
+2.4.2 Current Thoughts 
+It was found during the original research that an API may be necessary to accurately portray the information. An API was found on the site that the original research was on and that would be implemented in the same way as any other API. (See 2.5.2) 
+2.4.3 Implementation 
+The implementation of moon phases would be unnecessary for the application as it is not necessary information for the user to receive in order for the application to be effective. The moon phases do not affect the weather so it was believed that it would not be necessary to add them into the application, although the graphic design for it was completed for this part of the project.. 
+2.5 Open and Free APIs 
+An open API which is also referred to as a public API is a publicly available interface that can provide developers with access to a software application. In the case of this project, it can  allow the application to gather information about the weather without having to collect it itself. 
+2.5.1 Original Thoughts 
+Two different APIs were available for the project to use one provided by the Met Office called DataPoint, and another by OWM (OpenWeatherMap). Although both are free to use, there are various reasons why OWM is far more appealing to use. Using OWM, weather data is provided based on longitude and latitude, which is not a feature of DataPoint. DataPoint only allows you to look up the town's weather by name, which is something that would be good to avoid. (Met Office, 2016c). (OpenWeatherMap, 2016). 
+2.5.2 Current Thoughts 
+After further research the OWM was chosen as the source of the weather data and the Sunrise Sunset was chosen as the API of the sun data. (Sunrise Sunset, 2016). These would allow for all the relevant data for the weather to be collected and presented to the users. 
+
+
+3 Management 
+To make this project successful a plan was needed to be made from the beginning. The plan used was made up of two sections, the first section being a gantt chart and the second being a risk assessment of what would potentially go wrong during the project. 
+3.1 Gantt Chart 
+Microsoft Excel was chosen as the program to make the gantt chart with. The reason Excel was chosen was because it is software that is widely available. Previously Microsoft Project had been used but many issues arose during the process of moving the dates; familiarity with not only the Project application but also project management is required to successfully use Microsoft Project. One program that was recommended was SmartSheet, although the software was easy to use, it was required that the user pay to sign up or just use a 30 day free trial. To have access to the gantt chart for longer than thirty days was crucial to the development of the project, so the software to build the gantt chart was Excel. A step by step guide was followed, from YouTube, showing the process to produce a gantt chart which could easily add and change the length of tasks. (Subjectmoney, 2013). 
+3.1.1 Original Thoughts 
+The original gantt chart (See 9.19) for the project was broken down into very few sections meaning the end of the project had very little planning to it. (See 9.18). 
+3.1.2 Changes Made 
+The second iteration of the gantt chart (See 9.20) was broken down into many more sections. The section on project proposal was left the same as the gantt chart was created after that section was complete. 
+In the revised copy of the gantt chart each overall section of the project was filled in blue letting the smaller sections be coloured orange. This lead to having a more clear overview of what was needed to be done and when. This allowed the developer to judge the length of time necessary for each task. In the revised version of the gantt chart, the project is broken down into more detail allowing for the developer to keep track of the process of building the project more accurately. 
+A project log was made to try and keep the project to the planned timeframe. (See 9.24). 
+3.2 Risks 
+Many risks could have been encountered during the project, these risks were looked into early on during the project. 
+3.2.1 Original Risks 
+The original risk discussion was very complete and covered all of the potential risks that could be encountered. (See 9.21). 
+3.2.2 Risks Encountered 
+During the project many of the risks that had been planned for originally could have happened. These risks were mitigated by using the proposed solutions. The biggest risk was over loading the API and making too many requests. This was avoided by only allowing the developer to do testing, the requests were kept to a minimum, and once it was fully implemented requests are only made once every 30 minutes. 
+
+
+4 Ethics 
+During the project many ethical concerns were thought about. The ethical concerns were broken up into API ethics, university ethics and world ethics. It is crucial that the ethics are taken into consideration as these are the foundation of a good project. Each section will discuss the various ethical issues that could occur and how the developer overcame them. (See 9.22). 
+4.1 API Ethics 
+When using APIs, the systems have their own set of ethics that need to be adhered to. These can vary from a request limit to simple recognition. 
+4.1.1 Original Thoughts 
+Before the project began, it was discovered that one of the APIs being used had a strict, no more than sixty calls per minute policy. As the project was only set to be used in a closed environment it would not be breaking this rule. Additionally the API in question, OpenWeatherMap, requires the software to have a link to their site if the API is used. 
+4.1.2 Current Thoughts 
+The rules stated above for OpenWeatherMap similarly applied to the Sunrise Sunset API that was also used in the application. To avoid breaking the request limit rule the application only requests the data once every thirty minutes. The reason thirty minute intervals were chosen was because the weather itself would be unlikely to change much in that length of time, but hourly could see the potential for weather changes. . This would keep the requests below the maximum of sixty per minute. 
+The other rule that the APIs have, that had to be followed to maintain to their code of ethics, is that the sites from which the APIs originate are sourced on the site with a link to their own sites. This was included in the application at the bottom of the page, so the rules were adhered to. 
+4.2 University Ethics 
+The University of Brighton has strict ethics that must be adhered to. These were provided at the beginning of the project. 
+4.2.1 Original Thoughts 
+The project was evaluated using the ethics form provided by the university and were in place at the time of submitting the form. It was believed that no ethical concerns would be raised during the project. The project supervisor signed off on the ethics form approving the project to go ahead without being taken to the university ethics committee. (See 9.23). 
+4.2.2 Current Thoughts 
+During the project it was noted that a survey would be needed to test the functionality of the site. When the survey was constructed the university ethics form was considered in every step to ensure that the ethics were not violated. 
+The questions had to remain within the university guidelines to do this. It was essential that the target audience were not vulnerable and no additional data was collected. No sensitive data was to be collected and also the survey participants all had to be willing to partake in the survey without being forced. Finally the last step of the ethics for the project was to make sure that it was not detrimental to the environment, this also was crucial during the world ethics section. 
+4.3 World Ethics 
+There are some ethical concerns that affect the world as a whole. These can vary from collecting large amounts of data to projects that could damage the environment during the process of the project. To ensure that the project would not affect the world these world ethics were take into consideration. 
+4.3.1 Original Thoughts 
+As the data being used is publically accessible it should not cause any ethical issues. Looking through the ethics form it was noted that although the data is more easily accessible by using the application, it would not cause any negative affects to any potential users. This is further confirmed by a quote by the ICO. “Many instances of big data analytics do not involve personal data at all. Using climate and weather data, for example, could enable new discoveries and improved services without using personal data.” (Information Commissioner's Office, 2014). 
+Also the environmental impact of the application could have was looked at. As a very small and non intensive web hosted application it would not need a powerful PC to run, a Raspberry Pi would be adequate to run it. 
+4.3.2 Current Thoughts 
+To maintain the previously stated ethical goals, the project was kept to being a web hosted application, meaning that it can run on a Raspberry Pi. Also the application only used publicly available data, meaning that no sensitive data is being used. 
+
+
+5 Project 
+The project is made of three main components. This section will discuss the developmental process of each component. Two of these are for the application itself and the third being for the answer to the question the project asks “Can you present data without numbers?” 
+5.1 Graphics 
+This section will discuss how the graphics were created. These were all made to show data without having to present the numbers behind them. 
+“Graphics are an essential means of communication for humans, from prehistoric cave painting to modern computer graphics. A graphic can often summarize and visualize information much more efficiently than tables or words.” (Krause and OConnel, 2012). 
+5.1.1 Static Graphics 
+To create the assets for the project, photoshop was utilised to change images into pixel art as the original assets made in the focus group testing phase took significant resources in terms of time to make. Using Photoshop's action tool, an action can be made to recreate the steps taken which then can be assigned to a macro. 
+First of all, to create an asset all of the images that need to be represented in the art are collected to be worked on and then combined using photoshop. An attempt to match the colours would be made and levels of the images would also be matched if possible. When combining the merged image and pixelating it a lot of the detail is lost, for this reason the images are not matched perfectly. 
+Once happy with the asset created, it gets run through the action that creates the pixel art from the merged photos. It is a nine step action where the final product is the original non pixelated asset being returned in a uniform size pixelated image. 
+This is done by duplicating the original image to a new document. Then the amount of colours in the image is reduced to 20 whilst also maintaining a transparency layer. This allows the pixel art to look a lot crisper. This is done by converting the image mode to indexed colour. Unfortunately this is not intended for a document that could have the layers saved independently of each other so the image mode will need to be changed back to RGB later on. 
+At this point to make the image actually uniformly pixelated it is shrunk so the entire image is 10% of its original size. This removes a lot of the available pixels for photoshop to work with. So when it is then increased to 1000% of its size it is back to the original dimensions of the image. This then gives the illusion of the image having a low pixel count whilst still maintaining a decent sized image for the application to work with. 
+At this point the image mode it is needed to be changed back to RGB so the layer will become unlocked and be allowed to be interacted with again. The final four steps of the action are just duplicating the image back to the original document. To do this the entire image is selected, copied to the clipboard, the new document that has been worked on gets closed and then the pixelated version gets pasted back to the original document as a new layer. 
+This series of steps was originally inspired by a tutorial, but various steps could not be applied due to either updates with in the program, or because the guide was not intended to be creating editable assets with transparent sections (Kemper, 2014). 
+5.1.2 Animated Graphics 
+The same steps as above are repeated for the animated artwork also. The original animations before being pixelated are hand drawn or tweened images. An example of each of these are the hand drawn rain animation and the unused tree animation. For the rain each drop was drawn and moved in a frame by frame animation. Once all the frames were completed they were all pixelated using the same method as above. 
+An example of the tweened image animation is the tree. A still image of the tree was taken and then parts of the tree got split into separate sprites to be animated to show movement. Once the animation was completed the frames were split apart and pixelated in the same style as the frame by frame and static animations were. 
+5.2 Code Development 
+The application is made of three sections of code, the HTML, the CSS and the JavaScript. During the development of the code, it was built from the ground up, where each section was built one by one. 
+5.2.1 HTML Development 
+The HTML was developed first as it is the building blocks of a web application. During the development of the HTML several iterations were made. Initially there was a single div that contained all the image tags for the town scene to be shown. The sections making up the town were layers consisting of: 
+● Sky - The background layer that will either show night, dawn, dusk or day. ● Sun - A small image of the sun to be placed in the sky to show the time of day. ● Moon - To be used in the same style as the sun. 
+● Scene - This layer represents the town, this can be either a generic town image or one of the specific ones. 
+● Sign - This image is the sign that will be present in every town. 
+● Sign Effects - A layer for an animated image over the sign. 
+● Weather - This layer is for the animated weather to be displayed over the town. ● Clouds - This is a layer for the clouds to be displayed on top of the town. 
+These layers were all kept throughout the project, but during later development two more layers were added. These being Sign Text, a layer that puts text on the sign to show place name, and Atmosphere, a layer that has an opacity gradient to allow for the site to work at any resolution. The Sign Text will later be changed with JavaScript. 
+5.2.2 CSS Development 
+The CSS was developed after the HTML, as this reformats the previously mentioned layers. The beginning of the CSS was borrowed from a site. This CSS resets all of the styles that browsers use by default. This should minimise inconsistencies between browsers and allow for a wider variety of browsers to be used. (Meyer, 2016). 
+The next step of the CSS was applying a z-index to all the images to ensure that they are in the right order for the layers to show. Also the CSS needs to position the images all on top of each other, this is done by using absolute positioning and aligning with the bottom left of the image. The CSS will be later changed using JavaScript. 
+5.2.3 JavaScript Development 
+The JavaScript will be broken down into five sections. They were implemented in the order that they are written about. 
+The JavaScript begins by importing the jQuery Library. This is a publicly available library that minimises the amount of lines of code needed in the main JavaScript file. The version being run on this application is version 3.1.1. The file was downloaded from the Google Hosted Libraries (jQuery, 2016). 
+The first section developed was the initialise section. This section sets up all the variables needed to run the application whilst also setting an on load listener to launch the application once everything has loaded. The init function begins all of the functions needed to launch the application. This is done using the anonymous function that converts the user's mouse click to a set of longitude and latitude coordinates. Once that is complete the other functions are ready to run. (See 9.3). 
+The second section of code developed was the data collection section. This section of code uses four functions to gather all the data needed for the application to run. It uses two url builders and two functions that use an AJAX request to get the data using the APIs. (See 9.6). 
+The third section of code is made up of the equations, and is referred to as the maths section. The maths section organises all the data into a more usable format. This is done by getting the data and rearranging it into a twenty four hour format. The one functions that is crucial to the application is getting the relevant sunrise and sunset times. Using the sunsetSunrise function it collects the times of the next two that take place in the next twenty four hours. Another process is the weathe24Hours function. This function collects the relevant data from the data collection phase and formats it into the twenty four hour period using the presentationData function. (See 9.5). 
+The final section necessary for the application to run is to present the data to the user. One crucial process for the application to run is the resizeEverything function. This takes every image displayed and resizes based on a factoring number made up of the window width divided by 1920, which is the pixel width of the original images. Then using the same factoring number the atmosphere gets placed at the top of the sky image to allow for scaling on any device. The next step on displaying the data is using the town name on the sign, this is done by cutting the amount of characters shown and then placing it on the sign using the same technique as the resizeEverything function. The final function for the application is running through the collected data. This uses three functions to completely loop and keep the data up to date. The function runWeather is a multistep function that runs through the twenty-four hours worth of weather, whilst also positioning the sun to represent the time of day. After it has ran through the twenty-four cycle the function loops using the loop function. This repeats for half an hour before recollecting the data and starting again. (See 9.4). 
+5.3 Survey 
+The survey was created as a way to test whether or not the project was a success. It was created in conjunction with the ethics form provided by the university. 
+5.3.1 Goals of the Survey 
+The goal of the survey was to see if it was possible to present data to a user accurately without the use of numbers. The survey was testing the users to see if their perception of the data was the same as the data the application was trying to display. 
+5.3.2 Questionnaire 
+The questionnaire provided for users to fill in was compliant with the ethics form provided by the university. The questions focused on what the user interpreted from the provided snapshot of the site. The survey consisted of fourteen questions, four lots of three questions about each scene and then two final questions about the design itself. 
+The issues with the survey questions are that some responses are open to interpretation. A prime example of this is the time of day question, as different users may have different perceptions of when midday starts and ends. 
+5.3.3 Results 
+The survey showed that 38% of people recognised the snowy weather, whilst rain, cloud and clear weather were all recognised with an above 95% success rate. This shows that weather can be represented through images if it is something that is recognisable. An avenue that would be interesting for this project to explore if more time was available would be testing to see if a user who is more used to snow in their day to day life would find the snow more recognisable. This was confirmed in the additional feedback 
+The location question caused a small amount of confusion which can be seen in the results and further feedback (See 9.8). The first location Hastings was recognised by 94.6% of people, with similar results for Bearwood and Maidstone with 95.7% and 97.8% respectively. The planned outlier being Cottonshopeburnfoot, where the application shortened it down to “Cottonshopeb…”. The answer that would be deemed correct would be what is shown on the sign, so only 26.1% of people technically got it right, even though many people put down similar answers. 
+As mentioned in the previous section (See 5.3.2) the time question was most susceptible to misinterpretation. This is shown by the percentages of 56.5%, 40.2% and 21.7%. The one that seemed most recognisable was the night time one with a score of 83.7%. This is most likely due to the image being black to easily represent night and the fact it is the longest time period on the list. 
+The survey results show that although some data seems harder to represent than others it was a relatively successful project. 
+
+
+6 Project Testing 
+Testing the project consists of two stages. The first stage being to test the actual code itself to see if it's valid, this needs to be done three times with three different validators. The second stage of testing is made up of unit testing. This would be done by both developer and the users. Validators would show that the syntax and formatting of the code is correct whilst the unit testing will show whether or not the project accurately functions as expected. 
+6.1 Validators 
+Whilst validators check the code to see whether or not it is valid it can not test whether or not the code is functioning. The problem with validators is that when you put a loosely typed language into it there are many choices the developer can make which would not affect the code these problems are more apparent in JavaScript. 
+6.1.1 CSS Validation 
+Checking the CSS validation showed that there were no issues with the CSS file itself. Although this is promising it does not necessarily mean that the CSS will be fine throughout the entire projects run time. This is due to the fact that the CSS will be changed through JavaScript functions. (See 9.13). 
+6.1.2 HTML Validation 
+In a similar way to the CSS, the HTML validation shows a complete success with no errors. Once again while this is promising it does not mean that the HTML will be valid throughout the entirety of the processes that the project runs through. This is also due to this JavaScript changing the shape HTML during its functions. (See 9.14). 
+6.1.3 JavaScript Validation 
+One of the main issues with JavaScript validators is that the validator itself could have many built in requirements that are not necessary for the language to be typed. This is due to the fact that JavaScript is a loosely typed language. Some examples of these issues that are  brought up by many validators are using tabs instead of spaces or using single quotations as opposed to double quotations. Whilst looking for a validator to test the JavaScript it was found that some of these issues raised are in multiple validators. This lead to the developer choosing to use space delimitation, as opposed to tab delimitation whilst also changing all of the double quotes to single quotes. 
+The JavaScript validator showed three warnings throughout the entire piece of JavaScript code. These were all the same warning happening multiple times. That was that the variable was already defined, the reason this was dismissed by the developer is due to the fact that all three times the error occurred was due to the fact the variable was reset before use. (see 9.15). 
+6.2 Unit Testing 
+Although all the code validated the project itself still needs to be tested to see if it functions as intended. The developer tested the project by attempting to break the application. This was done on the two screens available to the user. 
+
+
+7 Conclusion 
+The goal of the project was to create an application that presents the weather of any location in England. There was a secondary aim to have custom images made for a few locations and to have moon phases. The final objective was to prove that it was or was not possible via a survey. 
+All the main objectives were hit including some of the secondary objectives. The moon phase graphics were created and the custom images for some locations were created. The only section not implemented into the final site, which was originally planned was the Beaufort scale. 
+The survey that was created to test the success of the project gave back results that were overwhelmingly positive, and the results that cast any doubt on the project had logical reasons that could be explained with further research. 
+There are some failures within the code of the project, the primary one being that the project itself does not work after sundown. This could be fixed if more time was available as it seems to be a logic error somewhere in the code. Another failure would be the beaufort scale not being implemented. This was due to the graphics not fitting in with the scene. If more time was available it would be able to be integrated easily, but it would not have been viable to recreate all the assets. 
+A closing statement from the developer. “I believe that the application shows there is more than one way to present data, and that with refining, user testing and a little more time, data could be presented without numbers.” 
+
+
+8 Annotated Bibliography 
+Beirut, M and Rand, P. 2014 
+Beirut, M and Rand, P. (2014) Thoughts on Design, San Francisco, Chronicle Books, pp. 46. This is a book on design I used. 
+Few, S. 2004 
+Few, S. (2004) Tapping the Power of Visual Perception [Online]. Available at 
+http://www.perceptualedge.com/articles/ie/visual_perception.pdf (Accessed 5 April 2017) This was used for a quote about visual perception of data. 
+Information Commissioner's Office. 2014 
+Information Commissioner's Office (2014) Big data and data protection [Online]. Available at https://ico.org.uk/media/for-organisations/documents/1541/big-data-and-data-protection.pdf (Accessed 23 November 2016). 
+This was used for the quote about how there are little to no ethical concerns using weather data. 
+The International Weather Network. 1998 
+Shelton, W.A., Healy, W.R., Jones, J.F.E. and Issac, S., The International Weather Network, (1998). System for collecting and presenting real-time weather information on multiple media. U.S. Patent 5,848,378. 
+I originally believed that this had more information on presenting the data, but it mainly focuses on the back end of the system, which I will already have in place using the API that I have found. For this reason I will not be using this in my report. 
+jQuery. 2016 
+jQuery. (2016) jQuery 3.1.1 Min [Online]. Available at 
+https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js (Accessed 8 May 2017). 
+This is the version of jQuery that was used in the project. 
+Kemper, A. 2014 
+Kemper, A. (2014) How To Make Any Photograph Or Image Into Pixel Art With Photoshop [Online]. Available at 
+https://www.shutterstock.com/blog/how-to-turn-any-photograph-into-pixel-art-with-photoshop (Accessed 13 December 2016). 
+A guide that helped me create the action to create the assets for my project. Met Office. 2016a 
+Met Office. (2016) National Meteorological Library and Archive Fact sheet 6 - The Beaufort Scale [Online]. Available at http://www.metoffice.gov.uk/media/pdf/4/4/Fact_Sheet_No._6_-_Beaufort_Scale.pdf (Accessed 26 November 2016). 
+This is the history of the Beaufort Scale used. 
+Met Office. 2016b 
+Met Office. (2016b) Key to Symbols and Terms - Met Office[Online]. Available at http://www.metoffice.gov.uk/guide/weather/symbols#weathersymbols (Accessed 25 November 2016). 
+I used this Met Office page to show examples of weather symbols that demonstrated the use of Icons. 
+Met Office. 2016c 
+Met Office. (2016b) DataPoint Documentation - Met Office [Online]. Available at http://www.metoffice.gov.uk/datapoint/support/documentation (Accessed 27 November 2016). 
+This is the home page that has access to all of the documentation for the DataPoint API which I chose not to use. 
+Meyer, K.S. 2016 
+Meyer, K.S. (2016) CSS Tools: Reset CSS [Online]. Available at 
+http://meyerweb.com/eric/tools/css/reset/ (Accessed 8 May 2017). 
+The set up for the CSS file to reset the browser's style. 
+Moon Phases. 2016a 
+Moon Phases (2016a) Infographic [Online]. Available at 
+http://moonphases.co.uk/images/infographic.png (28 November 2016). 
+This is an explanation of how the moon phases work. 
+Moon Phases. 2016b 
+Moon Phases (2016b) Moon Phases | Current Moon Phase and Monthly Moon Phase Calendar . Available at http://moonphases.co.uk/ (28 November 2016). 
+This page shows how the moonrise and moonset are different based on location. Nielsen, J. 1995 
+Nielsen, J. (1995) 10 Usability Heuristics for User Interface Design: Article by Jakob Nielsen[Online]. Available at https://www.nngroup.com/articles/ten-usability-heuristics/ (Accessed 25 November 2016). 
+This was a set of design rules I looked at in Human Computer Interaction Module in my first year. OpenWeatherMap. 2016a 
+OpenWeatherMap. (2016a) Current weather data - OpenWeatherMap [Online]. Available at http://openweathermap.org/current (Accessed 26 November 2016). 
+This is the current weather API documentation, which also contains the data on how the JSON is formatted. 
+OpenWeatherMap. 2016b 
+OpenWeatherMap. (2016b) Weather API Price-list - OpenWeatherMap [Online]. Available at http://openweathermap.org/price (Accessed 24 November 2016). 
+This is the price list, which also contains the data on request limits. 
+Papadopoulou, M. 2009 
+Papadopoulou, M. (2009) Knowing and guessing: How do 9 year olds approach the meaning of visual signs in weather charts? Journal for Theoretical Cartography ISSN, 1868, p.1387. 
+This was the first bit of research I found, which I also used in my project proposal. This Journal confirmed my initial thoughts. 
+SkyTellers. 2007 
+SkyTellers. (2007) SkyTellers - Moon Phases - About Our Moon [Online]. Available at http://www.lpi.usra.edu/education/skytellers/moon_phases/about.shtml (Accessed 28 November 2016) 
+A system to calculate the moon based on date and a previously known phase. Shneiderman, B and Plaisant, C. 2005 
+Shneiderman, B and Plaisant, C. (2005) Designing the User Interface Strategies for Effective Human-Computer Interaction, Massachusetts, Addison-Wesley Publishing Company, pp. 74-76. 
+I used Shneiderman's design principles as it is something I have used before in Human Computer Interaction Module in my first year when working on a report on poor design. 
+Weather Window. 2001 
+Weather Window. (2001) Do We Need the Beaufort Scale? - Franks-Weather - The Weather Window [Online]. Available at http://weather.mailasail.com/Franks-Weather/Why-Use-Beaufort-Scale (Accessed 1 May 2017). 
+This is the site describing modern uses of the Beaufort scale. 
+Subjectmoney. 2013 
+Subjectmoney (2013) Gantt Chart Excel Tutorial - How to make a Basic Gantt Chart in Microsoft Excel 2013 . Available at: https://www.youtube.com/watch?v=-oD50HSBBBI (Accessed 25 November 2016). 
+This is the tutorial I followed to make my Gantt Chart in Excel. I found it very easy to follow and would probably use his guides again. 
+Sunrise Sunset. 2013 
+Sunrise Sunset. (2013) Sunset and sunrise times API - Sunrise-Sunset.org [Online]. Available at http://sunrise-sunset.org/api (Accessed 27 November 2016) 
+This is the page about the API formatting. 
