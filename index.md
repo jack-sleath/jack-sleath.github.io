@@ -9,11 +9,12 @@
         <h1>Sites</h1>
         <ul>
             <li><a href="datasetmaker/datasetmaker.html">DataSet Maker</a></li>
-            <li> <a href="starwars/charsheet.html">Star Wars D&D Character Sheet</a></li>
-            <li> <a href="code/code.html">Demo Code</a></li>
-            <li> <a href="sonic-font/sonic.html">Sonic Titles</a></li>
-            <li> <a href="weather/index.html">Presenting Data without Numbers - 2017 University Final Project</a></li>
-            <li> <a href="intern/dashboard.html">ARM Server Dashboard - 2013 Internship</a></li>
+            <li><a href="sqlinsert/sqlinsert.html">SQL Insert Maker</a></li>
+            <li><a href="starwars/charsheet.html">Star Wars D&D Character Sheet</a></li>
+            <li><a href="code/code.html">Demo Code</a></li>
+            <li><a href="sonic-font/sonic.html">Sonic Titles</a></li>
+            <li><a href="weather/index.html">Presenting Data without Numbers - 2017 University Final Project</a></li>
+            <li><a href="intern/dashboard.html">ARM Server Dashboard - 2013 Internship</a></li>
         </ul>
     </body>
 </html>

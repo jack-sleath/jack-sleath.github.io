@@ -1,0 +1,5 @@
+﻿    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea { width: 100%; }
+    input[type="text"] { width: 200px; }
+    label { font-weight: bold; }
+    .container { margin-bottom: 15px; }

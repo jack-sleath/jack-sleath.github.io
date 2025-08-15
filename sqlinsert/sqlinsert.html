@@ -1,0 +1,33 @@
+﻿<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Make a DataSet</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+    
+
+</head>
+
+<body>
+  <h1>SQL Table to Insert Statement Converter</h1>
+  
+  <div class="container">
+    <label for="tableName">Table Name:</label><br>
+    <input type="text" id="tableName" placeholder="Enter table name">
+  </div>
+
+  <div class="container">
+    <label for="tableData">Paste SQL Table (with headers):</label><br>
+    <textarea id="tableData" rows="10" placeholder="Paste your SQL table data here"></textarea>
+  </div>
+
+  <button id="convertBtn">Convert</button>
+
+  <div class="container">
+    <label for="output">Insert Statements:</label><br>
+    <textarea id="output" rows="10" readonly></textarea>
+  </div>
+    <a href="/index.md">Home...</a>
+</body>
+</html>
