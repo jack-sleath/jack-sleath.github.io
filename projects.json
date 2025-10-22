@@ -1,0 +1,139 @@
+﻿[
+  {
+    "id": "unique-id",
+    "title": "Title of Project",
+    "description": "Description of Project",
+    "languages": [ "TypeScript", "C#" ],
+    "skills": [ "Full-stack" ],
+    "types": [ "Personal", "Game" ],
+    "links": {
+      "demo": "",
+      "repo": "",
+      "video": ""
+    },
+    "coauthors": [
+      {
+        "name": "Name",
+        "url": "https://github.com/",
+        "role": "Role"
+      }
+    ],
+    "thumb": "🤠"
+  },
+  {
+    "id": "urine-my-territory",
+    "title": "Urine My Territory (Game)",
+    "description": "A cheeky 2D territory control game with pathfinding and particle effects.",
+    "languages": [ "TypeScript", "C#" ],
+    "skills": [ "Full-stack" ],
+    "types": [ "Personal", "Game" ],
+    "links": {
+      "demo": "https://example.com/umt",
+      "repo": "",
+      "video": ""
+    },
+    "coauthors": [
+      {
+        "name": "Martin Boulding",
+        "url": "https://github.com/martin-boulding",
+        "role": "Tester"
+      },
+      {
+        "name": "Bob Lee",
+        "role": "Backend"
+      }
+    ],
+    "thumb": "💦"
+  },
+  {
+    "id": "dataset-maker",
+    "title": "DataSet Maker",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "demo": "https://jack-sleath.github.io/datasetmaker/datasetmaker.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/datasetmaker"
+    },
+    "thumb": ""
+  },
+  {
+    "id": "sql-insert-maker",
+    "title": "SQL Insert Maker",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "demo": "https://jack-sleath.github.io/sqlinsert/sqlinsert.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sqlinsert"
+    },
+    "thumb": ""
+  },
+  {
+    "id": "star-wars-dnd-character-sheet",
+    "title": "Star Wars D&D Character Sheet",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/starwars"
+    },
+    "thumb": ""
+  },
+  {
+    "id": "demo-code",
+    "title": "Demo Code",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "demo": "https://jack-sleath.github.io/code/code.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/code"
+    },
+    "thumb": ""
+  },
+  {
+    "id": "sonic-titles",
+    "title": "Sonic Titles",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "demo": "https://jack-sleath.github.io/sonic-font/sonic.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sonic-font"
+    },
+    "thumb": ""
+  },
+  {
+    "id": "presenting-data-without-numbers-2017-university-final-project",
+    "title": "Presenting Data without Numbers - 2017 University Final Project",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "demo": "https://jack-sleath.github.io/weather/index.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/weather"
+    },
+    "thumb": ""
+  },
+  {
+    "id": "arm-server-dashboard-2013-internship",
+    "title": "ARM Server Dashboard - 2013 Internship",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "demo": "https://jack-sleath.github.io/intern/dashboard.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/intern"
+    },
+    "thumb": ""
+  }
+]
