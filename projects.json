@@ -1,34 +1,5 @@
 ﻿[
   {
-    "id": "unique-id",
-    "title": "Title of Project",
-    "description": "Description of Project",
-    "languages": [
-      "TypeScript",
-      "C#"
-    ],
-    "skills": [
-      "Full-stack"
-    ],
-    "types": [
-      "Personal",
-      "Game"
-    ],
-    "links": {
-      "demo": "",
-      "repo": "",
-      "video": ""
-    },
-    "coauthors": [
-      {
-        "name": "Name",
-        "url": "https://github.com/",
-        "role": "Role"
-      }
-    ],
-    "thumb": "🤠"
-  },
-  {
     "id": "urine-my-territory",
     "title": "Urine My Territory (Game)",
     "description": "",
@@ -189,9 +160,9 @@
     "id": "ai-fortune",
     "title": "AI Fortune Teller",
     "description": "",
-    "languages": [],
+    "languages": ["C#"],
     "skills": [],
-    "types": [],
+    "types": ["Personal", "AI/ML"],
     "links": {
       "repo": "",
       "video": ""
