@@ -532,7 +532,7 @@
                         const initials = (c.initials || (c.name || '').split(' ').map(w => w[0]).join('').slice(0, 2) || '?').toUpperCase();
                         av.textContent = initials;
                         const label = document.createElement('span');
-                        label.textContent = c.role ? `${c.name} — ${c.role}` : c.name;
+                        label.textContent = c.role ? `${c.name} - ${c.role}` : c.name;
                         el.appendChild(av);
                         el.appendChild(label);
                         people.appendChild(el);
@@ -543,7 +543,7 @@
 
                 const links = document.createElement('div');
                 links.className = 'links';
-                if (p.links?.demo) links.appendChild(linkBtn(p.links.demo, 'Live Demo'));
+                if (p.links?.demo) links.appendChild(linkBtn(p.links.demo, 'Try it out'));
                 if (p.links?.video) links.appendChild(linkBtn(p.links.video, 'Video'));
                 if (p.links?.repo) links.appendChild(linkBtn(p.links.repo, 'Source'));
                 inner.appendChild(links);
