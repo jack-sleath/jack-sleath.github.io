@@ -3,9 +3,17 @@
     "id": "unique-id",
     "title": "Title of Project",
     "description": "Description of Project",
-    "languages": [ "TypeScript", "C#" ],
-    "skills": [ "Full-stack" ],
-    "types": [ "Personal", "Game" ],
+    "languages": [
+      "TypeScript",
+      "C#"
+    ],
+    "skills": [
+      "Full-stack"
+    ],
+    "types": [
+      "Personal",
+      "Game"
+    ],
     "links": {
       "demo": "",
       "repo": "",
@@ -24,9 +32,17 @@
     "id": "urine-my-territory",
     "title": "Urine My Territory (Game)",
     "description": "A cheeky 2D territory control game with pathfinding and particle effects.",
-    "languages": [ "TypeScript", "C#" ],
-    "skills": [ "Full-stack" ],
-    "types": [ "Personal", "Game" ],
+    "languages": [
+      "TypeScript",
+      "C#"
+    ],
+    "skills": [
+      "Full-stack"
+    ],
+    "types": [
+      "Personal",
+      "Game"
+    ],
     "links": {
       "demo": "https://example.com/umt",
       "repo": "",
