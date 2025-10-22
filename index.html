@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jack Sleath - Projects'</title>
+    <title>Jack Sleath - Projects</title>
     <meta name="description" content="A filterable, tile-based portfolio/CV page to showcase projects by language, skills, and type." />
     <style>
         :root {
@@ -411,7 +411,6 @@
         fetch('./projects.json')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 PROJECTS = data;
                 renderGrid();
             });
