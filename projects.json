@@ -61,9 +61,9 @@
     "id": "dataset-maker",
     "title": "DataSet Maker",
     "description": "",
-    "languages": [],
+    "languages": ["HTML", "CSS", "JavaScript", "SQL"],
     "skills": [],
-    "types": [],
+    "types": [ "Duct-Tape Utility" ],
     "links": {
       "demo": "https://jack-sleath.github.io/datasetmaker/datasetmaker.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/datasetmaker"
@@ -71,12 +71,25 @@
     "thumb": "📤"
   },
   {
+    "id": "csv-to-sql",
+    "title": "CSV to SQL",
+    "description": "",
+    "languages": [ "HTML", "CSS", "JavaScript", "SQL" ],
+    "skills": [],
+    "types": [ "Duct-Tape Utility" ],
+    "links": {
+      "demo": "https://jack-sleath.github.io/csv-to-sql/index.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/csv-to-sql"
+    },
+    "thumb": "🗃️"
+  },
+  {
     "id": "sql-insert-maker",
     "title": "SQL Insert Maker",
     "description": "",
-    "languages": [],
+    "languages": [ "HTML", "CSS", "JavaScript", "SQL" ],
     "skills": [],
-    "types": [],
+    "types": [ "Duct-Tape Utility" ],
     "links": {
       "demo": "https://jack-sleath.github.io/sqlinsert/sqlinsert.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sqlinsert"
