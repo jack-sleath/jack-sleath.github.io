@@ -147,5 +147,29 @@
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/intern"
     },
     "thumb": "🌡️"
+  },
+  {
+    "id": "photoshop-actions",
+    "title": "Photoshop Actions",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "repo": "https://github.com/jack-sleath/photoshop-actions/tree/main"
+    },
+    "thumb": "🎬"
+  },
+  {
+    "id": "local-deepseek",
+    "title": "Local Deepseek",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "repo": "https://github.com/jack-sleath/local-deepseek/tree/main"
+    },
+    "thumb": "🤖"
   }
 ]
