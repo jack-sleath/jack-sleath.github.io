@@ -31,7 +31,7 @@
   {
     "id": "urine-my-territory",
     "title": "Urine My Territory (Game)",
-    "description": "A cheeky 2D territory control game with pathfinding and particle effects.",
+    "description": "",
     "languages": [
       "TypeScript",
       "C#"
@@ -44,7 +44,7 @@
       "Game"
     ],
     "links": {
-      "demo": "https://example.com/umt",
+      "demo": "https://urinemyterritory.app/",
       "repo": "",
       "video": ""
     },
@@ -72,7 +72,7 @@
       "demo": "https://jack-sleath.github.io/datasetmaker/datasetmaker.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/datasetmaker"
     },
-    "thumb": ""
+    "thumb": "📤"
   },
   {
     "id": "sql-insert-maker",
@@ -85,7 +85,7 @@
       "demo": "https://jack-sleath.github.io/sqlinsert/sqlinsert.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sqlinsert"
     },
-    "thumb": ""
+    "thumb": "📥"
   },
   {
     "id": "star-wars-dnd-character-sheet",
@@ -98,7 +98,7 @@
       "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/starwars"
     },
-    "thumb": ""
+    "thumb": "🎲"
   },
   {
     "id": "demo-code",
@@ -111,7 +111,7 @@
       "demo": "https://jack-sleath.github.io/code/code.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/code"
     },
-    "thumb": ""
+    "thumb": "🖊️"
   },
   {
     "id": "sonic-titles",
@@ -124,7 +124,7 @@
       "demo": "https://jack-sleath.github.io/sonic-font/sonic.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sonic-font"
     },
-    "thumb": ""
+    "thumb": "🦔"
   },
   {
     "id": "presenting-data-without-numbers-2017-university-final-project",
@@ -137,7 +137,7 @@
       "demo": "https://jack-sleath.github.io/weather/index.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/weather"
     },
-    "thumb": ""
+    "thumb": "🌦️"
   },
   {
     "id": "arm-server-dashboard-2013-internship",
@@ -150,6 +150,6 @@
       "demo": "https://jack-sleath.github.io/intern/dashboard.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/intern"
     },
-    "thumb": ""
+    "thumb": "🌡️"
   }
 ]
