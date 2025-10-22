@@ -171,5 +171,25 @@
       "repo": "https://github.com/jack-sleath/local-deepseek/tree/main"
     },
     "thumb": "🤖"
+  },
+  {
+    "id": "ai-fortune",
+    "title": "AI Fortune Teller",
+    "description": "",
+    "languages": [],
+    "skills": [],
+    "types": [],
+    "links": {
+      "repo": "",
+      "video": ""
+    },
+    "coauthors": [
+      {
+        "name": "Will White",
+        "url": "",
+        "role": "Co-Developer"
+      }
+    ],
+    "thumb": "🔮"
   }
 ]
