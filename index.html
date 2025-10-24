@@ -352,7 +352,7 @@
 <body>
     <!--
       HOW TO USE
-      1) Edit the PROJECTS array below — it's the only place you need to touch to add projects.
+      1) Edit the PROJECTS array below - it's the only place you need to touch to add projects.
       2) Each project can include: id, title, description, languages[], skills[], types[], links { demo, repo, case, video }, coauthors[] (objects with name, url?, role?, initials?), and an optional thumb (emoji or short text).
       3) Add or remove filter values in FILTERS if you want to customize the chips shown.
       4) Filtering is OR within each group (Languages/Skills/Types) and AND across groups. Empty group = ignored.
@@ -609,7 +609,7 @@
                 try {
                     await navigator.clipboard.writeText(location.href);
                     toast('Filter URL copied to clipboard');
-                } catch { toast('Could not copy — select the URL in your address bar'); }
+                } catch { toast('Could not copy - select the URL in your address bar'); }
             });
 
             render();

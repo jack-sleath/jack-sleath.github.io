@@ -225,7 +225,7 @@
   {
     "id": "ai-fortune",
     "title": "AI Fortune Teller",
-    "description": "A Zoltar-like fortune-telling service. Written to allow for many different AI services to be plugged in. Plans included generating short-form content for TikTok, Instagram Reels, and YouTube Shorts, and also to have a full animatronic version of ourselves to read the fortunes. This project was an ambitious one, with several end goals — hopefully to be finished one day.",
+    "description": "A Zoltar-like fortune-telling service. Written to allow for many different AI services to be plugged in. Plans included generating short-form content for TikTok, Instagram Reels, and YouTube Shorts, and also to have a full animatronic version of ourselves to read the fortunes. This project was an ambitious one, with several end goals - hopefully to be finished one day.",
     "languages": [
       "C#"
     ],
