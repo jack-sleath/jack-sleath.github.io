@@ -71,8 +71,8 @@
     "id": "star-wars-dnd-character-sheet",
     "title": "Star Wars D&D Character Sheet",
     "description": "",
-    "languages": [],
-    "skills": [],
+    "languages": [ "HTML", "CSS", "JavaScript" ],
+    "skills": ["Frontend"],
     "types": [],
     "links": {
       "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
@@ -84,8 +84,8 @@
     "id": "demo-code",
     "title": "Demo Code",
     "description": "",
-    "languages": [],
-    "skills": [],
+    "languages": [ "HTML", "CSS", "JavaScript" ],
+    "skills": [ "Frontend" ],
     "types": [],
     "links": {
       "demo": "https://jack-sleath.github.io/code/code.html",
@@ -97,8 +97,8 @@
     "id": "sonic-titles",
     "title": "Sonic Titles",
     "description": "",
-    "languages": [],
-    "skills": [],
+    "languages": [ "HTML", "CSS", "JavaScript" ],
+    "skills": [ "Frontend" ],
     "types": [],
     "links": {
       "demo": "https://jack-sleath.github.io/sonic-font/sonic.html",
@@ -110,9 +110,9 @@
     "id": "presenting-data-without-numbers-2017-university-final-project",
     "title": "Presenting Data without Numbers - 2017 University Final Project",
     "description": "",
-    "languages": [],
-    "skills": [],
-    "types": [],
+    "languages": [ "HTML", "CSS", "JavaScript", "Photoshop" ],
+    "skills": [ "Frontend" ],
+    "types": [ "Academic" ],
     "links": {
       "demo": "https://jack-sleath.github.io/weather/index.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/weather"
@@ -123,9 +123,9 @@
     "id": "arm-server-dashboard-2013-internship",
     "title": "ARM Server Dashboard - 2013 Internship",
     "description": "",
-    "languages": [],
-    "skills": [],
-    "types": [],
+    "languages": [ "HTML", "CSS", "JavaScript" ],
+    "skills": [ "Frontend" ],
+    "types": [ "Academic" ],
     "links": {
       "demo": "https://jack-sleath.github.io/intern/dashboard.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/intern"
@@ -136,7 +136,7 @@
     "id": "photoshop-actions",
     "title": "Photoshop Actions",
     "description": "",
-    "languages": [],
+    "languages": ["JavaScript", "Photoshop"],
     "skills": [],
     "types": [],
     "links": {
@@ -148,8 +148,8 @@
     "id": "local-deepseek",
     "title": "Local Deepseek",
     "description": "",
-    "languages": [],
-    "skills": [],
+    "languages": [ "HTML", "CSS", "JavaScript" ],
+    "skills": [ "Frontend", "AI/ML" ],
     "types": [],
     "links": {
       "repo": "https://github.com/jack-sleath/local-deepseek/tree/main"
@@ -161,8 +161,8 @@
     "title": "AI Fortune Teller",
     "description": "",
     "languages": ["C#"],
-    "skills": [],
-    "types": ["Personal", "AI/ML"],
+    "skills": [ "Full-stack", "AI/ML" ],
+    "types": ["Personal"],
     "links": {
       "repo": "",
       "video": ""
