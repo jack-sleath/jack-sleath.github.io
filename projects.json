@@ -1,8 +1,8 @@
-﻿[
+[
   {
     "id": "urine-my-territory",
     "title": "Urine My Territory (Game)",
-    "description": "",
+    "description": "A global augmented reality geo-location game. Built to be run in Azure, making use of a static web page, service, and Cosmos DB. Automated API and UI tests written. Had a good time trying to get around the Mercator projection issue.",
     "languages": [
       "TypeScript",
       "C#"
@@ -31,10 +31,10 @@
   {
     "id": "dataset-maker",
     "title": "DataSet Maker",
-    "description": "",
+    "description": "Transforms copied SQL tables into a DataSet object. Originally written to help create return objects for mocked DB calls in unit tests but has since been used for many different applications at work.",
     "languages": ["HTML", "CSS", "JavaScript", "SQL"],
     "skills": [],
-    "types": [ "Duct-Tape Utility" ],
+    "types": ["Duct-Tape Utility"],
     "links": {
       "demo": "https://jack-sleath.github.io/datasetmaker/datasetmaker.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/datasetmaker"
@@ -44,10 +44,10 @@
   {
     "id": "csv-to-sql",
     "title": "CSV to SQL",
-    "description": "",
-    "languages": [ "HTML", "CSS", "JavaScript", "SQL" ],
+    "description": "Transforms a CSV into a SQL insert script. Originally written for a repetitive process of importing data, created whilst covering support to speed up the import process.",
+    "languages": ["HTML", "CSS", "JavaScript", "SQL"],
     "skills": [],
-    "types": [ "Duct-Tape Utility" ],
+    "types": ["Duct-Tape Utility"],
     "links": {
       "demo": "https://jack-sleath.github.io/csv-to-sql/index.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/csv-to-sql"
@@ -57,10 +57,10 @@
   {
     "id": "sql-insert-maker",
     "title": "SQL Insert Maker",
-    "description": "",
-    "languages": [ "HTML", "CSS", "JavaScript", "SQL" ],
+    "description": "Takes a copied SQL table and turns it into a SQL insert statement. Originally created to move live data to a staging database with no linked server. Has since been used for many different applications.",
+    "languages": ["HTML", "CSS", "JavaScript", "SQL"],
     "skills": [],
-    "types": [ "Duct-Tape Utility" ],
+    "types": ["Duct-Tape Utility"],
     "links": {
       "demo": "https://jack-sleath.github.io/sqlinsert/sqlinsert.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sqlinsert"
@@ -70,9 +70,9 @@
   {
     "id": "star-wars-dnd-character-sheet",
     "title": "Star Wars D&D Character Sheet",
-    "description": "",
+    "description": "Star Wars D&D character sheet. Created to replace a PDF that needed text boxes being inserted over on a Star Wars D&D Discord server. Originally used a HTML D&D 5e character sheet, but with the ability to import pre-built classes and export your character sheet to a JSON object to give to the DM to use, and for players to manually save too.",
     "languages": [ "HTML", "CSS", "JavaScript" ],
-    "skills": ["Frontend"],
+    "skills": [ "Frontend" ],
     "types": [],
     "links": {
       "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
@@ -83,7 +83,7 @@
   {
     "id": "demo-code",
     "title": "Demo Code",
-    "description": "",
+    "description": "A CodePen clone. Just a proof-of-concept maker that also allows me to save the projects to a JSON array and get pulled into the dropdown.",
     "languages": [ "HTML", "CSS", "JavaScript" ],
     "skills": [ "Frontend" ],
     "types": [],
@@ -96,7 +96,7 @@
   {
     "id": "sonic-titles",
     "title": "Sonic Titles",
-    "description": "",
+    "description": "Recreating the Sonic the Hedgehog movie titles. Used to help me learn odd CSS effects but also quickly generate joke titles to send to my friends. Makes use of URL parameters for the text.",
     "languages": [ "HTML", "CSS", "JavaScript" ],
     "skills": [ "Frontend" ],
     "types": [],
@@ -109,7 +109,7 @@
   {
     "id": "presenting-data-without-numbers-2017-university-final-project",
     "title": "Presenting Data without Numbers - 2017 University Final Project",
-    "description": "",
+    "description": "A pixel art 24-hour weather app. My final year project at the University of Brighton. The goal was to present the weather without the use of numbers. Integrated into a few APIs to get the weather, sunrise, and sunset times. I also wrote a Photoshop action to produce all the artwork. There are a few issues with the site, such as breaking after sunset, but it’s a nice time capsule of how I did things in 2017.",
     "languages": [ "HTML", "CSS", "JavaScript", "Photoshop" ],
     "skills": [ "Frontend" ],
     "types": [ "Academic" ],
@@ -122,7 +122,7 @@
   {
     "id": "arm-server-dashboard-2013-internship",
     "title": "ARM Server Dashboard - 2013 Internship",
-    "description": "",
+    "description": "A dashboard for servers. This was my first piece of work to ever be used in a production environment. During a week-long work placement at ARM Ltd during my first year of college. During this work placement I learned what JSON was, how to use graphing libraries, and how to produce an HTML site without the use of Dreamweaver (my only experience at the time). I don't imagine it's still in use, but I hope it at least saw usage until the end of 2013.",
     "languages": [ "HTML", "CSS", "JavaScript" ],
     "skills": [ "Frontend" ],
     "types": [ "Academic" ],
@@ -135,7 +135,7 @@
   {
     "id": "photoshop-actions",
     "title": "Photoshop Actions",
-    "description": "",
+    "description": "A solution for Photoshop scripts. Currently only has the pixelate function, used in my final year project and several profile pictures since.",
     "languages": ["JavaScript", "Photoshop"],
     "skills": [],
     "types": [],
@@ -147,7 +147,7 @@
   {
     "id": "local-deepseek",
     "title": "Local Deepseek",
-    "description": "",
+    "description": "A forked repository of Deepseek. Plans to expand on the site are written away somewhere to be picked up soon.",
     "languages": [ "HTML", "CSS", "JavaScript" ],
     "skills": [ "Frontend", "AI/ML" ],
     "types": [],
@@ -159,7 +159,7 @@
   {
     "id": "ai-fortune",
     "title": "AI Fortune Teller",
-    "description": "",
+    "description": "A Zoltar-like fortune-telling service. Written to allow for many different AI services to be plugged in. Plans included generating short-form content for TikTok, Instagram Reels, and YouTube Shorts, and also to have a full animatronic version of ourselves to read the fortunes. This project was an ambitious one, with several end goals — hopefully to be finished one day.",
     "languages": ["C#"],
     "skills": [ "Full-stack", "AI/ML" ],
     "types": ["Personal"],
