@@ -16,6 +16,9 @@
 # Mono auto generated files
 mono_crash.*
 
+# Visual Studio 2015/2017/2019 cache/options directory
+.vs/
+
 config.json
 
 # Build results
