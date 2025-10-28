@@ -22,7 +22,7 @@
     "coauthors": [
       {
         "name": "Martin Boulding",
-        "url": "https://github.com/martin-boulding",
+        "url": "https://www.linkedin.com/in/martin-boulding/",
         "role": "Tester"
       }
     ],
@@ -100,7 +100,7 @@
     "skills": [
       "Frontend"
     ],
-    "types": [],
+    "types": [ "Silly" ],
     "links": {
       "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/starwars"
@@ -138,7 +138,7 @@
     "skills": [
       "Frontend"
     ],
-    "types": [],
+    "types": [ "Silly", "Quick Idea" ],
     "links": {
       "demo": "https://jack-sleath.github.io/sonic-font/sonic.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sonic-font"
