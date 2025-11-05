@@ -237,13 +237,13 @@
       "Personal"
     ],
     "links": {
-      "repo": "",
+      "repo": "https://github.com/jack-sleath/Fortune",
       "video": ""
     },
     "coauthors": [
       {
         "name": "Will White",
-        "url": "",
+        "url": "https://www.linkedin.com/in/will-white-3aa84056/",
         "role": "Co-Developer"
       }
     ],
