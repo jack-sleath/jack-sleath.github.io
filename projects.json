@@ -191,7 +191,7 @@
   {
     "id": "photoshop-actions",
     "title": "Photoshop Actions",
-    "description": "A solution for Photoshop scripts. Currently only has the pixelate function, used in my final year project and several profile pictures since.",
+    "description": "A solution for Photoshop scripts. Currently only has a couple of functions including my pixelate function, used in my final year project and several profile pictures since.",
     "languages": [
       "JavaScript",
       "Photoshop"
