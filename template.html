@@ -1,0 +1,298 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jack Sleath – Writing & Images</title>
+    <meta name="description" content="A static page matching the projects style, optimized for long-form paragraphs and images: side‑by‑side, full‑width text, and full‑width images." />
+    <style>
+        :root {
+            --bg: #0b0d10;
+            --surface: #12161b;
+            --surface-2: #181d23;
+            --text: #e8edf2;
+            --muted: #9aa7b2;
+            --brand: #7c5cff;
+            --ring: #7c5cff55;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            --radius-xl: 18px;
+            --radius-lg: 14px;
+            --radius-md: 10px;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f6f7fb;
+                --surface: #ffffff;
+                --surface-2: #f0f3f7;
+                --text: #14181f;
+                --muted: #4b5563;
+                --shadow: 0 10px 30px rgba(17,24,39,.08);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text);
+            background: radial-gradient(1200px 600px at 10% -10%, #22283a44, transparent), var(--bg);
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .title {
+            font-size: clamp(22px, 3vw, 34px);
+            font-weight: 800;
+            letter-spacing: .3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .title .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 999px;
+                background: var(--brand);
+                box-shadow: 0 0 0 6px var(--ring);
+                display: inline-block;
+            }
+
+        /* Cards / sections */
+        .card {
+            background: linear-gradient(180deg, var(--surface), var(--surface-2));
+            border: 1px solid #2a3240;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+            overflow: clip;
+        }
+
+        .section {
+            padding: 16px;
+        }
+
+            .section + .section {
+                margin-top: 16px;
+            }
+
+        /* Prose (typography) */
+        .prose {
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+            .prose h2 {
+                margin: 0 0 10px;
+                font-size: 20px;
+                letter-spacing: .2px;
+            }
+
+            .prose p {
+                margin: 0 0 12px;
+                color: var(--text);
+            }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .prose a {
+            color: var(--brand);
+            text-decoration: none;
+            border-bottom: 1px dashed currentColor;
+        }
+
+            .prose a:hover {
+                border-bottom-style: solid;
+            }
+
+        /* Media row (text + image side-by-side) */
+        .media-row {
+            display: grid;
+            gap: 16px;
+            align-items: center;
+            grid-template-columns: 1fr; /* mobile */
+        }
+
+        @media (min-width: 860px) {
+            .media-row {
+                grid-template-columns: 1.1fr .9fr;
+            }
+
+                .media-row.reverse {
+                    grid-template-columns: .9fr 1.1fr;
+                }
+        }
+
+        .media-card {
+            padding: 16px;
+        }
+
+        /* Image wrapper */
+        .media {
+            border: 1px solid #2a3240;
+            background: #0f1318;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+            .media img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            .media .cap {
+                padding: 10px 12px;
+                font-size: 13px;
+                color: var(--muted);
+                border-top: 1px solid #2a3240;
+            }
+
+        /* Full-width text */
+        .prose-card {
+            padding: 18px;
+        }
+
+        /* Full-width image */
+        .full-image {
+            display: block;
+            width: 100%;
+            border-radius: var(--radius-xl);
+            border: 1px solid #2a3240;
+            box-shadow: var(--shadow);
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        figcaption {
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            padding: 8px 6px 0;
+        }
+
+        /* Small utilities */
+        .badge {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #0f1318;
+            border: 1px solid #2a3240;
+            display: inline-block;
+        }
+
+        footer {
+            margin: 24px 0;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Gentle hover motion */
+        @media (prefers-reduced-motion: no-preference) {
+            .media, .full-image, .card {
+                transition: transform .15s ease, box-shadow .2s ease;
+            }
+
+                .media:hover, .full-image:hover, .card:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 18px 40px rgba(0,0,0,.45);
+                }
+        }
+    </style>
+</head>
+<body>
+    <!--
+      HOW TO USE
+      • Duplicate any of the three example blocks below:
+        1) Text + image side-by-side (.media-row)
+        2) Full-width text (.prose-card)
+        3) Full-width image (<figure> with .full-image)
+      • For a right-image layout, add .reverse to .media-row.
+      • Replace the placeholder data-URI images or swap to your own URLs.
+    -->
+    <div class="wrap">
+        <header>
+            <div class="title" role="heading" aria-level="1"><span class="dot"></span> Writing & Images</div>
+        </header>
+
+        <!-- 1) TEXT + IMAGE (left text, right image) -->
+        <section class="section card">
+            <div class="media-row">
+                <div class="media-card prose" aria-label="Article text">
+                    <h2>Side‑by‑side layout</h2>
+                    <p class="muted">Use this when a paragraph wants a buddy image. On wider screens they sit next to each other; on mobile they stack, keeping things comfy.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet, nibh vitae ornare placerat, leo diam volutpat lacus, at convallis ex nunc eget nibh. Integer pretium, augue non faucibus pretium, purus augue commodo est, id pharetra lacus dui vitae ante. Praesent non lobortis orci. Nulla facilisi.</p>
+                    <p>Aliquam erat volutpat. Suspendisse potenti. Sed vel accumsan augue. Vivamus vehicula, nisl a euismod tempor, quam nunc sagittis risus, quis euismod enim risus id odio. Integer gravida vulputate mauris, vitae volutpat felis euismod at.</p>
+                    <span class="badge" aria-hidden="true">Example</span>
+                </div>
+                <figure class="media" aria-label="Illustrative image">
+                    <img alt="Abstract gradient placeholder" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231a2a6c'/%3E%3Cstop offset='1' stop-color='%237c5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='300' cy='250' r='180' fill='rgba(255,255,255,0.08)'/%3E%3Ccircle cx='900' cy='550' r='220' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E" />
+                    <figcaption class="cap">A friendly placeholder image. Swap this for your own.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 1b) TEXT + IMAGE (right text, left image) -->
+        <section class="section card">
+            <div class="media-row reverse">
+                <figure class="media" aria-label="Illustrative image">
+                    <img alt="Geometric placeholder" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%230b486b'/%3E%3Cstop offset='1' stop-color='%231f8a70'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g2)'/%3E%3Crect x='120' y='120' width='300' height='300' fill='rgba(255,255,255,0.08)' rx='24'/%3E%3Crect x='640' y='260' width='420' height='420' fill='rgba(255,255,255,0.06)' rx='28'/%3E%3C/svg%3E" />
+                    <figcaption class="cap">Left image / right text variant via <code>.reverse</code>.</figcaption>
+                </figure>
+                <div class="media-card prose" aria-label="Article text">
+                    <h2>Reversed layout</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia omnis aspernatur illum non perspiciatis, rerum laudantium aliquam necessitatibus libero, nihil, vitae laborum velit. Delectus, at?</p>
+                    <p>Quasi, perferendis. Inventore pariatur non, numquam tenetur maiores optio perspiciatis, deleniti possimus sit distinctio eius dignissimos aperiam. Quod laborum nihil temporibus labore recusandae ipsam similique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2) FULL-WIDTH TEXT -->
+        <section class="section card prose prose-card" aria-label="Full-width article">
+            <h2>Full‑width text</h2>
+            <p class="muted">Ideal for uninterrupted reading—announcements, long‑form notes, or storytime.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet sapien in sapien tempor, a iaculis nunc vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce eu velit at massa mattis pulvinar. Aenean ullamcorper, urna vel porttitor tristique, mauris quam vulputate eros, sit amet mattis nulla mi non justo.</p>
+            <p>Morbi a velit est. Integer eleifend, orci sit amet consectetur varius, nibh erat luctus justo, nec faucibus justo mi sed est. Integer cursus, est eget luctus sagittis, justo risus consequat dui, nec interdum sem mauris ut arcu. Integer id semper lectus, non auctor felis.</p>
+            <p>Vivamus semper, velit nec condimentum convallis, nisl mauris finibus velit, a commodo sapien eros vel nulla. Sed euismod, augue a egestas sagittis, nunc nisi condimentum arcu, vitae placerat risus odio non elit.</p>
+        </section>
+
+        <!-- 3) FULL-WIDTH IMAGE -->
+        <section class="section card" aria-label="Full-width image example">
+            <figure>
+                <img class="full-image" alt="Wide banner style placeholder" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1800' height='900'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2321263a'/%3E%3Cstop offset='1' stop-color='%237c5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1800' height='900' fill='url(%23g3)'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui, -apple-system, Segoe UI, Roboto' font-size='64' fill='rgba(255,255,255,0.7)'%3EFull‑width image%3C/text%3E%3C/svg%3E" />
+                <figcaption>Drop in any large banner or photo; the rounded corners and shadow match your project tiles.</figcaption>
+            </figure>
+        </section>
+
+        <footer>
+            <p>Tip: duplicate a block to add more sections. Keep your alt text descriptive for accessibility.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,310 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jack Sleath - About Me</title>
+    <meta name="description" content="" />
+    <style>
+        :root {
+            --bg: #0b0d10;
+            --surface: #12161b;
+            --surface-2: #181d23;
+            --text: #e8edf2;
+            --muted: #9aa7b2;
+            --brand: #7c5cff;
+            --ring: #7c5cff55;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            --radius-xl: 18px;
+            --radius-lg: 14px;
+            --radius-md: 10px;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f6f7fb;
+                --surface: #ffffff;
+                --surface-2: #f0f3f7;
+                --text: #14181f;
+                --muted: #4b5563;
+                --shadow: 0 10px 30px rgba(17,24,39,.08);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text);
+            background: radial-gradient(1200px 600px at 10% -10%, #22283a44, transparent), var(--bg);
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .title {
+            font-size: clamp(22px, 3vw, 34px);
+            font-weight: 800;
+            letter-spacing: .3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .title .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 999px;
+                background: var(--brand);
+                box-shadow: 0 0 0 6px var(--ring);
+                display: inline-block;
+            }
+        /* Cards / sections */
+        .card {
+            background: linear-gradient(180deg, var(--surface), var(--surface-2));
+            border: 1px solid #2a3240;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+            overflow: clip;
+        }
+
+        .section {
+            padding: 16px;
+        }
+
+            .section + .section {
+                margin-top: 16px;
+            }
+        /* Prose (typography) */
+        .prose {
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+            .prose h2 {
+                margin: 0 0 10px;
+                font-size: 20px;
+                letter-spacing: .2px;
+            }
+
+            .prose p {
+                margin: 0 0 12px;
+                color: var(--text);
+            }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .prose a {
+            color: var(--brand);
+            text-decoration: none;
+            border-bottom: 1px dashed currentColor;
+        }
+
+            .prose a:hover {
+                border-bottom-style: solid;
+            }
+        /* Media row (text + image side-by-side) */
+        .media-row {
+            display: grid;
+            gap: 16px;
+            align-items: center;
+            grid-template-columns: 1fr; /* mobile */
+        }
+
+        @media (min-width: 860px) {
+            .media-row {
+                grid-template-columns: 1.1fr .9fr;
+            }
+
+                .media-row.reverse {
+                    grid-template-columns: .9fr 1.1fr;
+                }
+        }
+
+        .media-card {
+            padding: 16px;
+        }
+        /* Image wrapper */
+        .media {
+            border: 1px solid #2a3240;
+            background: #0f1318;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+            .media img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            .media .cap {
+                padding: 10px 12px;
+                font-size: 13px;
+                color: var(--muted);
+                border-top: 1px solid #2a3240;
+            }
+        /* Full-width text */
+        .prose-card {
+            padding: 18px;
+        }
+        /* Full-width image */
+        .full-image {
+            display: block;
+            width: 100%;
+            border-radius: var(--radius-xl);
+            border: 1px solid #2a3240;
+            box-shadow: var(--shadow);
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        figcaption {
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            padding: 8px 6px 0;
+        }
+        /* Small utilities */
+        .badge {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #0f1318;
+            border: 1px solid #2a3240;
+            display: inline-block;
+        }
+
+        footer {
+            margin: 24px 0;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+        }
+        /* Gentle hover motion */
+        @media (prefers-reduced-motion: no-preference) {
+            .media, .full-image, .card {
+                transition: transform .15s ease, box-shadow .2s ease;
+            }
+
+                .media:hover, .full-image:hover, .card:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 18px 40px rgba(0,0,0,.45);
+                }
+        }
+    </style>
+</head>
+<body>
+    <!--
+    HOW TO USE
+    • Duplicate any of the three example blocks below:
+    1) Text + image side-by-side (.media-row)
+    2) Full-width text (.prose-card)
+    3) Full-width image (<figure> with .full-image)
+    • For a right-image layout, add .reverse to .media-row.
+    • Replace the placeholder data-URI images or swap to your own URLs.
+    -->
+    <div class="wrap">
+        <header>
+            <div class="title" role="heading" aria-level="1"><span class="dot"></span>Jack Sleath - About Me</div>
+        </header>
+
+
+        <!-- ABOUT ME - alternating image sides: Right, Left, Right, Left -->
+        <!-- Block 1 - Image Right: Duct tape development -->
+        <section class="section card">
+            <div class="media-row">
+                <div class="media-card prose" aria-label="About - Duct tape development">
+                    <h2>Duct tape development</h2>
+                    <p>One of my favourite ways of doing development is what I think of as duct tape development - little pieces of code or sites I make that help make my life and job easier. Sometimes something doesn’t need to be polished to get the job done. It’s about getting from problem to solution without overcomplicating the path in between.</p>
+                    <p>An example of this is at work there was a 14-step guide to getting a token for a service that would normally run on an iPad. I did this 14-step solution once and realised I never wanted to do it again, so I made various calls to different APIs to build up the request - all of which were included in the original steps - and stuck it on a site with a button. Now for a token you could just press that and you’d have the token given to you.</p>
+                    <p>Duct tape solutions work for many things, but on the other side of things, making a solid piece of development that’s easy to expand on and well written from the start is just as important.</p>
+                </div>
+                <figure class="media" aria-label="Illustration - quick pragmatic builds">
+                    <img alt="Abstract toolkit illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%232b2f45'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g1)'/%3E%3Cg fill='rgba(255,255,255,0.12)'%3E%3Crect x='140' y='160' width='280' height='120' rx='16'/%3E%3Crect x='460' y='160' width='280' height='120' rx='16'/%3E%3Crect x='780' y='160' width='280' height='120' rx='16'/%3E%3Crect x='140' y='320' width='920' height='80' rx='16'/%3E%3C/g%3E%3C/svg%3E" />
+                    <figcaption class="cap">From 14 steps to a single button.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- Block 2 - Image Left: Teaching kids -->
+        <section class="section card">
+            <div class="media-row reverse">
+                <figure class="media" aria-label="Illustration - teaching & creativity">
+                    <img alt="Playful classroom style illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%230b486b'/%3E%3Cstop offset='1' stop-color='%231f8a70'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g2)'/%3E%3Cg fill='rgba(255,255,255,0.12)'%3E%3Ccircle cx='260' cy='300' r='70'/%3E%3Ccircle cx='420' cy='300' r='70'/%3E%3Crect x='200' y='420' width='280' height='60' rx='12'/%3E%3C/g%3E%3C/svg%3E" />
+                    <figcaption class="cap">Weekends spent helping kids ship ideas.</figcaption>
+                </figure>
+                <div class="media-card prose" aria-label="About - Teaching">
+                    <h2>Teaching kids to make things</h2>
+                    <p>In my hometown, I was walking along a road on my way to work and saw a new building had opened up. It had ASCII art on the window and advertised being a code academy and camp for kids. I’d taught a few times in primary schools that my mum worked at - helping teachers when they reached the point of teaching Scratch - and I loved it every time. So I took the opportunity to apply, and I’ve been doing it nearly every Saturday since.</p>
+                    <p>I get to teach the kids all sorts of practical skills for their professional future. Some coding-specific, like Python with the older children, but mainly code and design fundamentals. A lot of this is using early programming platforms like Scratch or MIT App Inventor. I also get them to present back to their parents at the end of a 12-week module, teaching the required skills to make and deliver a presentation.</p>
+                    <p>When I joined, some of the kids seemed to lack the drive to make something - and every time I see one of them have an idea, and I explain that we can make it, and then we actually do, it feels like a massive win. Teaching the kids has given me a new energy to start learning new things, because some of the platforms we use weren’t available to me when I started coding.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Block 3 - Image Right: Work projects -->
+        <section class="section card">
+            <div class="media-row">
+                <div class="media-card prose" aria-label="About - Projects at work">
+                    <h2>Leading projects at work</h2>
+                    <p>In my job I’ve been given the opportunity to head up a couple of different projects - giving the customer the option to repeat order as a subscription and leading our new approach to product search.</p>
+                    <p>The subscription project allowed me to design a couple of new microservices, which plugged into our existing microservice structure and our monolith. It was a great opportunity to use the strangulation approach on our monolith, while also introducing a revenue stream that could guarantee a certain income.</p>
+                    <p>The product search project gave me an opportunity to come up with a way to A/B test different search models, and create an algorithm based on a user’s search logs to determine how frustrated customers were during the process. It’s the kind of work that blends logic with curiosity - solving real problems while exploring better ways to think about them.</p>
+                </div>
+                <figure class="media" aria-label="Illustration - systems & search">
+                    <img alt="System diagrams and charts illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2321263a'/%3E%3Cstop offset='1' stop-color='%237c5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g3)'/%3E%3Cg fill='rgba(255,255,255,0.12)'%3E%3Crect x='160' y='220' width='280' height='180' rx='16'/%3E%3Crect x='480' y='220' width='280' height='180' rx='16'/%3E%3Crect x='800' y='220' width='240' height='420' rx='16'/%3E%3Crect x='160' y='440' width='600' height='200' rx='16'/%3E%3C/g%3E%3C/svg%3E" />
+                    <figcaption class="cap">Subscriptions, strangling the monolith, and smarter search.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- Block 4 - Image Left: Collecting ideas -->
+        <section class="section card">
+            <div class="media-row reverse">
+                <figure class="media" aria-label="Illustration - ideas library">
+                    <img alt="Notes and ideas collage illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%233a1f47'/%3E%3Cstop offset='1' stop-color='%237c5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g4)'/%3E%3Cg fill='rgba(255,255,255,0.12)'%3E%3Crect x='180' y='180' width='260' height='160' rx='14'/%3E%3Crect x='480' y='140' width='320' height='140' rx='14'/%3E%3Crect x='860' y='220' width='160' height='200' rx='14'/%3E%3Crect x='240' y='420' width='760' height='200' rx='16'/%3E%3C/g%3E%3C/svg%3E" />
+                    <figcaption class="cap">A growing garden of half-sparks and future projects.</figcaption>
+                </figure>
+                <div class="media-card prose" aria-label="About - Ideas">
+                    <h2>Collecting ideas & making them real</h2>
+                    <p>I’ve been collating my ideas for a long time - since pre-university - chucking them on my phone in a notes app. Once I got to 50-plus ideas, it wasn’t manageable, so I started to sort them. I’ve got ideas for videos, costumes, stickers, physical projects, development projects, games, and mods for existing games.</p>
+                    <p>Not all of these ideas end up as something polished or even a duct tape solution, but the point is that now, no idea gets left behind. Every half-thought and half-finished spark is a seed for something future-me might turn into something cool.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <footer>
+            <p>Tip: duplicate a block to add more sections. Keep your alt text descriptive for accessibility.</p>
+        </footer>
+    </div>
+</body>
+</html>
