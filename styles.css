@@ -1,4 +1,8 @@
-﻿:root {
+﻿.badge[hidden] {
+    display: none !important;
+}
+
+:root {
     --bg: #0b0d10;
     --surface: #12161b;
     --surface-2: #181d23;
@@ -127,6 +131,7 @@ body.page-writing header {
     background: #0f1318;
     border: 1px solid #2a3240;
     display: inline-block;
+    color: var(--text);
 }
 
 footer {
