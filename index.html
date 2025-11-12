@@ -5,461 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jack Sleath - Projects</title>
     <meta name="description" content="A filterable, tile-based portfolio page to showcase projects by language, skills, and type." />
-    <style>
-        :root {
-            --bg: #0b0d10;
-            --surface: #12161b;
-            --surface-2: #181d23;
-            --text: #e8edf2;
-            --muted: #9aa7b2;
-            --brand: #7c5cff;
-            --ring: #7c5cff55;
-            --ok: #22c55e;
-            --warn: #f59e0b;
-            --err: #ef4444;
-            --shadow: 0 10px 30px rgba(0,0,0,.35);
-            --radius-xl: 18px;
-            --radius-lg: 14px;
-            --radius-md: 10px;
-        }
-
-        @media (prefers-color-scheme: light) {
-            :root {
-                --bg: #f6f7fb;
-                --surface: #ffffff;
-                --surface-2: #f0f3f7;
-                --text: #14181f;
-                --muted: #4b5563;
-                --shadow: 0 10px 30px rgba(17,24,39,.08);
-            }
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-            color: var(--text);
-            background: radial-gradient(1200px 600px at 10% -10%, #22283a44, transparent), var(--bg);
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        /* Inline text link - use for <a> inside copy */
-        .text-link {
-            color: inherit;
-            text-decoration: underline;
-            text-decoration-color: #3a4658; /* subtle in dark; overridden by system light mode vars */
-            text-decoration-thickness: .08em;
-            text-underline-offset: 3px;
-            border-radius: 6px; /* for focus ring rounding */
-            outline: none;
-            transition: color .15s ease, text-decoration-color .15s ease, box-shadow .2s ease;
-        }
-
-        .text-link:hover {
-            color: var(--brand);
-            text-decoration-color: var(--brand);
-        }
-
-        .text-link:focus-visible {
-            box-shadow: 0 0 0 4px var(--ring);
-        }
-
-        /* Optional: a “muted” variant for low-emphasis links in meta text */
-        .text-link.muted {
-            color: var(--muted);
-            text-decoration-color: currentColor;
-        }
-
-        /* Optional: external icon affordance */
-        .text-link.external::after {
-            content: "↗";
-            font-size: .85em;
-            margin-left: .25em;
-            opacity: .8;
-        }
-
-
-        .wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px;
-        }
-
-        header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .title {
-            font-size: clamp(22px, 3vw, 34px);
-            font-weight: 800;
-            letter-spacing: .3px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-            .title .dot {
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                border-radius: 999px;
-                background: var(--brand);
-                box-shadow: 0 0 0 6px var(--ring);
-            }
-
-        .toolbar {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .search {
-            position: relative;
-            flex: 1 1 260px;
-        }
-
-            .search input {
-                width: 100%;
-                padding: 12px 40px 12px 42px;
-                border-radius: var(--radius-lg);
-                border: 1px solid transparent;
-                background: var(--surface);
-                color: var(--text);
-                outline: none;
-                box-shadow: var(--shadow);
-            }
-
-                .search input:focus {
-                    border-color: var(--brand);
-                    box-shadow: 0 0 0 4px var(--ring), var(--shadow);
-                }
-
-            .search svg {
-                position: absolute;
-                left: 12px;
-                top: 50%;
-                transform: translateY(-50%);
-                opacity: .8;
-                width: 18px;
-                height: 18px;
-            }
-
-        .actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn {
-            appearance: none;
-            border: 1px solid #2a3240;
-            color: var(--text);
-            background: linear-gradient(180deg, var(--surface), var(--surface-2));
-            padding: 10px 14px;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            font-weight: 600;
-        }
-
-            .btn:hover {
-                border-color: #3a4658
-            }
-
-            .btn.ghost {
-                background: transparent;
-                border-color: #3a4658
-            }
-
-        /* Collapsible (details/summary) styling */
-        details.collapsible {
-            border: 1px solid #2a3240;
-            border-radius: var(--radius-xl);
-            background: linear-gradient(180deg, var(--surface), var(--surface-2));
-            box-shadow: var(--shadow);
-            margin: 12px 0 20px;
-            overflow: clip;
-        }
-
-            details.collapsible > summary {
-                list-style: none;
-                cursor: pointer;
-                user-select: none;
-                padding: 14px 16px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-weight: 800;
-                letter-spacing: .2px;
-            }
-
-                details.collapsible > summary::-webkit-details-marker {
-                    display: none;
-                }
-
-        .caret {
-            width: 10px;
-            height: 10px;
-            border-right: 2px solid currentColor;
-            border-bottom: 2px solid currentColor;
-            transform: rotate(-45deg);
-            transition: transform .18s ease;
-            opacity: .8;
-        }
-
-        details[open] > summary .caret {
-            transform: rotate(45deg);
-        }
-
-        .summary-meta {
-            margin-left: auto;
-            display: inline-flex;
-            gap: 8px;
-            align-items: center;
-            font-weight: 700;
-            color: var(--muted);
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            border: 1px solid #2a3240;
-            background: #0f1318;
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        /* Collapsible content wrapper for subtle reveal */
-        .collapsible-content {
-            padding: 0 16px 16px;
-        }
-
-        /* Filters */
-        .filters {
-            margin: 6px 0 0;
-            display: grid;
-            gap: 14px;
-            grid-template-columns: 1fr;
-        }
-
-        .group {
-            background: linear-gradient(180deg, var(--surface), var(--surface-2));
-            border: 1px solid #2a3240;
-            border-radius: var(--radius-xl);
-            padding: 14px;
-            box-shadow: var(--shadow);
-        }
-
-            .group h3 {
-                margin: 0 0 10px;
-                font-size: 14px;
-                text-transform: uppercase;
-                letter-spacing: .12em;
-                color: var(--muted);
-            }
-
-        .chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .chip {
-            border: 1px solid #2a3240;
-            background: #0f1318;
-            color: var(--text);
-            padding: 7px 12px;
-            border-radius: 999px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-            .chip[aria-pressed="true"] {
-                border-color: var(--brand);
-                box-shadow: 0 0 0 4px var(--ring);
-                background: #11152d;
-            }
-
-        @media (min-width: 880px) {
-            .filters {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Grid */
-        .grid {
-            display: grid;
-            gap: 16px;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        }
-
-        .tile {
-            position: relative;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            background: linear-gradient(180deg, var(--surface), var(--surface-2));
-            border: 1px solid #2a3240;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .thumb {
-            aspect-ratio: 24/7;
-            background: #1a2030;
-            display: grid;
-            place-items: center;
-        }
-
-            .thumb svg {
-                width: 44px;
-                height: 44px;
-                opacity: .9
-            }
-
-        .tile-inner {
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .tile h4 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .desc {
-            color: var(--muted);
-            line-height: 1.45;
-        }
-
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .badge {
-            font-size: 12px;
-            font-weight: 700;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: #0f1318;
-            border: 1px solid #2a3240;
-            color: var(--text);
-        }
-            .badge.badge--more-toggle {
-                cursor: pointer;
-                border-style: dashed;
-                opacity: 0.9;
-            }
-
-        .links {
-            display: flex;
-            gap: 8px;
-            margin-top: 6px;
-        }
-
-        .link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
-            border-radius: var(--radius-md);
-            background: #0f1318;
-            border: 1px solid #2a3240;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 700;
-        }
-
-            .link:hover {
-                border-color: #3a4658
-            }
-
-        /* People / Co-authors */
-        .people {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .person {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: #0f1318;
-            border: 1px solid #2a3240;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 700;
-            font-size: 12px;
-        }
-
-            .person:hover {
-                border-color: #3a4658
-            }
-
-        .avatar {
-            width: 20px;
-            height: 20px;
-            border-radius: 999px;
-            background: #1f2937;
-            display: grid;
-            place-items: center;
-            font-size: 11px;
-            font-weight: 900;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--muted);
-        }
-
-        footer {
-            margin: 24px 0;
-            color: var(--muted);
-            font-size: 14px;
-            text-align: center;
-        }
-
-        /* Reduce motion */
-        @media (prefers-reduced-motion: no-preference) {
-            .tile {
-                transition: transform .15s ease, box-shadow .2s ease;
-            }
-
-                .tile:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 18px 40px rgba(0,0,0,.45);
-                }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="page-projects">
     <!-- Duct-tape and superglue, applied on purpose. ChatGPT assisted; the decisions and fingerprints are mine. -->
     <div class="wrap">
         <header>
@@ -613,9 +161,9 @@
 
             const groupHit = ['languages', 'skills', 'types'].every(g => {
                 const sel = state.selected[g];
-                if (!sel.size) return true; // empty group ignored
+                if (!sel.size) return true;
                 const values = new Set(p[g]);
-                return Array.from(sel).some(v => values.has(v)); // OR within group
+                return Array.from(sel).some(v => values.has(v));
             });
             return textHit && groupHit;
         }
@@ -642,7 +190,6 @@
                 const badgeWrap = document.createElement('div');
                 badgeWrap.className = 'badges';
 
-                // Collect all badges for this project
                 const allBadges = [
                     ...p.languages.map(l => l),
                     ...p.skills.map(s => s),
@@ -651,19 +198,16 @@
 
                 const totalBadges = allBadges.length;
 
-                // Create real badge elements
                 const badgeEls = allBadges.map((text, index) => {
                     const b = badge(text);
-                    // Mark badges past the visible limit as "extra"
                     if (index >= MAX_BADGES_VISIBLE) {
                         b.classList.add('badge--extra');
-                        b.hidden = true; // hidden = display: none
+                        b.hidden = true;
                     }
                     badgeWrap.appendChild(b);
                     return b;
                 });
 
-                // If we have more than MAX_BADGES_VISIBLE, add a "(and Y more)" toggle
                 if (totalBadges > MAX_BADGES_VISIBLE) {
                     const hiddenCount = totalBadges - MAX_BADGES_VISIBLE;
 
@@ -692,7 +236,6 @@
                 }
 
                 inner.appendChild(badgeWrap);
-
 
                 if (Array.isArray(p.coauthors) && p.coauthors.length) {
                     const people = document.createElement('div'); people.className = 'people';
@@ -754,7 +297,6 @@
             render();
         }
 
-        // --- Collapsible helpers ----------------------------------------------------
         const ABOUT_KEY = 'aboutOpen';
         const FILTERS_KEY = 'filtersOpen';
         function restoreOpenStates() {
@@ -775,25 +317,21 @@
             pill.textContent = `${count} selected`;
         }
 
-        // --- INIT -------------------------------------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
             restoreOpenStates();
             wireOpenStatePersistence();
 
-            // Hydrate chips
             renderAllChips();
 
-            // Search input
             const q = $('#q');
             q.value = state.q || '';
             q.addEventListener('input', () => { state.q = q.value; syncURL(); render(); });
-            // Keyboard shortcuts
+
             document.addEventListener('keydown', (e) => {
                 if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
                 if (e.key === 'Escape' && q.value) { q.value = ''; state.q = ''; syncURL(); render(); }
             });
 
-            // Buttons
             $('#btn-clear').addEventListener('click', clearFilters);
             $('#btn-copy').addEventListener('click', async () => {
                 try {
@@ -805,7 +343,6 @@
             render();
         });
 
-        // --- Tiny toast -------------------------------------------------------------
         function toast(msg) {
             const t = document.createElement('div');
             t.textContent = msg;
