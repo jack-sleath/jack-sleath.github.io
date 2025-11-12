@@ -103,7 +103,15 @@
         let PROJECTS = [];
         fetch('./projects.json')
             .then(response => response.json())
-            .then(data => { PROJECTS = data; renderGrid(); updateFilterSummary(); });
+            .then(data => {
+                PROJECTS = data.sort((a, b) => {
+                    const aCount = (a.languages?.length || 0) + (a.skills?.length || 0);
+                    const bCount = (b.languages?.length || 0) + (b.skills?.length || 0);
+                    return bCount - aCount;
+                });
+                renderGrid();
+                updateFilterSummary();
+            });
 
         // --- STATE ------------------------------------------------------------------
         const params = new URLSearchParams(location.search);
