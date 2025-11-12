@@ -366,6 +366,11 @@
             background: #0f1318;
             border: 1px solid #2a3240;
         }
+            .badge.badge--more-toggle {
+                cursor: pointer;
+                border-style: dashed;
+                opacity: 0.9;
+            }
 
         .links {
             display: flex;
@@ -544,6 +549,8 @@
                 "Legacy", "Game"]
         };
 
+        const MAX_BADGES_VISIBLE = 6;
+
         let PROJECTS = [];
         fetch('./projects.json')
             .then(response => response.json())
@@ -631,11 +638,60 @@
 
                 const desc = document.createElement('p'); desc.className = 'desc'; desc.textContent = p.description; inner.appendChild(desc);
 
-                const badgeWrap = document.createElement('div'); badgeWrap.className = 'badges';
-                p.languages.forEach(l => badgeWrap.appendChild(badge(l)));
-                p.skills.forEach(s => badgeWrap.appendChild(badge(s)));
-                p.types.forEach(t => badgeWrap.appendChild(badge(t)));
+                const badgeWrap = document.createElement('div');
+                badgeWrap.className = 'badges';
+
+                // Collect all badges for this project
+                const allBadges = [
+                    ...p.languages.map(l => l),
+                    ...p.skills.map(s => s),
+                    ...p.types.map(t => t)
+                ];
+
+                const totalBadges = allBadges.length;
+
+                // Create real badge elements
+                const badgeEls = allBadges.map((text, index) => {
+                    const b = badge(text);
+                    // Mark badges past the visible limit as "extra"
+                    if (index >= MAX_BADGES_VISIBLE) {
+                        b.classList.add('badge--extra');
+                        b.hidden = true; // hidden = display: none
+                    }
+                    badgeWrap.appendChild(b);
+                    return b;
+                });
+
+                // If we have more than MAX_BADGES_VISIBLE, add a "(and Y more)" toggle
+                if (totalBadges > MAX_BADGES_VISIBLE) {
+                    const hiddenCount = totalBadges - MAX_BADGES_VISIBLE;
+
+                    const moreBtn = document.createElement('button');
+                    moreBtn.type = 'button';
+                    moreBtn.className = 'badge badge--more-toggle';
+                    moreBtn.textContent = `(and ${hiddenCount} more)`;
+                    moreBtn.setAttribute('aria-expanded', 'false');
+
+                    moreBtn.addEventListener('click', () => {
+                        const extras = badgeWrap.querySelectorAll('.badge--extra');
+                        const isExpanded = moreBtn.getAttribute('aria-expanded') === 'true';
+
+                        if (!isExpanded) {
+                            extras.forEach(b => { b.hidden = false; });
+                            moreBtn.textContent = 'Show fewer';
+                            moreBtn.setAttribute('aria-expanded', 'true');
+                        } else {
+                            extras.forEach(b => { b.hidden = true; });
+                            moreBtn.textContent = `(and ${hiddenCount} more)`;
+                            moreBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    badgeWrap.appendChild(moreBtn);
+                }
+
                 inner.appendChild(badgeWrap);
+
 
                 if (Array.isArray(p.coauthors) && p.coauthors.length) {
                     const people = document.createElement('div'); people.className = 'people';
