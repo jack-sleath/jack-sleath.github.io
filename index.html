@@ -365,6 +365,7 @@
             border-radius: 999px;
             background: #0f1318;
             border: 1px solid #2a3240;
+            color: var(--text);
         }
             .badge.badge--more-toggle {
                 cursor: pointer;
@@ -549,7 +550,7 @@
                 "Legacy", "Game"]
         };
 
-        const MAX_BADGES_VISIBLE = 6;
+        const MAX_BADGES_VISIBLE = 5;
 
         let PROJECTS = [];
         fetch('./projects.json')
@@ -669,7 +670,7 @@
                     const moreBtn = document.createElement('button');
                     moreBtn.type = 'button';
                     moreBtn.className = 'badge badge--more-toggle';
-                    moreBtn.textContent = `(and ${hiddenCount} more)`;
+                    moreBtn.textContent = `and ${hiddenCount} more`;
                     moreBtn.setAttribute('aria-expanded', 'false');
 
                     moreBtn.addEventListener('click', () => {
@@ -682,7 +683,7 @@
                             moreBtn.setAttribute('aria-expanded', 'true');
                         } else {
                             extras.forEach(b => { b.hidden = true; });
-                            moreBtn.textContent = `(and ${hiddenCount} more)`;
+                            moreBtn.textContent = `and ${hiddenCount} more`;
                             moreBtn.setAttribute('aria-expanded', 'false');
                         }
                     });
