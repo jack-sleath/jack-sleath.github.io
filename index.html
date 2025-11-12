@@ -510,7 +510,7 @@
             <div class="collapsible-content">
                 <section class="filters" role="region" aria-label="Filters">
                     <div class="group" data-group="languages">
-                        <h3>Languages</h3>
+                        <h3>Languages &Aacute; Framework</h3>
                         <div class="chips" id="chips-languages"></div>
                     </div>
                     <div class="group" data-group="skills">
@@ -539,9 +539,17 @@
     <script>
         // --- CONFIG -----------------------------------------------------------------
         const FILTERS = {
-            languages: ["JavaScript", "TypeScript", "C#", "Python", "HTML", "CSS", "SQL", "Photoshop"],
-            skills: ["Frontend", "Backend", "Full-stack", "API", "Database", "DevOps", "CI/CD", "Testing", "AI/ML"],
-            types: ["Open Source", "Personal", "Hackathon", "Academic", "Duct-Tape Utility", "Silly", "Quick Idea", "Historic"]
+            languages: ["JavaScript", "TypeScript", "C#", "Python",
+                "HTML", "CSS", "SQL", "React", "JSON"],
+
+            skills: ["Frontend", "Backend", "Full-stack", "API",
+                "Database", "DevOps", "CI/CD", "Testing", "AI/ML",
+                "Azure", "NoSQL", "MongoDB", "CosmosDB",
+                "Microservice Architecture", "Photoshop"],
+
+            types: ["Open Source", "Personal", "Academic",
+                "Duct-Tape Utility", "Silly", "Quick Idea",
+                "Legacy", "Game"]
         };
 
         let PROJECTS = [];

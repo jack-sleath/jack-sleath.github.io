@@ -4,11 +4,21 @@
     "title": "Urine My Territory (Game)",
     "description": "A global augmented reality geo-location game. Built to be run in Azure, making use of a static web page, service, and Cosmos DB. Automated API and UI tests written. Had a good time trying to get around the Mercator projection issue.",
     "languages": [
+      "React",
       "TypeScript",
       "C#"
     ],
     "skills": [
-      "Full-stack"
+      "Frontend",
+      "Backend",
+      "Full-stack",
+      "Azure",
+      "NoSQL",
+      "CosmosDB",
+      "API",
+      "CI/CD",
+      "Database",
+      "Microservice Architecture"
     ],
     "types": [
       "Personal",
@@ -27,7 +37,7 @@
         "role": "Tester"
       }
     ],
-    "thumb": "💦"
+    "thumb": "💦🌍"
   },
   {
     "id": "dataset-maker",
@@ -47,7 +57,7 @@
       "demo": "https://jack-sleath.github.io/datasetmaker/datasetmaker.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/datasetmaker"
     },
-    "thumb": "📤"
+    "thumb": "📤🧪"
   },
   {
     "id": "csv-to-sql",
@@ -67,7 +77,7 @@
       "demo": "https://jack-sleath.github.io/csv-to-sql/index.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/csv-to-sql"
     },
-    "thumb": "🗃️"
+    "thumb": "📄📥"
   },
   {
     "id": "sql-insert-maker",
@@ -87,7 +97,7 @@
       "demo": "https://jack-sleath.github.io/sqlinsert/sqlinsert.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sqlinsert"
     },
-    "thumb": "📥"
+    "thumb": "📤📥"
   },
   {
     "id": "star-wars-dnd-character-sheet",
@@ -96,22 +106,25 @@
     "languages": [
       "HTML",
       "CSS",
-      "JavaScript"
+      "JavaScript",
+      "JSON"
     ],
     "skills": [
       "Frontend"
     ],
-    "types": [ "Silly" ],
+    "types": [
+      "Silly", "Game", "Quick Idea"
+    ],
     "links": {
       "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/starwars"
     },
-    "thumb": "🎲"
+    "thumb": "🎲✨"
   },
   {
     "id": "demo-code",
     "title": "Demo Code",
-    "description": "A CodePen clone. Just a proof-of-concept maker that also allows me to save the projects to a JSON array and get pulled into the dropdown.",
+    "description": "Code scratch pad. Just a proof-of-concept maker that also allows me to save the projects to a JSON array and get pulled into the dropdown.",
     "languages": [
       "HTML",
       "CSS",
@@ -120,12 +133,15 @@
     "skills": [
       "Frontend"
     ],
-    "types": [],
+    "types": [
+      "Quick Idea",
+      "Duck-Tape Utility"
+    ],
     "links": {
       "demo": "https://jack-sleath.github.io/code/code.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/code"
     },
-    "thumb": "🖊️"
+    "thumb": "✏️🖥️"
   },
   {
     "id": "sonic-titles",
@@ -139,12 +155,15 @@
     "skills": [
       "Frontend"
     ],
-    "types": [ "Silly", "Quick Idea" ],
+    "types": [
+      "Silly",
+      "Quick Idea"
+    ],
     "links": {
       "demo": "https://jack-sleath.github.io/sonic-font/sonic.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sonic-font"
     },
-    "thumb": "🦔"
+    "thumb": "🎥🦔"
   },
   {
     "id": "presenting-data-without-numbers-2017-university-final-project",
@@ -153,20 +172,21 @@
     "languages": [
       "HTML",
       "CSS",
-      "JavaScript",
-      "Photoshop"
+      "JavaScript"
     ],
     "skills": [
-      "Frontend"
+      "Frontend",
+      "Photoshop"
     ],
     "types": [
-      "Academic"
+      "Academic",
+      "Legacy"
     ],
     "links": {
       "demo": "https://jack-sleath.github.io/weather/index.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/weather"
     },
-    "thumb": "🌦️"
+    "thumb": "🌦️🗺️"
   },
   {
     "id": "arm-server-dashboard-2013-internship",
@@ -181,28 +201,30 @@
       "Frontend"
     ],
     "types": [
-      "Academic"
+      "Academic",
+      "Legacy"
     ],
     "links": {
       "demo": "https://jack-sleath.github.io/intern/dashboard.html",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/intern"
     },
-    "thumb": "🌡️"
+    "thumb": "🌡️💽"
   },
   {
     "id": "photoshop-actions",
     "title": "Photoshop Actions",
     "description": "A solution for Photoshop scripts. Currently only has a couple of functions including my pixelate function, used in my final year project and several profile pictures since.",
     "languages": [
-      "JavaScript",
+      "JavaScript"
+    ],
+    "skills": [
       "Photoshop"
     ],
-    "skills": [],
     "types": [],
     "links": {
       "repo": "https://github.com/jack-sleath/photoshop-actions/tree/main"
     },
-    "thumb": "🎬"
+    "thumb": "🔁👾"
   },
   {
     "id": "local-deepseek",
@@ -221,21 +243,28 @@
     "links": {
       "repo": "https://github.com/jack-sleath/local-deepseek/tree/main"
     },
-    "thumb": "🤖"
+    "thumb": "🏠🤖"
   },
   {
     "id": "ai-fortune",
     "title": "AI Fortune Teller",
     "description": "A Zoltar-like fortune-telling service. Written to allow for many different AI services to be plugged in. Plans included generating short-form content for TikTok, Instagram Reels, and YouTube Shorts, and also to have a full animatronic version of ourselves to read the fortunes. This project was an ambitious one, with several end goals - hopefully to be finished one day.",
     "languages": [
-      "C#"
+      "C#",
+      "React"
     ],
     "skills": [
+      "Frontend",
+      "Backend",
       "Full-stack",
-      "AI/ML"
+      "AI/ML",
+      "NoSQL",
+      "MongoDB",
+      "Microservice Architecture"
     ],
     "types": [
-      "Personal"
+      "Personal",
+      "Open Source"
     ],
     "links": {
       "repo": "https://github.com/jack-sleath/Fortune",
@@ -248,6 +277,6 @@
         "role": "Co-Developer"
       }
     ],
-    "thumb": "🔮"
+    "thumb": "🤖🔮"
   }
 ]
