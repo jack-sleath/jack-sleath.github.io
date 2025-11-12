@@ -40,6 +40,40 @@
     "thumb": "💦🌍"
   },
   {
+    "id": "ai-fortune",
+    "title": "AI Fortune Teller",
+    "description": "A Zoltar-like fortune-telling service. Written to allow for many different AI services to be plugged in. Plans included generating short-form content for TikTok, Instagram Reels, and YouTube Shorts, and also to have a full animatronic version of ourselves to read the fortunes. This project was an ambitious one, with several end goals - hopefully to be finished one day.",
+    "languages": [
+      "C#",
+      "React"
+    ],
+    "skills": [
+      "Frontend",
+      "Backend",
+      "Full-stack",
+      "AI/ML",
+      "NoSQL",
+      "MongoDB",
+      "Microservice Architecture"
+    ],
+    "types": [
+      "Personal",
+      "Open Source"
+    ],
+    "links": {
+      "repo": "https://github.com/jack-sleath/Fortune",
+      "video": ""
+    },
+    "coauthors": [
+      {
+        "name": "Will White",
+        "url": "https://www.linkedin.com/in/will-white-3aa84056/",
+        "role": "Co-Developer"
+      }
+    ],
+    "thumb": "🤖🔮"
+  },
+  {
     "id": "dataset-maker",
     "title": "DataSet Maker",
     "description": "Transforms copied SQL tables into a DataSet object. Originally written to help create return objects for mocked DB calls in unit tests but has since been used for many different applications at work.",
@@ -244,39 +278,5 @@
       "repo": "https://github.com/jack-sleath/local-deepseek/tree/main"
     },
     "thumb": "🏠🤖"
-  },
-  {
-    "id": "ai-fortune",
-    "title": "AI Fortune Teller",
-    "description": "A Zoltar-like fortune-telling service. Written to allow for many different AI services to be plugged in. Plans included generating short-form content for TikTok, Instagram Reels, and YouTube Shorts, and also to have a full animatronic version of ourselves to read the fortunes. This project was an ambitious one, with several end goals - hopefully to be finished one day.",
-    "languages": [
-      "C#",
-      "React"
-    ],
-    "skills": [
-      "Frontend",
-      "Backend",
-      "Full-stack",
-      "AI/ML",
-      "NoSQL",
-      "MongoDB",
-      "Microservice Architecture"
-    ],
-    "types": [
-      "Personal",
-      "Open Source"
-    ],
-    "links": {
-      "repo": "https://github.com/jack-sleath/Fortune",
-      "video": ""
-    },
-    "coauthors": [
-      {
-        "name": "Will White",
-        "url": "https://www.linkedin.com/in/will-white-3aa84056/",
-        "role": "Co-Developer"
-      }
-    ],
-    "thumb": "🤖🔮"
   }
 ]
