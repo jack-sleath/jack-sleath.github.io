@@ -49,6 +49,42 @@
             background: radial-gradient(1200px 600px at 10% -10%, #22283a44, transparent), var(--bg);
         }
 
+        /* Inline text link — use for <a> inside copy */
+        .text-link {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: #3a4658; /* subtle in dark; overridden by system light mode vars */
+            text-decoration-thickness: .08em;
+            text-underline-offset: 3px;
+            border-radius: 6px; /* for focus ring rounding */
+            outline: none;
+            transition: color .15s ease, text-decoration-color .15s ease, box-shadow .2s ease;
+        }
+
+        .text-link:hover {
+            color: var(--brand);
+            text-decoration-color: var(--brand);
+        }
+
+        .text-link:focus-visible {
+            box-shadow: 0 0 0 4px var(--ring);
+        }
+
+        /* Optional: a “muted” variant for low-emphasis links in meta text */
+        .text-link.muted {
+            color: var(--muted);
+            text-decoration-color: currentColor;
+        }
+
+        /* Optional: external icon affordance */
+        .text-link.external::after {
+            content: "↗";
+            font-size: .85em;
+            margin-left: .25em;
+            opacity: .8;
+        }
+
+
         .wrap {
             max-width: 1200px;
             margin: 0 auto;
