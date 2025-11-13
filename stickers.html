@@ -1,0 +1,94 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jack Sleath – Writing & Images</title>
+    <meta name="description" content="A static page matching the projects style, optimized for long-form paragraphs and images: side-by-side, full-width text, and full-width images." />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-writing">
+    <div class="wrap">
+        <header>
+            <div class="title" role="heading" aria-level="1"><span class="dot"></span> Writing & Images</div>
+        </header>
+
+        <!-- 2) FULL-WIDTH TEXT -->
+        <section class="section card prose prose-card" aria-label="Full-width article">
+            <h2>Full-width text</h2>
+            <p class="muted">Ideal for uninterrupted reading-announcements, long-form notes, or storytime.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet sapien in sapien tempor, a iaculis nunc vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce eu velit at massa mattis pulvinar. Aenean ullamcorper, urna vel porttitor tristique, mauris quam vulputate eros, sit amet mattis nulla mi non justo.</p>
+            <p>Morbi a velit est. Integer eleifend, orci sit amet consectetur varius, nibh erat luctus justo, nec faucibus justo mi sed est. Integer cursus, est eget luctus sagittis, justo risus consequat dui, nec interdum sem mauris ut arcu. Integer id semper lectus, non auctor felis.</p>
+            <p>Vivamus semper, velit nec condimentum convallis, nisl mauris finibus velit, a commodo sapien eros vel nulla. Sed euismod, augue a egestas sagittis, nunc nisi condimentum arcu, vitae placerat risus odio non elit.</p>
+        </section>
+
+        <!-- 1) TEXT + IMAGE (left text, right image) -->
+        <section class="section card">
+            <div class="media-row">
+                <div class="media-card prose" aria-label="Article text">
+                    <h2>Side-by-side layout</h2>
+                    <p class="muted">Use this when a paragraph wants a buddy image. On wider screens they sit next to each other; on mobile they stack, keeping things comfy.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet, nibh vitae ornare placerat, leo diam volutpat lacus, at convallis ex nunc eget nibh. Integer pretium, augue non faucibus pretium, purus augue commodo est, id pharetra lacus dui vitae ante. Praesent non lobortis orci. Nulla facilisi.</p>
+                    <p>Aliquam erat volutpat. Suspendisse potenti. Sed vel accumsan augue. Vivamus vehicula, nisl a euismod tempor, quam nunc sagittis risus, quis euismod enim risus id odio. Integer gravida vulputate mauris, vitae volutpat felis euismod at.</p>
+                    <span class="badge" aria-hidden="true">Example</span>
+                </div>
+                <figure class="media" aria-label="Illustrative image">
+                    <img alt="E.T. tu Brute?" src="images/et.png" style="background-color:black;"/>
+                    <figcaption class="cap">A friendly placeholder image. Swap this for your own.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 1b) TEXT + IMAGE (right text, left image) -->
+        <section class="section card">
+            <div class="media-row reverse">
+                <figure class="media" aria-label="Illustrative image">
+                    <img alt="" src="images/dc.png" />
+                    <figcaption class="cap">Left image / right text variant via <code>.reverse</code>.</figcaption>
+                </figure>
+                <div class="media-card prose" aria-label="Article text">
+                    <h2>Reversed layout</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia omnis aspernatur illum non perspiciatis, rerum laudantium aliquam necessitatibus libero, nihil, vitae laborum velit. Delectus, at?</p>
+                    <p>Quasi, perferendis. Inventore pariatur non, numquam tenetur maiores optio perspiciatis, deleniti possimus sit distinctio eius dignissimos aperiam. Quod laborum nihil temporibus labore recusandae ipsam similique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1) TEXT + IMAGE (left text, right image) -->
+        <section class="section card">
+            <div class="media-row">
+                <div class="media-card prose" aria-label="Article text">
+                    <h2>Side-by-side layout</h2>
+                    <p class="muted">Use this when a paragraph wants a buddy image. On wider screens they sit next to each other; on mobile they stack, keeping things comfy.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet, nibh vitae ornare placerat, leo diam volutpat lacus, at convallis ex nunc eget nibh. Integer pretium, augue non faucibus pretium, purus augue commodo est, id pharetra lacus dui vitae ante. Praesent non lobortis orci. Nulla facilisi.</p>
+                    <p>Aliquam erat volutpat. Suspendisse potenti. Sed vel accumsan augue. Vivamus vehicula, nisl a euismod tempor, quam nunc sagittis risus, quis euismod enim risus id odio. Integer gravida vulputate mauris, vitae volutpat felis euismod at.</p>
+                    <span class="badge" aria-hidden="true">Example</span>
+                </div>
+                <figure class="media" aria-label="Illustrative image">
+                    <img alt="" src="images/fn.png" />
+                    <figcaption class="cap">A friendly placeholder image. Swap this for your own.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 1b) TEXT + IMAGE (right text, left image) -->
+        <section class="section card">
+            <div class="media-row reverse">
+                <figure class="media" aria-label="Illustrative image">
+                    <img alt="" src="images/s.png" />
+                    <figcaption class="cap">Left image / right text variant via <code>.reverse</code>.</figcaption>
+                </figure>
+                <div class="media-card prose" aria-label="Article text">
+                    <h2>Reversed layout</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia omnis aspernatur illum non perspiciatis, rerum laudantium aliquam necessitatibus libero, nihil, vitae laborum velit. Delectus, at?</p>
+                    <p>Quasi, perferendis. Inventore pariatur non, numquam tenetur maiores optio perspiciatis, deleniti possimus sit distinctio eius dignissimos aperiam. Quod laborum nihil temporibus labore recusandae ipsam similique.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Tip: my stickers are available online somewhere...</p>
+        </footer>
+    </div>
+</body>
+</html>
