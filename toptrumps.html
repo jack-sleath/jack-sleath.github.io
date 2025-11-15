@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Star Wars Top Trumps (SVG + Score)</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #000;
+        color: #ffe81f;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    h1 {
+        margin-bottom: 0;
+        font-size: 40px;
+        text-shadow: 0 0 10px #ffe81f;
+    }
+    #score {
+        margin-top: 5px;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    #game {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+    }
+    .card {
+        background: #111;
+        padding: 15px;
+        border-radius: 12px;
+        width: 260px;
+        border: 2px solid #ffe81f66;
+        box-shadow: 0 0 10px #ffe81f44;
+        min-height: 280px;
+    }
+    .svgWrap {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .card h2 {
+        text-align: center;
+        margin: 5px 0 15px 0;
+    }
+    .card ul { list-style: none; padding: 0; }
+    .card li { margin-bottom: 8px; }
+    .hiddenCard {
+        text-align: center;
+        margin-top: 80px;
+        font-size: 22px;
+        opacity: 0.6;
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #ffe81f;
+        color: #000;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    button:hover { background: #fff176; }
+    #result {
+        margin-top: 20px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<h1>Star Wars Top Trumps</h1>
+<div id="score">Score: <b>0</b></div>
+
+<div id="game">
+    <div class="card" id="playerCard"></div>
+    <div class="card" id="computerCard">
+        <div class="hiddenCard">Hidden<br>Card</div>
+    </div>
+</div>
+
+<button onclick="drawCard()">Draw Card</button>
+
+<div id="result"></div>
+
+<script>
+/* ----------------------------------------------------
+   INLINE SVG ICONS
+------------------------------------------------------*/
+const svgs = {
+    luke: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="45" y="5" width="10" height="70" fill="#7df9ff"/>
+            <circle cx="50" cy="85" r="10" fill="#444"/>
+        </svg>
+    `,
+    vader: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="40" rx="28" ry="35" fill="#222"/>
+            <rect x="35" y="60" width="30" height="20" fill="#111"/>
+        </svg>
+    `,
+    yoda: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="50" rx="20" ry="25" fill="#8fbc8f"/>
+            <polygon points="10,50 30,40 30,60" fill="#8fbc8f"/>
+            <polygon points="90,50 70,40 70,60" fill="#8fbc8f"/>
+        </svg>
+    `,
+    rey: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="48" y="10" width="4" height="60" fill="#fff"/>
+            <rect x="46" y="55" width="8" height="25" fill="#beige"/>
+        </svg>
+    `,
+    kylo: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="48" y="5" width="4" height="70" fill="#ff304f"/>
+            <rect x="30" y="40" width="40" height="8" fill="#ff304f"/>
+        </svg>
+    `,
+    obiwan: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <circle cx="50" cy="35" r="20" fill="#e0c097"/>
+            <rect x="30" y="55" width="40" height="25" fill="#5d4037"/>
+        </svg>
+    `,
+    anakin: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <polygon points="50,10 70,70 30,70" fill="#ffdd99"/>
+            <rect x="40" y="70" width="20" height="15" fill="#444"/>
+        </svg>
+    `,
+    mace: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="48" y="10" width="4" height="60" fill="#c77dff"/>
+            <rect x="46" y="60" width="8" height="20" fill="#222"/>
+        </svg>
+    `,
+    quigon: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="35" rx="18" ry="25" fill="#c9a46c"/>
+            <rect x="30" y="55" width="40" height="30" fill="#805a38"/>
+        </svg>
+    `,
+    maul: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <circle cx="50" cy="40" r="25" fill="#b71c1c"/>
+            <path d="M30 20 L35 10 L40 20 M60 20 L65 10 L70 20" stroke="#fff" stroke-width="3"/>
+        </svg>
+    `,
+    dooku: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="46" y="10" width="8" height="60" fill="#bbb"/>
+            <rect x="44" y="60" width="12" height="20" fill="#222"/>
+        </svg>
+    `,
+    palpatine: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="45" rx="25" ry="30" fill="#444"/>
+            <circle cx="50" cy="40" r="10" fill="#888"/>
+        </svg>
+    `,
+    ahsoka: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <path d="M50 10 L70 60 L30 60 Z" fill="#4dd0e1"/>
+            <circle cx="50" cy="65" r="10" fill="#ff7043"/>
+        </svg>
+    `,
+    grogu: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="50" rx="22" ry="25" fill="#9acd32"/>
+            <polygon points="8,50 25,40 25,60" fill="#9acd32"/>
+            <polygon points="92,50 75,40 75,60" fill="#9acd32"/>
+        </svg>
+    `,
+    han: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="30" y="20" width="40" height="20" fill="#8d6e63"/>
+            <rect x="30" y="40" width="40" height="30" fill="#3e2723"/>
+        </svg>
+    `,
+    leia: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <circle cx="50" cy="40" r="18" fill="#ffe0b2"/>
+            <circle cx="25" cy="40" r="12" fill="#5d4037"/>
+            <circle cx="75" cy="40" r="12" fill="#5d4037"/>
+        </svg>
+    `,
+    chewie: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="30" y="20" width="40" height="55" fill="#8b5a2b"/>
+            <line x1="30" y1="25" x2="70" y2="70" stroke="#fff" stroke-width="5"/>
+        </svg>
+    `,
+    lando: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <circle cx="50" cy="35" r="18" fill="#444"/>
+            <rect x="30" y="55" width="40" height="25" fill="#1976d2"/>
+        </svg>
+    `,
+    cassian: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="35" y="20" width="30" height="40" fill="#5c6bc0"/>
+            <rect x="40" y="60" width="20" height="20" fill="#283593"/>
+        </svg>
+    `,
+    jyn: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <circle cx="50" cy="38" r="18" fill="#a1887f"/>
+            <rect x="32" y="56" width="36" height="24" fill="#4e342e"/>
+        </svg>
+    `,
+    boba: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="30" y="25" width="40" height="30" fill="#4caf50"/>
+            <rect x="30" y="55" width="40" height="20" fill="#333"/>
+        </svg>
+    `,
+    jango: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <circle cx="50" cy="38" r="18" fill="#90caf9"/>
+            <rect x="30" y="56" width="40" height="25" fill="#0d47a1"/>
+        </svg>
+    `,
+    phasma: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <rect x="30" y="20" width="40" height="60" fill="#cfd8dc"/>
+            <line x1="30" y1="20" x2="70" y2="80" stroke="#b71c1c" stroke-width="4"/>
+        </svg>
+    `,
+    grievous: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <polygon points="50,10 85,90 15,90" fill="#e0e0e0"/>
+            <circle cx="40" cy="45" r="6" fill="#000"/>
+            <circle cx="60" cy="45" r="6" fill="#000"/>
+        </svg>
+    `,
+    trooper: `
+        <svg width="90" height="90" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="35" rx="22" ry="20" fill="#fff"/>
+            <rect x="30" y="55" width="40" height="20" fill="#eee"/>
+        </svg>
+    `
+};
+
+
+/* ----------------------------------------------------
+   STAR WARS JSON CARDS
+------------------------------------------------------*/
+const cards = [
+    { "name": "Luke Skywalker", "strength": 75, "speed": 80, "force": 95, "svg": svgs.luke },
+{ "name": "Darth Vader", "strength": 92, "speed": 65, "force": 98, "svg": svgs.vader },
+{ "name": "Yoda", "strength": 60, "speed": 88, "force": 100, "svg": svgs.yoda },
+{ "name": "Rey", "strength": 72, "speed": 82, "force": 96, "svg": svgs.rey },
+{ "name": "Kylo Ren", "strength": 87, "speed": 76, "force": 92, "svg": svgs.kylo },
+{ "name": "Obi-Wan Kenobi", "strength": 79, "speed": 75, "force": 97, "svg": svgs.obiwan },
+{ "name": "Anakin Skywalker", "strength": 85, "speed": 78, "force": 94, "svg": svgs.anakin },
+{ "name": "Mace Windu", "strength": 82, "speed": 74, "force": 93, "svg": svgs.mace },
+{ "name": "Qui-Gon Jinn", "strength": 77, "speed": 72, "force": 91, "svg": svgs.quigon },
+{ "name": "Darth Maul", "strength": 89, "speed": 92, "force": 82, "svg": svgs.maul },
+{ "name": "Count Dooku", "strength": 83, "speed": 68, "force": 90, "svg": svgs.dooku },
+{ "name": "Emperor Palpatine", "strength": 70, "speed": 60, "force": 99, "svg": svgs.palpatine },
+{ "name": "Ahsoka Tano", "strength": 74, "speed": 88, "force": 86, "svg": svgs.ahsoka },
+{ "name": "Grogu", "strength": 20, "speed": 35, "force": 90, "svg": svgs.grogu },
+{ "name": "Han Solo", "strength": 55, "speed": 72, "force": 10, "svg": svgs.han },
+{ "name": "Princess Leia", "strength": 52, "speed": 70, "force": 22, "svg": svgs.leia },
+{ "name": "Chewbacca", "strength": 96, "speed": 55, "force": 5, "svg": svgs.chewie },
+{ "name": "Lando Calrissian", "strength": 48, "speed": 68, "force": 8, "svg": svgs.lando },
+{ "name": "Cassian Andor", "strength": 50, "speed": 65, "force": 5, "svg": svgs.cassian },
+{ "name": "Jyn Erso", "strength": 58, "speed": 70, "force": 4, "svg": svgs.jyn },
+{ "name": "Boba Fett", "strength": 82, "speed": 74, "force": 12, "svg": svgs.boba },
+{ "name": "Jango Fett", "strength": 80, "speed": 78, "force": 10, "svg": svgs.jango },
+{ "name": "Captain Phasma", "strength": 76, "speed": 60, "force": 6, "svg": svgs.phasma },
+{ "name": "General Grievous", "strength": 93, "speed": 88, "force": 0, "svg": svgs.grievous },
+{ "name": "Stormtrooper", "strength": 40, "speed": 50, "force": 1, "svg": svgs.trooper }
+];
+
+let currentPlayerCard;
+let currentComputerCard;
+
+/* ----------------------------------------------------
+   SCORE SYSTEM
+------------------------------------------------------*/
+let score = 0;
+
+function updateScoreDisplay() {
+    document.getElementById("score").innerHTML = `Score: <b>${score}</b>`;
+}
+
+/* ----------------------------------------------------
+   GAME LOGIC
+------------------------------------------------------*/
+function drawCard() {
+    currentPlayerCard = cards[Math.floor(Math.random() * cards.length)];
+    currentComputerCard = cards[Math.floor(Math.random() * cards.length)];
+
+    displayCard("playerCard", currentPlayerCard, true);
+
+    document.getElementById("computerCard").innerHTML =
+        `<div class="hiddenCard">Hidden<br>Card</div>`;
+
+    document.getElementById("result").innerHTML = "";
+}
+
+function displayCard(elementId, card, allowClick) {
+    let output = `
+        <div class="svgWrap">${card.svg}</div>
+        <h2>${card.name}</h2>
+        <ul>
+    `;
+
+    for (let attr in card) {
+        if (["name", "svg"].includes(attr)) continue;
+        if (allowClick) {
+            output += `<li><button onclick="compare('${attr}')">${attr}: ${card[attr]}</button></li>`;
+        } else {
+            output += `<li>${attr}: ${card[attr]}</li>`;
+        }
+    }
+
+    output += "</ul>";
+    document.getElementById(elementId).innerHTML = output;
+}
+
+function compare(attribute) {
+    const playerVal = currentPlayerCard[attribute];
+    const compVal = currentComputerCard[attribute];
+
+    displayCard("computerCard", currentComputerCard, false);
+
+    let resultMsg = "";
+
+    if (playerVal > compVal) {
+        score++;
+        resultMsg = "✨ You Win!";
+    } else if (playerVal < compVal) {
+        score = 0;
+        resultMsg = "💀 You Lose!";
+    } else {
+        resultMsg = "🤝 It's a Draw!";
+    }
+
+    updateScoreDisplay();
+
+    document.getElementById("result").innerHTML =
+        `You chose <b>${attribute}</b><br>
+         You: ${playerVal} | Computer: ${compVal}<br><br>
+         ${resultMsg}`;
+}
+</script>
+
+</body>
+</html>
