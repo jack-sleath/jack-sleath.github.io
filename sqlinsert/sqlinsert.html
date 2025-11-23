@@ -1,33 +1,55 @@
-﻿<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
 
-    <title>Make a DataSet</title>
+    <title>SQL Table to Insert Statement Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/script.js"></script>
-    
-
 </head>
 
 <body>
-  <h1>SQL Table to Insert Statement Converter</h1>
-  
-  <div class="container">
-    <label for="tableName">Table Name:</label><br>
-    <input type="text" id="tableName" placeholder="Enter table name">
-  </div>
+    <div class="container">
+        <h1>SQL Table to Insert Statement Converter</h1>
+        <p class="small">Paste a table result (headers + rows) and convert it into SQL INSERT statements.</p>
 
-  <div class="container">
-    <label for="tableData">Paste SQL Table (with headers):</label><br>
-    <textarea id="tableData" rows="10" placeholder="Paste your SQL table data here"></textarea>
-  </div>
+        <label for="tableName">Table name</label>
+        <input type="text" id="tableName" placeholder="Enter table name">
 
-  <button id="convertBtn">Convert</button>
+        <label for="tableData">Results input</label>
+        <textarea id="tableData" placeholder="Paste your table data here (include header row)"></textarea>
 
-  <div class="container">
-    <label for="output">Insert Statements:</label><br>
-    <textarea id="output" rows="10" readonly></textarea>
-  </div>
-    <a href="https://jack-sleath.github.io/">Home...</a>
+        <div class="row">
+            <button id="convertBtn" type="button">Convert</button>
+            <button id="copyBtn" type="button">Copy SQL</button>
+            <span id="status" class="small" aria-live="polite"></span>
+        </div>
+
+        <label for="output">Insert statements</label>
+        <textarea id="output" readonly placeholder="Generated INSERT statements will appear here..."></textarea>
+
+        <a class="home-link" href="https://jack-sleath.github.io/">Home...</a>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // small helper for existing script to show transient messages
+        function setStatus(message) {
+            const el = document.getElementById('status');
+            if (!el) return;
+            el.textContent = message;
+            if (!message) return;
+            setTimeout(() => { if (el.textContent === message) el.textContent = ''; }, 2500);
+        }
+        window.setStatus = setStatus;
+
+        // wire buttons to existing script functions if present
+        document.getElementById('convertBtn').addEventListener('click', function () {
+            if (typeof ConvertTable === 'function') ConvertTable();
+        });
+        document.getElementById('copyBtn').addEventListener('click', function () {
+            if (typeof CopyInsertStatements === 'function') CopyInsertStatements();
+        });
+    </script>
 </body>
 </html>

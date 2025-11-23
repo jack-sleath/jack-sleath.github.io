@@ -1,27 +1,52 @@
-﻿<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-
     <title>Make a DataSet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/script.js"></script>
-    
-
 </head>
 
 <body>
-    <div>
-        <textarea class="boxsizingBorder" id="CsvInput" name="CSV Input" placeholder="Enter table here..."></textarea>
-    </div>
-    <div>
+    <div class="container">
+        <h1>Make a DataSet</h1>
+        <p class="small">Paste a results grid copied from SQL Server Management Studio (SSMS), give it a table name, and build a dataset. Use the buttons to add multiple tables, copy, or clear.</p>
+
+        <label for="CsvInput">Results input (from SSMS)</label>
+        <textarea id="CsvInput" placeholder="Paste results copied from SSMS here (include the header row)..."></textarea>
+        <div class="hint">Copy the result grid from SSMS (including column headers) and paste it here. Use "Add Another DataTable" to include multiple result sets in the dataset.</div>
+
+        <label for="tableName">Table name</label>
         <input id="tableName" type="text" placeholder="Enter table name here..." />
-        <button onclick="AddNewTable()">Add Another DataTable</button>
-        <button onclick="CopyDataSet()">Copy DataSet</button>
-        <button onclick="ClearDataSet()">Clear DataSet</button>
+
+        <div class="row">
+            <button id="addBtn" type="button" onclick="AddNewTable()">Add Another DataTable</button>
+            <button id="copyBtn" type="button" onclick="CopyDataSet()">Copy DataSet</button>
+            <button id="clearBtn" type="button" onclick="ClearDataSet()">Clear DataSet</button>
+            <span id="status" class="small" aria-live="polite"></span>
+        </div>
+
+        <label for="ScriptOutput">Dataset output</label>
+        <textarea id="ScriptOutput" readonly placeholder="Generated dataset will appear here..."></textarea>
+
+        <a class="home-link" href="https://jack-sleath.github.io/">Home...</a>
     </div>
-    <div>
-        <textarea class="boxsizingBorder" id="ScriptOutput" name="Script Output"></textarea>
-    </div>
-    <a href="https://jack-sleath.github.io/">Home...</a>
+
+    <script src="js/script.js"></script>
+    <script>
+        // show basic status if the existing functions call setStatus
+        function setStatus(message) {
+            const el = document.getElementById('status');
+            if (!el) return;
+            el.textContent = message;
+            if (!message) return;
+            setTimeout(() => {
+                if (el.textContent === message) el.textContent = '';
+            }, 2500);
+        }
+
+        // expose a helper for existing inline handlers
+        window.setStatus = setStatus;
+    </script>
 </body>
 </html>

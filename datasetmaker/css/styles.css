@@ -1,55 +1,152 @@
-﻿body {
+﻿* {
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 1.5rem;
+    background: #f7f7f8;
+    color: #111827;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin: 1rem 0 0.25rem;
 }
 
 textarea {
     width: 100%;
-    max-width: 100%;
-    height:45%;
-    resize:none;
+    min-height: 240px;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    resize: vertical;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+    background: #fff;
+    color: #111827;
 }
-button {
 
+input[type="text"] {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    font-size: 0.95rem;
+    background: #fff;
+    color: #111827;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+button {
+    border-radius: 999px;
+    border: none;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 4px 14px rgba(15,23,42,0.18);
+    transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.1s ease;
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.3);
+}
+
+#addBtn {
+    background: #2563eb;
+    color: white;
+}
+
+#copyBtn {
+    background: #e5e7eb;
+    color: #111827;
+    box-shadow: none;
+}
+
+#clearBtn {
+    background: #ef4444;
+    color: white;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+.small {
+    font-size: 0.8rem;
+}
+
+a.home-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
 }
 
 /* Dark mode based on browser preference */
 @media (prefers-color-scheme: dark) {
-    html,
-    body {
+    html, body {
         background-color: #181a1b;
         color: #e8e6e3;
-        color-scheme: dark; /* makes native controls/scrollbars dark where supported */
+        color-scheme: dark; /* helps form controls/scrollbars */
+    }
+
+    .container {
+        background: #1f2426;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     textarea {
-        background-color: #111416;
+        background: #181a1b;
         color: #e8e6e3;
-        border: 1px solid #545b5e;
+        border-color: #545b5e;
     }
 
     input[type="text"] {
-        background-color: #111416;
+        background: #1f2426;
         color: #e8e6e3;
-        border: 1px solid #545b5e;
+        border-color: #545b5e;
     }
 
-    button {
-        background-color: #2563eb;
-        color: #ffffff;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
+    #copyBtn {
+        background: #374151;
+        color: #e5e7eb;
+        box-shadow: none;
     }
 
-        button:hover {
-            background-color: #1d4ed8;
-        }
-
-    a {
+    a.home-link {
         color: #3391ff;
     }
-
-        a:hover {
-            text-decoration: underline;
-        }
 }

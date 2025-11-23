@@ -1,108 +1,273 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8" />
+    <title>CSV to SQL Insert Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 1.5rem;
+            background: #f7f7f8;
+            color: #111827;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 1rem 0 0.25rem;
         }
 
         textarea {
             width: 100%;
-            height: 200px;
+            min-height: 240px;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid #d1d5db;
+            resize: vertical;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+            background: #fff;
+            color: #111827;
         }
 
-        input[type="file"] {
-            margin-bottom: 20px;
+        input[type="file"], input[type="text"] {
+            display: block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0.6rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            font-size: 0.95rem;
+            background: #fff;
+            color: #111827;
         }
-    </style>
-    <style>
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+
+        button {
+            border-radius: 999px;
+            border: none;
+            padding: 0.55rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 4px 14px rgba(15,23,42,0.18);
+            transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.1s ease;
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(15,23,42,0.3);
+        }
+
+        #generateBtn {
+            background: #2563eb;
+            color: white;
+        }
+
+        #copyBtn {
+            background: #e5e7eb;
+            color: #111827;
+            box-shadow: none;
+        }
+
+        .hint {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .small {
+            font-size: 0.8rem;
+        }
+
         @media (prefers-color-scheme: dark) {
             html, body {
                 background-color: #181a1b;
                 color: #e8e6e3;
-                color-scheme: dark; /* native form controls & scrollbars */
+                color-scheme: dark; /* helps form controls/scrollbars */
             }
 
-            body {
-                /* keep your margin but add a dark bg */
-                margin: 20px;
-            }
-
-            h1, h2 {
-                color: #e8e6e3;
+            .container {
+                background: #1f2426;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             }
 
             textarea {
-                background-color: #111416;
+                background: #181a1b;
                 color: #e8e6e3;
-                border: 1px solid #545b5e;
+                border-color: #545b5e;
             }
 
-            input[type="file"] {
+            input[type="file"], input[type="text"] {
+                background: #1f2426;
                 color: #e8e6e3;
+                border-color: #545b5e;
             }
 
-            button {
-                background-color: #2563eb;
-                color: #ffffff;
-                border: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                cursor: pointer;
+            #copyBtn {
+                background: #374151;
+                color: #e5e7eb;
+                box-shadow: none;
             }
-
-                button:hover {
-                    background-color: #1d4ed8;
-                }
         }
     </style>
-
 </head>
 <body>
+    <div class="container">
+        <h1>CSV to SQL Insert Generator</h1>
+        <p class="small">Choose a CSV file and generate INSERT statements. Uses PapaParse for robust CSV parsing.</p>
+
+        <label for="csvFileInput">CSV file</label>
+        <input type="file" id="csvFileInput" accept=".csv" />
+        <div class="hint">CSV should include a header row with column names.</div>
+
+        <label for="tableNameInput">Table name</label>
+        <input type="text" id="tableNameInput" value="local_page_rollout" />
+        <div class="hint">Enter the target table name for the generated INSERT statements.</div>
+
+        <div class="row">
+            <button id="generateBtn" type="button">Generate SQL</button>
+            <button id="copyBtn" type="button">Copy SQL</button>
+            <span id="status" class="small" aria-live="polite"></span>
+        </div>
+
+        <label for="sqlOutput">SQL Insert Queries</label>
+        <textarea id="sqlOutput" readonly placeholder="Generated SQL will appear here..."></textarea>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-
-    <h1>CSV to SQL Insert Generator</h1>
-    <input type="file" id="csvFileInput" accept=".csv">
-    <button onclick="generateSQL()">Generate SQL</button>
-
-    <h2>SQL Insert Queries</h2>
-<textarea id="sqlOutput" readonly=""></textarea>
     <script>
-    function generateSQL() {
+        (function () {
             const fileInput = document.getElementById('csvFileInput');
-            if (!fileInput.files.length) {
-                alert("Please choose a CSV file first.");
-                return;
+            const tableNameInput = document.getElementById('tableNameInput');
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const sqlOutput = document.getElementById('sqlOutput');
+            const status = document.getElementById('status');
+
+            function showStatus(message) {
+                status.textContent = message;
+                if (!message) return;
+                setTimeout(() => {
+                    if (status.textContent === message) status.textContent = '';
+                }, 2500);
             }
 
-            const file = fileInput.files[0];
-            Papa.parse(file, {
-                header: true,
-                complete: function (results) {
-                    const data = results.data;
-                    const tableName = "local_page_rollout"; // Change table name if needed
-                    const columns = Object.keys(data[0]);
-                    let sqlQueries = `INSERT INTO ${tableName} (${columns.join(", ")}) VALUES\n`;
+            function safeColumn(col) {
+                // Basic safety: quote column names containing special chars
+                if (/[^a-zA-Z0-9_]/.test(col)) return `"${col.replace(/"/g, '""')}"`;
+                return col;
+            }
 
-                    const values = data.map(row => {
-                        const rowValues = columns.map(col => {
-                            const value = row[col];
-                            if (value === undefined || value === null || value === "") {
-                                return "NULL";
-                            } else if (typeof value === 'string') {
-                                return `'${value.replace(/'/g, "''")}'`;
-                            } else {
-                                return value;
-                            }
+            function generateSQL() {
+                if (!fileInput.files.length) {
+                    showStatus('Please choose a CSV file first.');
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                Papa.parse(file, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function (results) {
+                        const data = results.data;
+                        if (!data.length) {
+                            sqlOutput.value = '';
+                            showStatus('No rows parsed from CSV.');
+                            return;
+                        }
+
+                        const rawTableName = (tableNameInput.value || '').trim();
+                        const tableName = rawTableName ? rawTableName : 'local_page_rollout';
+
+                        const columns = Object.keys(data[0]);
+                        const safeColumns = columns.map(safeColumn);
+
+                        let sql = `INSERT INTO ${tableName} (${safeColumns.join(', ')}) VALUES\n`;
+
+                        const values = data.map(row => {
+                            const rowValues = columns.map(col => {
+                                const value = row[col];
+                                if (value === undefined || value === null || value === '') return 'NULL';
+                                return `'${String(value).replace(/'/g, "''")}'`;
+                            });
+                            return `(${rowValues.join(', ')})`;
                         });
-                        return `(${rowValues.join(", ")})`;
-                    });
 
-                    sqlQueries += values.join(",\n") + ";";
-                    document.getElementById('sqlOutput').textContent = sqlQueries;
+                        sql += values.join(',\n') + ';';
+                        sqlOutput.value = sql;
+                        showStatus('Generated SQL.');
+                    },
+                    error: function (err) {
+                        console.error(err);
+                        showStatus('Error parsing CSV');
+                    }
+                });
+            }
+
+            async function copySQL() {
+                const text = sqlOutput.value.trim();
+                if (!text) {
+                    showStatus('Nothing to copy yet.');
+                    return;
+                }
+
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(text);
+                    } else {
+                        sqlOutput.focus();
+                        sqlOutput.select();
+                        document.execCommand('copy');
+                        sqlOutput.setSelectionRange(0, 0);
+                    }
+                    showStatus('Copied to clipboard.');
+                } catch (err) {
+                    console.error(err);
+                    showStatus('Could not copy.');
+                }
+            }
+
+            generateBtn.addEventListener('click', generateSQL);
+            copyBtn.addEventListener('click', copySQL);
+
+            // support pressing Enter when file input is focused
+            fileInput.addEventListener('keydown', function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    generateSQL();
                 }
             });
-        }</script>
-
+        })();
+    </script>
 </body>
 </html>
