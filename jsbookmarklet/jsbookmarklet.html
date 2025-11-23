@@ -252,7 +252,9 @@ hello();"></textarea>
         <label for="bookmarkletOutput">Bookmarklet URL</label>
         <textarea id="bookmarkletOutput" readonly placeholder="javascript:..."></textarea>
         <div class="hint">
-            Create a new bookmark and paste this entire line into the URL/location field.
+            Create a new bookmark and paste this entire line into the URL/location field,
+            or drag this link to your bookmarks bar:
+            <a id="bookmarkletLink" href="#" hidden>Bookmarklet link</a>
         </div>
     </div>
 
@@ -264,6 +266,7 @@ hello();"></textarea>
             const convertBtn = document.getElementById('convertBtn');
             const copyBtn = document.getElementById('copyBtn');
             const status = document.getElementById('status');
+            const bookmarkletLink = document.getElementById('bookmarkletLink');
 
             function showStatus(message) {
                 status.textContent = message;
@@ -414,11 +417,21 @@ hello();"></textarea>
 
                 if (!bookmarklet) {
                     output.value = '';
+                    if (bookmarkletLink) {
+                        bookmarkletLink.setAttribute('hidden', 'hidden');
+                        bookmarkletLink.removeAttribute('href');
+                    }
                     showStatus('Enter some JavaScript first.');
                     return;
                 }
 
                 output.value = bookmarklet;
+
+                if (bookmarkletLink) {
+                    bookmarkletLink.href = bookmarklet;
+                    bookmarkletLink.removeAttribute('hidden');
+                }
+
                 showStatus('Minified and generated bookmarklet.');
             }
 
