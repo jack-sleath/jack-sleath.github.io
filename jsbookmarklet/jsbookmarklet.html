@@ -116,6 +116,110 @@
             min-height: 80px;
         }
     </style>
+    <style>
+        /* Use browser preference */
+        @media (prefers-color-scheme: dark) {
+            html, body {
+                background-color: #181a1b;
+                color: #e8e6e3;
+                color-scheme: dark; /* helps form controls/scrollbars */
+            }
+
+            /* Links */
+            a {
+                color: #3391ff;
+            }
+
+            /* Selection */
+            ::selection {
+                background-color: #004daa;
+                color: #e8e6e3;
+            }
+
+            ::-moz-selection {
+                background-color: #004daa;
+                color: #e8e6e3;
+            }
+
+            /* Placeholders */
+            ::placeholder {
+                color: #b2aba1;
+                opacity: 0.8;
+            }
+
+            /* Scrollbar (modern browsers) */
+            * {
+                scrollbar-color: #454a4d #202324;
+            }
+
+            /* --- Your components in dark mode --- */
+
+            body {
+                background: #181a1b;
+                color: #e8e6e3;
+            }
+
+            .container {
+                background: #1f2426;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            }
+
+            h1 {
+                color: #e8e6e3;
+            }
+
+            label {
+                color: #e8e6e3;
+            }
+
+            .small {
+                color: #d1d5db;
+            }
+
+            .hint {
+                color: #9ca3af;
+            }
+
+            textarea {
+                background: #181a1b;
+                color: #e8e6e3;
+                border-color: #545b5e;
+            }
+
+                textarea[readonly] {
+                    background: #1f2426;
+                }
+
+            button {
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
+            }
+
+            /* Primary button (Minify & convert) */
+            #convertBtn {
+                background: #2563eb;
+                color: #ffffff;
+            }
+
+            /* Secondary button (Copy bookmarklet) */
+            #copyBtn {
+                background: #374151;
+                color: #e5e7eb;
+                box-shadow: none;
+            }
+
+            .pill {
+                background: #3730a3;
+                color: #e0e7ff;
+            }
+
+            code {
+                background: rgba(15, 23, 42, 0.6);
+                padding: 0.1rem 0.25rem;
+                border-radius: 0.25rem;
+            }
+        }
+
+    </style>
 </head>
 <body>
     <div class="container">
