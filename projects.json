@@ -114,6 +114,25 @@
     "thumb": "📄📥"
   },
   {
+    "id": "jsbookmarklet",
+    "title": "JS Bookmarklet Maker",
+    "description": "Converts your JS into a single line, ready to add to a bookmarklet.",
+    "languages": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "skills": [],
+    "types": [
+      "Duct-Tape Utility"
+    ],
+    "links": {
+      "demo": "https://jack-sleath.github.io/jsbookmarklet/jsbookmarklet.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/jsbookmarklet"
+    },
+    "thumb": "🔖✨"
+  },
+  {
     "id": "sql-insert-maker",
     "title": "SQL Insert Maker",
     "description": "Takes a copied SQL table and turns it into a SQL insert statement. Originally created to move live data to a staging database with no linked server. Has since been used for many different applications.",
@@ -147,7 +166,9 @@
       "Frontend"
     ],
     "types": [
-      "Silly", "Game", "Quick Idea"
+      "Silly",
+      "Game",
+      "Quick Idea"
     ],
     "links": {
       "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
@@ -278,5 +299,28 @@
       "repo": "https://github.com/jack-sleath/local-deepseek/tree/main"
     },
     "thumb": "🏠🤖"
+  },
+  {
+    "id": "review-guessing-game",
+    "title": "LetterBoxd Review Guesser",
+    "description": "LetterBoxd needs an API key, which gave me the challenge of doing it all in JS and iframes. A little Google Chrome extension that lets you do a quiz based on a LetterBoxd list. Concept stolen from a video, who stole the concept from a Buzzfeed quiz.",
+    "languages": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "skills": [
+      "Frontend"
+    ],
+    "types": [
+      "Vibe-Coded",
+      "Silly",
+      "Game"
+    ],
+    "links": {
+      "demo": "",
+      "repo": "https://github.com/jack-sleath/ReviewGuessingGame/tree/main"
+    },
+    "thumb": "🎬❓"
   }
 ]
