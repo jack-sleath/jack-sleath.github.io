@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Bookmarklet Builder (Minifying)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 1.5rem;
+            background: #f7f7f8;
+            color: #111827;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 1rem 0 0.25rem;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 160px;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid #d1d5db;
+            resize: vertical;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9rem;
+        }
+
+            textarea[readonly] {
+                background: #f3f4f6;
+            }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+
+        button {
+            border-radius: 999px;
+            border: none;
+            padding: 0.55rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 4px 14px rgba(15,23,42,0.18);
+            transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.1s ease;
+        }
+
+            button:active {
+                transform: translateY(1px);
+                box-shadow: 0 2px 8px rgba(15,23,42,0.3);
+            }
+
+        #convertBtn {
+            background: #2563eb;
+            color: white;
+        }
+
+        #copyBtn {
+            background: #e5e7eb;
+            color: #111827;
+            box-shadow: none;
+        }
+
+        .hint {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        .small {
+            font-size: 0.8rem;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #4338ca;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.35rem;
+            vertical-align: middle;
+        }
+
+        #minifiedPreview {
+            min-height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript Bookmarklet Builder <span class="pill">minify</span></h1>
+        <p class="small">
+            Paste any JavaScript below. It will be <strong>minified</strong> (comments &amp; extra whitespace removed)
+            and then turned into a <code>javascript:</code> bookmarklet URL.
+        </p>
+
+        <label for="jsInput">JavaScript code (source)</label>
+        <textarea id="jsInput" placeholder="// Example:
+function hello() {
+  // This is a comment
+  alert('Hello from my bookmarklet!');
+}
+hello();"></textarea>
+        <div class="hint">
+            Single-line (<code>//</code>) and block (<code>/* ... */</code>) comments are removed. Strings and template literals are preserved.
+        </div>
+
+        <label for="minifiedPreview">Minified JavaScript (preview)</label>
+        <textarea id="minifiedPreview" readonly placeholder="Minified JS will appear here..."></textarea>
+
+        <div class="row">
+            <button id="convertBtn" type="button">Minify &amp; convert</button>
+            <button id="copyBtn" type="button">Copy bookmarklet</button>
+            <span id="status" class="small" aria-live="polite"></span>
+        </div>
+
+        <label for="bookmarkletOutput">Bookmarklet URL</label>
+        <textarea id="bookmarkletOutput" readonly placeholder="javascript:..."></textarea>
+        <div class="hint">
+            Create a new bookmark and paste this entire line into the URL/location field.
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const jsInput = document.getElementById('jsInput');
+            const minifiedPreview = document.getElementById('minifiedPreview');
+            const output = document.getElementById('bookmarkletOutput');
+            const convertBtn = document.getElementById('convertBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const status = document.getElementById('status');
+
+            function showStatus(message) {
+                status.textContent = message;
+                if (!message) return;
+                setTimeout(() => {
+                    if (status.textContent === message) {
+                        status.textContent = '';
+                    }
+                }, 2500);
+            }
+
+            // Simple JS minifier:
+            // - removes // and /* */ comments (outside of strings/regex)
+            // - collapses whitespace
+            // NOTE: it's intentionally lightweight; very exotic JS may need a real build-step minifier.
+            function minifyJs(code) {
+                let out = '';
+                let inSingle = false;
+                let inDouble = false;
+                let inTemplate = false;
+                let inRegex = false;
+                let inLineComment = false;
+                let inBlockComment = false;
+                let escapeNext = false;
+                let lastNonSpace = '';
+
+                for (let i = 0; i < code.length; i++) {
+                    const ch = code[i];
+                    const next = code[i + 1];
+
+                    if (inLineComment) {
+                        if (ch === '\n') {
+                            inLineComment = false;
+                            if (out[out.length - 1] !== ' ') out += ' ';
+                        }
+                        continue;
+                    }
+
+                    if (inBlockComment) {
+                        if (ch === '*' && next === '/') {
+                            inBlockComment = false;
+                            i++;
+                        }
+                        continue;
+                    }
+
+                    if (inSingle || inDouble || inTemplate || inRegex) {
+                        out += ch;
+
+                        if (escapeNext) {
+                            escapeNext = false;
+                            continue;
+                        }
+                        if (ch === '\\') {
+                            escapeNext = true;
+                            continue;
+                        }
+
+                        if (inSingle && ch === "'") inSingle = false;
+                        else if (inDouble && ch === '"') inDouble = false;
+                        else if (inTemplate && ch === '`') inTemplate = false;
+                        else if (inRegex && ch === '/') inRegex = false;
+
+                        continue;
+                    }
+
+                    // comments
+                    if (ch === '/' && next === '/') {
+                        inLineComment = true;
+                        i++;
+                        continue;
+                    }
+                    if (ch === '/' && next === '*') {
+                        inBlockComment = true;
+                        i++;
+                        continue;
+                    }
+
+                    // start of strings / template
+                    if (ch === "'") {
+                        inSingle = true;
+                        out += ch;
+                        continue;
+                    }
+                    if (ch === '"') {
+                        inDouble = true;
+                        out += ch;
+                        continue;
+                    }
+                    if (ch === '`') {
+                        inTemplate = true;
+                        out += ch;
+                        continue;
+                    }
+
+                    // naive regex literal detection: after certain chars, a / is likely regex
+                    if (ch === '/') {
+                        const prev = lastNonSpace;
+                        if (!prev || /[({[=:+\-!*?,;<>%^&|]/.test(prev)) {
+                            inRegex = true;
+                            out += ch;
+                            continue;
+                        }
+                    }
+
+                    // whitespace collapse
+                    if (/\s/.test(ch)) {
+                        const last = out[out.length - 1];
+                        if (!last || /\s/.test(last) || /[({[=:+\-!*?,;<>%^&|]/.test(last)) {
+                            // skip
+                        } else {
+                            out += ' ';
+                        }
+                        continue;
+                    }
+
+                    out += ch;
+                    if (!/\s/.test(ch)) lastNonSpace = ch;
+                }
+
+                return out.trim();
+            }
+
+            function toBookmarklet(code) {
+                let js = code.trim();
+                if (!js) return '';
+
+                // Strip existing javascript: prefix if present
+                if (js.toLowerCase().startsWith('javascript:')) {
+                    js = js.slice('javascript:'.length);
+                }
+
+                // Minify first
+                const minified = minifyJs(js);
+                minifiedPreview.value = minified || '';
+
+                if (!minified) return '';
+
+                // Just prefix; no URL encoding
+                // Also ensure no newlines
+                const oneLine = minified.replace(/\s*\n+\s*/g, ' ');
+                return 'javascript:' + oneLine;
+            }
+
+            function convert() {
+                const src = jsInput.value;
+                const bookmarklet = toBookmarklet(src);
+
+                if (!bookmarklet) {
+                    output.value = '';
+                    showStatus('Enter some JavaScript first.');
+                    return;
+                }
+
+                output.value = bookmarklet;
+                showStatus('Minified and generated bookmarklet.');
+            }
+
+            async function copyOutput() {
+                const text = output.value.trim();
+                if (!text) {
+                    showStatus('Nothing to copy yet.');
+                    return;
+                }
+
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(text);
+                    } else {
+                        output.focus();
+                        output.select();
+                        document.execCommand('copy');
+                        output.setSelectionRange(0, 0);
+                    }
+                    showStatus('Copied to clipboard.');
+                } catch (err) {
+                    console.error(err);
+                    showStatus('Could not copy. Copy it manually.');
+                }
+            }
+
+            convertBtn.addEventListener('click', convert);
+            copyBtn.addEventListener('click', copyOutput);
+
+            // Ctrl+Enter / Cmd+Enter to convert
+            jsInput.addEventListener('keydown', function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    convert();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
