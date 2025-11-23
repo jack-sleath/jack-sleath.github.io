@@ -167,12 +167,14 @@
                 .toLowerCase()
                 .includes(q);
 
-            const groupHit = ['languages', 'skills', 'types'].every(g => {
+            const totalSelected = state.selected.languages.size + state.selected.skills.size + state.selected.types.size;
+            const groupHit = totalSelected === 0 || ['languages', 'skills', 'types'].some(g => {
                 const sel = state.selected[g];
-                if (!sel.size) return true;
-                const values = new Set(p[g]);
+                if (!sel.size) return false;
+                const values = new Set(p[g] || []);
                 return Array.from(sel).some(v => values.has(v));
             });
+
             return textHit && groupHit;
         }
 
