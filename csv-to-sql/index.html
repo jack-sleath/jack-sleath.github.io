@@ -15,6 +15,48 @@
             margin-bottom: 20px;
         }
     </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            html, body {
+                background-color: #181a1b;
+                color: #e8e6e3;
+                color-scheme: dark; /* native form controls & scrollbars */
+            }
+
+            body {
+                /* keep your margin but add a dark bg */
+                margin: 20px;
+            }
+
+            h1, h2 {
+                color: #e8e6e3;
+            }
+
+            textarea {
+                background-color: #111416;
+                color: #e8e6e3;
+                border: 1px solid #545b5e;
+            }
+
+            input[type="file"] {
+                color: #e8e6e3;
+            }
+
+            button {
+                background-color: #2563eb;
+                color: #ffffff;
+                border: none;
+                padding: 6px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                button:hover {
+                    background-color: #1d4ed8;
+                }
+        }
+    </style>
+
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>

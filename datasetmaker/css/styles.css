@@ -10,3 +10,46 @@ textarea {
 button {
 
 }
+
+/* Dark mode based on browser preference */
+@media (prefers-color-scheme: dark) {
+    html,
+    body {
+        background-color: #181a1b;
+        color: #e8e6e3;
+        color-scheme: dark; /* makes native controls/scrollbars dark where supported */
+    }
+
+    textarea {
+        background-color: #111416;
+        color: #e8e6e3;
+        border: 1px solid #545b5e;
+    }
+
+    input[type="text"] {
+        background-color: #111416;
+        color: #e8e6e3;
+        border: 1px solid #545b5e;
+    }
+
+    button {
+        background-color: #2563eb;
+        color: #ffffff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+    a {
+        color: #3391ff;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+}
