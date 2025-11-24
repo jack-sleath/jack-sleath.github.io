@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bingo Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Bingo Generator</h1>
+        </header>
+        <section id="controls" class="card">
+            <label for="items" class="visually-hidden">Bingo items JSON</label>
+            <textarea id="items" rows="4" placeholder='Enter items as JSON array, e.g. ["A","B","C", ...]'></textarea>
+            <input type="file" id="fileInput" accept=".json,application/json">
+            <div class="actions">
+                <button id="generate">Generate Bingo</button>
+            </div>
+        </section>
+        <section class="board-wrap">
+            <table id="bingo" aria-label="Bingo board"></table>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
