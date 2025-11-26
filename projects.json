@@ -324,8 +324,7 @@
     "links": {
       "demo": "https://chromewebstore.google.com/detail/letterboxd-review-guesser/kobelcjkeeijadckpflngddlhceaooce",
       "video": "",
-      "repo": "https://github.com/jack-sleath/ReviewGuessingGame/tree/main",
-      "documentation": "https://github.com/jack-sleath/ReviewGuessingGame/blob/main/PrivacyPolicy.md"
+      "repo": "https://github.com/jack-sleath/ReviewGuessingGame/tree/main"
     },
     "thumb": "🎬❓"
   },
