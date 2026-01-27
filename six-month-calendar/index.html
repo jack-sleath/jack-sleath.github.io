@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Six-Month Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Six-Month Calendar</p>
+        <h1>For when 12 is just too many months.</h1>
+        <p class="subtitle">Click a day to mark it. Add notes for anything worth remembering.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="stat">
+          <span class="stat-number" id="total-days">0</span>
+          <span class="stat-label">Total days</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" id="marked-days">0</span>
+          <span class="stat-label">Marked</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="controls">
+      <button id="toggle-theme" class="btn ghost">Enable dark mode</button>
+      <button id="toggle-leap" class="btn ghost">Enable leap year</button>
+      <button id="clear-all" class="btn">Clear all marks</button>
+      <div class="hint">Tip: Click any day to toggle it. Notes save automatically.</div>
+    </section>
+
+    <main class="calendar-grid" id="calendar"></main>
+
+    <aside class="details" aria-live="polite">
+      <div class="details-header">
+        <h2>Day details</h2>
+        <p id="selected-date">Select a day</p>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="marked-toggle" />
+        <span>Marked day</span>
+      </label>
+      <label class="note">
+        <span>Note</span>
+        <textarea id="note-input" rows="5" placeholder="Add a reminder or a plan..."></textarea>
+      </label>
+    </aside>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

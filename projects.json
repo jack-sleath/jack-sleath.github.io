@@ -270,6 +270,30 @@
     "thumb": "🌡️💽"
   },
   {
+    "id": "six-month-calendar",
+    "title": "6 month calendar",
+    "description": "A calendar for when 12 months is too many. This full idea came from a typo in a presentation, Augly made this happen.",
+    "languages": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "JSON"
+    ],
+    "skills": [
+      "Frontend"
+    ],
+    "types": [
+      "Vibe-Coded",
+      "Silly",
+      "Quick Idea"
+    ],
+    "links": {
+      "demo": "https://jack-sleath.github.io/six-month-calendar/index.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/six-month-calendar"
+    },
+    "thumb": "🌗🗓️"
+  },
+  {
     "id": "photoshop-actions",
     "title": "Photoshop Actions",
     "description": "A solution for Photoshop scripts. Currently only has a couple of functions including my pixelate function, used in my final year project and several profile pictures since.",
