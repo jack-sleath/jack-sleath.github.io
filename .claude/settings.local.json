@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:/Users/jackw/source/repos/jack-sleath/jack-sleath.github.io\" diff --stat HEAD)",
+      "Bash(git -C \"c:/Users/jackw/source/repos/jack-sleath/jack-sleath.github.io\" status)"
+    ]
+  }
+}
