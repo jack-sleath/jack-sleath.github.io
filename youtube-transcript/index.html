@@ -295,6 +295,7 @@
             // so we don't fail on large ytInitialPlayerResponse blobs.
             function extractFirstJsonObject(str) {
                 let depth = 0;
+                let start = -1;
                 let inString = false;
                 let escape = false;
                 for (let i = 0; i < str.length; i++) {
@@ -303,10 +304,12 @@
                     if (ch === '\\' && inString) { escape = true; continue; }
                     if (ch === '"') { inString = !inString; continue; }
                     if (inString) continue;
-                    if (ch === '{') depth++;
-                    else if (ch === '}') {
+                    if (ch === '{') {
+                        if (depth === 0) start = i;
+                        depth++;
+                    } else if (ch === '}') {
                         depth--;
-                        if (depth === 0) return JSON.parse(str.slice(0, i + 1));
+                        if (depth === 0) return JSON.parse(str.slice(start, i + 1));
                     }
                 }
                 throw new Error('Unbalanced JSON object');
