@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>YouTube Transcript Extractor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 1.5rem;
+            background: #f7f7f8;
+            color: #111827;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .url-input {
+            flex: 1;
+            padding: 0.6rem 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            font-size: 0.95rem;
+            background: #fff;
+            color: #111827;
+            min-width: 0;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+        }
+
+        .video-info {
+            margin: 1rem 0 0.5rem;
+            padding: 0.75rem 1rem;
+            background: #f0f3f7;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .video-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 0 0 0.25rem;
+            font-size: 0.85rem;
+        }
+
+        select {
+            padding: 0.4rem 0.6rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            font-size: 0.9rem;
+            background: #fff;
+            color: #111827;
+        }
+
+        button {
+            border-radius: 999px;
+            border: none;
+            padding: 0.55rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 14px rgba(15,23,42,0.18);
+            transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.1s ease;
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(15,23,42,0.3);
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        #fetchBtn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .secondary-btn {
+            background: #e5e7eb;
+            color: #111827;
+            box-shadow: none;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            margin: 0.75rem 0;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 380px;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid #d1d5db;
+            resize: vertical;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+            font-size: 0.85rem;
+            background: #fff;
+            color: #111827;
+            line-height: 1.65;
+        }
+
+        .hint {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin: 0.25rem 0 0;
+        }
+
+        .small {
+            font-size: 0.82rem;
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            padding: 0.6rem 0.75rem;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 0.5rem;
+        }
+
+        #status {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html, body {
+                background-color: #181a1b;
+                color: #e8e6e3;
+                color-scheme: dark;
+            }
+
+            .container {
+                background: #1f2426;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            }
+
+            .url-input, select, textarea {
+                background: #181a1b;
+                color: #e8e6e3;
+                border-color: #545b5e;
+            }
+
+            .url-input:focus {
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+            }
+
+            .video-info {
+                background: #252a2d;
+                border-color: #3a4046;
+            }
+
+            .secondary-btn {
+                background: #374151;
+                color: #e5e7eb;
+            }
+
+            .error {
+                background: #2d1515;
+                border-color: #7f1d1d;
+                color: #fca5a5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Transcript Extractor</h1>
+        <p class="small">Paste a YouTube URL below to pull the transcript. Works with auto-generated and manual captions.</p>
+
+        <div class="input-row">
+            <input
+                type="text"
+                id="urlInput"
+                class="url-input"
+                placeholder="https://www.youtube.com/watch?v=..."
+                aria-label="YouTube URL"
+                autocomplete="off"
+                spellcheck="false"
+            />
+            <button id="fetchBtn" type="button">Get Transcript</button>
+        </div>
+
+        <div id="errorMsg" class="error" hidden></div>
+
+        <div id="videoInfo" hidden>
+            <div class="video-info">
+                <div id="videoTitle" class="video-title"></div>
+                <label for="langSelect">Caption track</label>
+                <select id="langSelect"></select>
+            </div>
+
+            <div class="row">
+                <button id="copyWithTimestamps" class="secondary-btn" type="button">Copy with timestamps</button>
+                <button id="copyPlain" class="secondary-btn" type="button">Copy plain text</button>
+                <span id="status" aria-live="polite"></span>
+            </div>
+        </div>
+
+        <textarea id="transcriptOutput" readonly placeholder="Transcript will appear here..."></textarea>
+
+        <p class="hint">Uses a CORS proxy to reach YouTube. If fetching fails, wait a moment and try again.</p>
+    </div>
+
+    <script>
+        (function () {
+            const urlInput = document.getElementById('urlInput');
+            const fetchBtn = document.getElementById('fetchBtn');
+            const errorMsg = document.getElementById('errorMsg');
+            const videoInfo = document.getElementById('videoInfo');
+            const videoTitle = document.getElementById('videoTitle');
+            const langSelect = document.getElementById('langSelect');
+            const copyWithTimestampsBtn = document.getElementById('copyWithTimestamps');
+            const copyPlainBtn = document.getElementById('copyPlain');
+            const statusEl = document.getElementById('status');
+            const transcriptOutput = document.getElementById('transcriptOutput');
+
+            let captionTracks = [];
+            let currentTranscript = [];
+
+            // --- Helpers ---
+
+            function extractVideoId(raw) {
+                raw = raw.trim();
+                const patterns = [
+                    /[?&]v=([a-zA-Z0-9_-]{11})/,
+                    /youtu\.be\/([a-zA-Z0-9_-]{11})/,
+                    /\/embed\/([a-zA-Z0-9_-]{11})/,
+                    /\/shorts\/([a-zA-Z0-9_-]{11})/,
+                    /^([a-zA-Z0-9_-]{11})$/
+                ];
+                for (const p of patterns) {
+                    const m = raw.match(p);
+                    if (m) return m[1];
+                }
+                return null;
+            }
+
+            function formatTime(seconds) {
+                const h = Math.floor(seconds / 3600);
+                const m = Math.floor((seconds % 3600) / 60);
+                const s = Math.floor(seconds % 60);
+                if (h > 0) return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+                return m + ':' + String(s).padStart(2, '0');
+            }
+
+            // Walk the JSON character by character to find where the top-level object ends,
+            // so we don't fail on large ytInitialPlayerResponse blobs.
+            function extractFirstJsonObject(str) {
+                let depth = 0;
+                let inString = false;
+                let escape = false;
+                for (let i = 0; i < str.length; i++) {
+                    const ch = str[i];
+                    if (escape) { escape = false; continue; }
+                    if (ch === '\\' && inString) { escape = true; continue; }
+                    if (ch === '"') { inString = !inString; continue; }
+                    if (inString) continue;
+                    if (ch === '{') depth++;
+                    else if (ch === '}') {
+                        depth--;
+                        if (depth === 0) return JSON.parse(str.slice(0, i + 1));
+                    }
+                }
+                throw new Error('Unbalanced JSON object');
+            }
+
+            function parsePlayerResponse(html) {
+                const marker = 'var ytInitialPlayerResponse = ';
+                const idx = html.indexOf(marker);
+                if (idx === -1) throw new Error('Player data not found in page response. YouTube may have blocked the proxy request.');
+                return extractFirstJsonObject(html.slice(idx + marker.length));
+            }
+
+            // Try two CORS proxies in sequence
+            async function proxyFetch(url) {
+                try {
+                    const resp = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url));
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        if (data && data.contents) return data.contents;
+                    }
+                } catch (_) { /* fall through */ }
+
+                // Fallback proxy
+                const resp2 = await fetch('https://corsproxy.io/?' + encodeURIComponent(url));
+                if (!resp2.ok) throw new Error('Both CORS proxies failed (status ' + resp2.status + '). Please try again shortly.');
+                return resp2.text();
+            }
+
+            // --- Core logic ---
+
+            async function fetchTranscript() {
+                const raw = urlInput.value.trim();
+                if (!raw) return;
+
+                const videoId = extractVideoId(raw);
+                if (!videoId) {
+                    showError('Could not read a video ID from that URL. Please double-check and try again.');
+                    return;
+                }
+
+                setLoading(true);
+                hideError();
+                videoInfo.hidden = true;
+                transcriptOutput.value = '';
+                currentTranscript = [];
+                captionTracks = [];
+
+                try {
+                    const html = await proxyFetch('https://www.youtube.com/watch?v=' + videoId);
+                    const playerResponse = parsePlayerResponse(html);
+
+                    const title = (playerResponse.videoDetails && playerResponse.videoDetails.title) || 'Unknown title';
+                    videoTitle.textContent = title;
+
+                    captionTracks = (
+                        playerResponse.captions &&
+                        playerResponse.captions.playerCaptionsTracklistRenderer &&
+                        playerResponse.captions.playerCaptionsTracklistRenderer.captionTracks
+                    ) || [];
+
+                    if (captionTracks.length === 0) {
+                        showError('No captions or transcripts are available for this video.');
+                        return;
+                    }
+
+                    langSelect.innerHTML = '';
+                    captionTracks.forEach(function (track, i) {
+                        const opt = document.createElement('option');
+                        opt.value = i;
+                        const name = (track.name && track.name.simpleText) || track.languageCode || 'Unknown';
+                        opt.textContent = name + (track.kind === 'asr' ? ' (auto-generated)' : '');
+                        langSelect.appendChild(opt);
+                    });
+
+                    videoInfo.hidden = false;
+                    await loadTrack(0);
+
+                } catch (e) {
+                    showError(e.message || 'An unexpected error occurred.');
+                    console.error(e);
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            async function loadTrack(trackIndex) {
+                const track = captionTracks[trackIndex];
+                if (!track) return;
+
+                setLoading(true);
+                try {
+                    const xml = await proxyFetch(track.baseUrl);
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(xml, 'text/xml');
+                    const nodes = doc.querySelectorAll('text');
+
+                    currentTranscript = Array.from(nodes).map(function (el) {
+                        return {
+                            start: parseFloat(el.getAttribute('start') || '0'),
+                            text: el.textContent.replace(/<[^>]+>/g, '').trim()
+                        };
+                    }).filter(function (item) { return item.text.length > 0; });
+
+                    renderTranscript(true);
+                } catch (e) {
+                    showError('Could not load transcript track: ' + e.message);
+                    console.error(e);
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            function renderTranscript(withTimestamps) {
+                if (withTimestamps) {
+                    transcriptOutput.value = currentTranscript
+                        .map(function (item) { return '[' + formatTime(item.start) + '] ' + item.text; })
+                        .join('\n');
+                } else {
+                    transcriptOutput.value = currentTranscript
+                        .map(function (item) { return item.text; })
+                        .join(' ');
+                }
+            }
+
+            async function copyText(text) {
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(text);
+                    } else {
+                        transcriptOutput.focus();
+                        transcriptOutput.select();
+                        document.execCommand('copy');
+                        transcriptOutput.setSelectionRange(0, 0);
+                    }
+                    showStatus('Copied!');
+                } catch (_) {
+                    showStatus('Could not copy.');
+                }
+            }
+
+            // --- UI state ---
+
+            function setLoading(loading) {
+                fetchBtn.disabled = loading;
+                fetchBtn.textContent = loading ? 'Loading...' : 'Get Transcript';
+            }
+
+            function showStatus(msg) {
+                statusEl.textContent = msg;
+                setTimeout(function () {
+                    if (statusEl.textContent === msg) statusEl.textContent = '';
+                }, 2500);
+            }
+
+            function showError(msg) {
+                errorMsg.textContent = msg;
+                errorMsg.hidden = false;
+            }
+
+            function hideError() {
+                errorMsg.hidden = true;
+            }
+
+            // --- Event listeners ---
+
+            fetchBtn.addEventListener('click', fetchTranscript);
+
+            urlInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') fetchTranscript();
+            });
+
+            langSelect.addEventListener('change', function () {
+                loadTrack(parseInt(langSelect.value, 10));
+            });
+
+            copyWithTimestampsBtn.addEventListener('click', function () {
+                const text = currentTranscript
+                    .map(function (item) { return '[' + formatTime(item.start) + '] ' + item.text; })
+                    .join('\n');
+                copyText(text);
+            });
+
+            copyPlainBtn.addEventListener('click', function () {
+                const text = currentTranscript.map(function (item) { return item.text; }).join(' ');
+                copyText(text);
+            });
+        })();
+    </script>
+</body>
+</html>
