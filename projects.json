@@ -353,6 +353,29 @@
     "thumb": "🎬❓"
   },
   {
+    "id": "youtube-transcript",
+    "title": "YouTube Transcript Extractor",
+    "description": "Paste a YouTube URL and get the full transcript. Pulls auto-generated and manual captions directly in the browser via a CORS proxy, with options to copy with or without timestamps.",
+    "languages": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "skills": [
+      "Frontend",
+      "API"
+    ],
+    "types": [
+      "Duct-Tape Utility",
+      "Quick Idea"
+    ],
+    "links": {
+      "demo": "https://jack-sleath.github.io/youtube-transcript/index.html",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/youtube-transcript"
+    },
+    "thumb": "🎬📝"
+  },
+  {
     "id": "bingo-board",
     "title": "JSON Bingo Board",
     "description": "A Bingo card that loads the squares up based on a JSON String Array.",
