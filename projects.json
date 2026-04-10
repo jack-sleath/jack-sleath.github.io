@@ -234,7 +234,8 @@
     ],
     "skills": [
       "Frontend",
-      "Photoshop"
+      "Photoshop",
+      "Data Visualisation"
     ],
     "types": [
       "Academic",
@@ -351,6 +352,28 @@
       "repo": "https://github.com/jack-sleath/ReviewGuessingGame/tree/main"
     },
     "thumb": "🎬❓"
+  },
+  {
+    "id": "uk-prices-chart",
+    "title": "UK Consumer Prices by Category",
+    "description": "Cumulative percentage change in UK consumer prices by category since 2005, based on ONS CPI data. Each line tracks how much prices in a given sector have risen or fallen relative to a common starting point.",
+    "languages": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "skills": [
+      "Frontend",
+      "Data Visualisation"
+    ],
+    "types": [
+      "Vibe-Coded",
+      "Quick Idea"
+    ],
+    "links": {
+      "demo": "https://jack-sleath.github.io/uk-prices-chart/index.html"
+    },
+    "thumb": "📈🇬🇧"
   },
   {
     "id": "bingo-board",
