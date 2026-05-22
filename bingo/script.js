@@ -9,6 +9,19 @@ function shuffle(array) {
 
 // Note: theme follows browser/OS preference via CSS `prefers-color-scheme`.
 
+const STORAGE_KEY = 'bingo:itemsJson';
+
+const itemsTextarea = document.getElementById('items');
+if (itemsTextarea) {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved !== null) itemsTextarea.value = saved;
+    } catch (_) {}
+    itemsTextarea.addEventListener('input', () => {
+        try { localStorage.setItem(STORAGE_KEY, itemsTextarea.value); } catch (_) {}
+    });
+}
+
 // Handle file import (JSON array)
 const fileInput = document.getElementById('fileInput');
 if (fileInput) {
@@ -20,7 +33,9 @@ if (fileInput) {
             try {
                 const parsed = JSON.parse(reader.result);
                 if (!Array.isArray(parsed)) throw new Error('JSON is not an array');
-                document.getElementById('items').value = JSON.stringify(parsed, null, 2);
+                const formatted = JSON.stringify(parsed, null, 2);
+                document.getElementById('items').value = formatted;
+                try { localStorage.setItem(STORAGE_KEY, formatted); } catch (_) {}
             } catch (err) {
                 alert('Failed to read JSON file: ' + err.message);
             }
@@ -43,6 +58,8 @@ function generateBoard(size) {
         alert("Please enter a valid JSON array of strings.");
         return;
     }
+
+    try { localStorage.setItem(STORAGE_KEY, input); } catch (_) {}
 
     const total = size * size;
     const pool = items.slice();
