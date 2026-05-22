@@ -32,44 +32,47 @@ if (fileInput) {
     });
 }
 
-// Generate bingo board from textarea JSON array
-const generateBtn = document.getElementById('generate');
-if (generateBtn) {
-    generateBtn.addEventListener("click", () => {
-        const input = document.getElementById("items").value;
-        let items;
-        try {
-            items = JSON.parse(input);
-            if (!Array.isArray(items)) throw new Error('Not an array');
-        } catch (err) {
-            alert("Please enter a valid JSON array of strings.");
-            return;
+// Generate bingo board of a given size from textarea JSON array
+function generateBoard(size) {
+    const input = document.getElementById("items").value;
+    let items;
+    try {
+        items = JSON.parse(input);
+        if (!Array.isArray(items)) throw new Error('Not an array');
+    } catch (err) {
+        alert("Please enter a valid JSON array of strings.");
+        return;
+    }
+
+    const total = size * size;
+    const pool = items.slice();
+    while (pool.length < total) pool.push("Free Square");
+
+    const boardItems = shuffle(pool).slice(0, total);
+    const table = document.getElementById("bingo");
+    if (!table) return;
+    table.innerHTML = "";
+    table.dataset.size = String(size);
+
+    for (let r = 0; r < size; r++) {
+        const row = table.insertRow();
+        for (let c = 0; c < size; c++) {
+            const cell = row.insertCell();
+            const content = document.createElement('div');
+            content.textContent = boardItems[r * size + c];
+            cell.appendChild(content);
+            cell.addEventListener("click", () => {
+                cell.classList.toggle("marked");
+            });
         }
+    }
 
-        // Ensure there are at least 25 items, pad with "Free Square" if needed
-        const pool = items.slice();
-        while (pool.length < 25) pool.push("Free Square");
-
-        const boardItems = shuffle(pool).slice(0, 25);
-        const table = document.getElementById("bingo");
-        if (!table) return;
-        table.innerHTML = "";
-
-        for (let r = 0; r < 5; r++) {
-            const row = table.insertRow();
-            for (let c = 0; c < 5; c++) {
-                const cell = row.insertCell();
-                const content = document.createElement('div');
-                content.textContent = boardItems[r * 5 + c];
-                cell.appendChild(content);
-                cell.addEventListener("click", () => {
-                    cell.classList.toggle("marked");
-                });
-            }
-        }
-
-        // Hide the input controls so only the board shows
-        const controls = document.getElementById('controls');
-        if (controls) controls.style.display = 'none';
-    });
+    const controls = document.getElementById('controls');
+    if (controls) controls.style.display = 'none';
 }
+
+const generateBtn = document.getElementById('generate');
+if (generateBtn) generateBtn.addEventListener("click", () => generateBoard(5));
+
+const generate3Btn = document.getElementById('generate3');
+if (generate3Btn) generate3Btn.addEventListener("click", () => generateBoard(3));
