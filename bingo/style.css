@@ -120,10 +120,12 @@ header {
 .actions {
     display: flex;
     justify-content: flex-end;
+    gap: 0.5rem;
     margin-top: 0.6rem
 }
 
-button#generate {
+button#generate,
+button#generate3 {
     background: var(--accent);
     border: none;
     color: var(--accent-contrast);
@@ -133,9 +135,16 @@ button#generate {
     cursor: pointer
 }
 
-    button#generate:active {
+    button#generate:active,
+    button#generate3:active {
         transform: translateY(1px)
     }
+
+button#generate3 {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border)
+}
 
 .board-wrap {
     display: flex;
@@ -156,6 +165,11 @@ button#generate {
         position: relative;
         border: 1px solid var(--cell-border);
         background: var(--cell-bg)
+    }
+
+    #bingo[data-size="3"] td {
+        width: calc(100% / 3);
+        padding-top: calc(100% / 3)
     }
 
         #bingo td > div {
@@ -190,8 +204,9 @@ button#generate {
         font-size: 1.25rem
     }
 
-    button#generate {
-        width: 100%
+    button#generate,
+    button#generate3 {
+        flex: 1
     }
 
     .actions {
