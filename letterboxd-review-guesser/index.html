@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LetterBoxd Review Guesser - Install</title>
+    <meta name="description" content="Install the LetterBoxd Review Guesser browser extension for Chrome, Edge, or Firefox." />
+    <meta name="robots" content="noindex" />
+    <style>
+        :root { color-scheme: light dark; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 36rem;
+            margin: 4rem auto;
+            padding: 0 1.25rem;
+            line-height: 1.5;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+        .sub { opacity: 0.7; margin-top: 0; }
+        ul { list-style: none; padding: 0; margin: 1.5rem 0; }
+        li { margin: 0.5rem 0; }
+        a.store {
+            display: inline-block;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid currentColor;
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+        }
+        a.store:hover { background: rgba(127, 127, 127, 0.12); }
+        .stub { opacity: 0.5; pointer-events: none; }
+        .stub::after { content: " (coming soon)"; font-size: 0.85em; }
+        footer { margin-top: 2rem; font-size: 0.9em; opacity: 0.7; }
+    </style>
+</head>
+<body>
+    <h1>LetterBoxd Review Guesser</h1>
+    <p class="sub" id="status">Sending you to the right store&hellip;</p>
+
+    <p>If nothing happens, pick your browser:</p>
+    <ul>
+        <li><a class="store" id="link-chrome" href="https://chromewebstore.google.com/detail/letterboxd-review-guesser/kobelcjkeeijadckpflngddlhceaooce">Chrome / Brave / Opera / Arc</a></li>
+        <li><a class="store stub" id="link-edge" href="#TODO-edge-addons-url">Microsoft Edge</a></li>
+        <li><a class="store stub" id="link-firefox" href="#TODO-firefox-addons-url">Firefox</a></li>
+    </ul>
+
+    <footer>
+        <a href="../">&larr; Back to projects</a>
+    </footer>
+
+    <script>
+        (function () {
+            var CHROME_URL  = "https://chromewebstore.google.com/detail/letterboxd-review-guesser/kobelcjkeeijadckpflngddlhceaooce";
+            var EDGE_URL    = "#TODO-edge-addons-url";
+            var FIREFOX_URL = "#TODO-firefox-addons-url";
+
+            var ua = navigator.userAgent || "";
+            var target = null;
+
+            if (/Edg\//.test(ua))           target = EDGE_URL;
+            else if (/Firefox\//.test(ua))  target = FIREFOX_URL;
+            else                             target = CHROME_URL;
+
+            if (target && target.charAt(0) !== "#") {
+                window.location.replace(target);
+            } else {
+                document.getElementById("status").textContent =
+                    "That store isn't live yet. Pick one of the working links below:";
+            }
+        })();
+    </script>
+</body>
+</html>
