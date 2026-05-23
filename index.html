@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,53 +8,51 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-projects">
-    <!-- Duct-tape and superglue, applied on purpose. ChatGPT assisted; the decisions and fingerprints are mine. -->
     <div class="wrap">
-        <header>
-            <div class="title" role="heading" aria-level="1"><span class="dot"></span> Jack Sleath - Projects</div>
-            <div class="toolbar" role="region" aria-label="Search and global actions">
-                <div class="search">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" /><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" /></svg>
-                    <input id="q" type="search" placeholder="Search projects, descriptions, tags…" aria-label="Search projects" />
-                </div>
-                <div class="actions">
-                    <button class="btn" id="btn-clear">Clear filters</button>
-                    <button class="btn ghost" id="btn-copy">Copy shareable filter URL</button>
-                </div>
+        <header class="site-header">
+            <div class="brand">
+                <span class="brand-dot" aria-hidden="true"></span>
+                <span class="brand-name">Jack Sleath</span>
+                <span class="brand-sep" aria-hidden="true">/</span>
+                <span class="brand-page">Projects</span>
             </div>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="./index.html" aria-current="page">Projects</a>
+                <a href="./about.html">About</a>
+            </nav>
         </header>
 
-        <!-- ABOUT ME (collapsible) -->
-        <details class="collapsible" id="about">
+        <p class="tagline">Practical builds, quick fixes, and ideas I couldn't stop writing down.</p>
+
+        <hr class="rule" />
+
+        <details class="block" id="about">
             <summary>
                 <span class="caret" aria-hidden="true"></span>
-                <span>Hi I'm Jack</span>
+                Hi I'm Jack
             </summary>
-            <div class="collapsible-content">
-                <div class="group" style="margin-top:8px;">
-                    <p class="desc" style="margin:0 0 12px;">
-                        I’m a full stack developer who believes in <a class="text-link external" href="https://www.joelonsoftware.com/2009/09/23/the-duct-tape-programmer/" target="_blank">duct tape development</a>, quick fixes that make life easier, but I also love building polished systems when it counts. Between teaching kids code and game design at Impact Academies and leading projects like subscription microservices and smarter product search at COOK Trading Ltd., I’m always chasing that balance between practical and creative. I write down every idea I get, because you never know which one’ll turn into something worth building.
-                    </p>
-                    <div class="links" style="margin-top:12px;">
-                        <a class="link" href="mailto:jackwilliamsleath@gmail.com" aria-label="Email Jack">📧 Email</a>
-                        <a class="link" href="https://github.com/jack-sleath" target="_blank" aria-label="Jack on GitHub">🐙 GitHub</a>
-                        <a class="link" href="https://www.linkedin.com/in/jack-sleath/" target="_blank" aria-label="Jack on LinkedIn">💼 LinkedIn</a>
-                    </div>
+            <div class="block-body">
+                <p class="about-text">
+                    I'm a full stack developer who believes in <a class="text-link external" href="https://www.joelonsoftware.com/2009/09/23/the-duct-tape-programmer/" target="_blank" rel="noopener">duct tape development</a>, quick fixes that make life easier, but I also love building polished systems when it counts. Between teaching kids code and game design at Impact Academies and leading projects like subscription microservices and smarter product search at COOK Trading Ltd., I'm always chasing that balance between practical and creative. I write down every idea I get, because you never know which one'll turn into something worth building.
+                </p>
+                <div class="about-links">
+                    <a class="link" href="mailto:jackwilliamsleath@gmail.com">📧 Email</a>
+                    <a class="link" href="https://github.com/jack-sleath" target="_blank" rel="noopener">🐙 GitHub</a>
+                    <a class="link" href="https://www.linkedin.com/in/jack-sleath/" target="_blank" rel="noopener">💼 LinkedIn</a>
                 </div>
             </div>
         </details>
 
-        <!-- Filters (collapsible) -->
-        <details class="collapsible" id="filters-panel" open>
+        <details class="block" id="filters-panel">
             <summary>
                 <span class="caret" aria-hidden="true"></span>
-                <span>Filters</span>
+                Filters
                 <span class="summary-meta">
                     <span class="pill" id="pill-count" aria-live="polite">0 selected</span>
                 </span>
             </summary>
-            <div class="collapsible-content">
-                <section class="filters" role="region" aria-label="Filters">
+            <div class="block-body">
+                <section class="filters" aria-label="Filters">
                     <div class="group" data-group="languages">
                         <h3>Languages & Framework</h3>
                         <div class="chips" id="chips-languages"></div>
@@ -71,14 +69,25 @@
             </div>
         </details>
 
-        <!-- Grid -->
+        <div class="tools">
+            <div class="search">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 21l-4.2-4.2" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="11" cy="11" r="7" stroke-width="2" />
+                </svg>
+                <input id="q" type="search" placeholder="Search projects, descriptions, tags…" aria-label="Search projects" />
+            </div>
+            <button class="btn" id="btn-clear">Clear filters</button>
+            <button class="btn ghost" id="btn-copy">Copy filter URL</button>
+        </div>
+
         <main>
             <div id="grid" class="grid" aria-live="polite"></div>
             <div id="empty" class="empty" hidden>No projects match your filters. Try clearing some chips or the search.</div>
         </main>
 
         <footer>
-            <p>Keyboard tip: press <kbd>/</kbd> to focus search, <kbd>Esc</kbd> to clear. <kbd>Enter</kbd> toggles collapsibles when focused.</p>
+            Press <kbd>/</kbd> to focus search, <kbd>Esc</kbd> to clear, <kbd>Enter</kbd> to toggle collapsibles.
         </footer>
     </div>
 
@@ -100,9 +109,39 @@
 
         const MAX_BADGES_VISIBLE = 5;
 
+        // --- HELPERS ----------------------------------------------------------------
+        const $ = sel => document.querySelector(sel);
+        const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+        // Format tag as #lowercase-kebab.
+        function tag(text) {
+            return '#' + String(text).toLowerCase().replace(/[\s_/]+/g, '-');
+        }
+
+        function badge(text, kind) {
+            const b = document.createElement('span');
+            b.className = kind ? `badge badge--${kind}` : 'badge';
+            b.textContent = tag(text);
+            b.title = text;
+            return b;
+        }
+
+        function makeIconPath() {
+            const ns = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(ns, 'svg');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.innerHTML = '<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />';
+            return svg;
+        }
+
+        // --- DATA -------------------------------------------------------------------
         let PROJECTS = [];
         fetch('./projects.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error(`projects.json ${response.status}`);
+                return response.json();
+            })
             .then(data => {
                 PROJECTS = data.sort((a, b) => {
                     const aCount = (a.languages?.length || 0) + (a.skills?.length || 0);
@@ -111,6 +150,15 @@
                 });
                 renderGrid();
                 updateFilterSummary();
+            })
+            .catch(err => {
+                const empty = $('#empty');
+                empty.hidden = false;
+                const onFileProtocol = location.protocol === 'file:';
+                empty.innerHTML = onFileProtocol
+                    ? `Couldn't load <code>projects.json</code>. Browsers block <code>fetch()</code> on <code>file://</code> URLs, so you'll need to run a local server: <code>python -m http.server</code> in the project folder, then open <code>http://localhost:8000</code>.`
+                    : `Couldn't load <code>projects.json</code>: ${err.message}`;
+                console.error('Failed to load projects.json:', err);
             });
 
         // --- STATE ------------------------------------------------------------------
@@ -124,30 +172,19 @@
             }
         };
 
-        // --- HELPERS ----------------------------------------------------------------
-        const $ = sel => document.querySelector(sel);
-        const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-        function badge(text) {
-            const b = document.createElement('span');
-            b.className = 'badge'; b.textContent = text; return b;
-        }
-        function makeIconPath() {
-            const ns = 'http://www.w3.org/2000/svg';
-            const svg = document.createElementNS(ns, 'svg');
-            svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('fill', 'none');
-            svg.innerHTML = '<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />';
-            return svg;
-        }
-
+        // --- CHIPS ------------------------------------------------------------------
         function renderChips(group, containerId) {
             const root = document.getElementById(containerId);
             root.innerHTML = '';
             FILTERS[group].forEach(val => {
                 const btn = document.createElement('button');
-                btn.className = 'chip'; btn.type = 'button'; btn.setAttribute('role', 'button');
+                btn.className = 'chip';
+                btn.type = 'button';
                 btn.setAttribute('aria-pressed', String(state.selected[group].has(val)));
-                btn.dataset.group = group; btn.dataset.value = val; btn.textContent = val;
+                btn.dataset.group = group;
+                btn.dataset.value = val;
+                btn.textContent = tag(val);
+                btn.title = val;
                 btn.addEventListener('click', () => {
                     const sel = state.selected[group];
                     if (sel.has(val)) sel.delete(val); else sel.add(val);
@@ -159,6 +196,7 @@
             });
         }
 
+        // --- FILTERING --------------------------------------------------------------
         function projectMatches(p) {
             const q = state.q.trim().toLowerCase();
             const names = (p.coauthors || []).map(c => [c.name, c.role].filter(Boolean).join(' ')).join(' ');
@@ -178,6 +216,7 @@
             return textHit && groupHit;
         }
 
+        // --- RENDER -----------------------------------------------------------------
         function renderGrid() {
             const grid = $('#grid');
             grid.innerHTML = '';
@@ -185,59 +224,65 @@
             $('#empty').hidden = filtered.length > 0;
             filtered.forEach(p => {
                 const card = document.createElement('article');
-                card.className = 'tile'; card.tabIndex = 0; card.setAttribute('aria-label', p.title);
+                card.className = 'tile';
+                card.tabIndex = 0;
+                card.setAttribute('aria-label', p.title);
 
-                const th = document.createElement('div'); th.className = 'thumb';
-                if (p.thumb) { th.textContent = p.thumb; th.style.fontSize = '40px'; } else { th.appendChild(makeIconPath()); }
+                const th = document.createElement('div');
+                th.className = 'thumb';
+                if (p.thumb) { th.textContent = p.thumb; } else { th.appendChild(makeIconPath()); }
                 card.appendChild(th);
 
-                const inner = document.createElement('div'); inner.className = 'tile-inner';
+                const inner = document.createElement('div');
+                inner.className = 'tile-inner';
 
-                const h4 = document.createElement('h4'); h4.textContent = p.title; inner.appendChild(h4);
+                const h4 = document.createElement('h4');
+                h4.textContent = p.title;
+                inner.appendChild(h4);
 
-                const desc = document.createElement('p'); desc.className = 'desc'; desc.textContent = p.description; inner.appendChild(desc);
+                const desc = document.createElement('p');
+                desc.className = 'desc';
+                desc.textContent = p.description;
+                inner.appendChild(desc);
 
                 const badgeWrap = document.createElement('div');
                 badgeWrap.className = 'badges';
 
                 const allBadges = [
-                    ...p.languages.map(l => l),
-                    ...p.skills.map(s => s),
-                    ...p.types.map(t => t)
+                    ...p.languages.map(text => ({ text, kind: 'lang' })),
+                    ...p.skills.map(text => ({ text, kind: 'skill' })),
+                    ...p.types.map(text => ({ text, kind: 'type' }))
                 ];
 
                 const totalBadges = allBadges.length;
 
-                const badgeEls = allBadges.map((text, index) => {
-                    const b = badge(text);
+                allBadges.forEach((item, index) => {
+                    const b = badge(item.text, item.kind);
                     if (index >= MAX_BADGES_VISIBLE) {
                         b.classList.add('badge--extra');
                         b.hidden = true;
                     }
                     badgeWrap.appendChild(b);
-                    return b;
                 });
 
                 if (totalBadges > MAX_BADGES_VISIBLE) {
                     const hiddenCount = totalBadges - MAX_BADGES_VISIBLE;
-
                     const moreBtn = document.createElement('button');
                     moreBtn.type = 'button';
                     moreBtn.className = 'badge badge--more-toggle';
-                    moreBtn.textContent = `and ${hiddenCount} more`;
+                    moreBtn.textContent = `+${hiddenCount} more`;
                     moreBtn.setAttribute('aria-expanded', 'false');
 
                     moreBtn.addEventListener('click', () => {
                         const extras = badgeWrap.querySelectorAll('.badge--extra');
                         const isExpanded = moreBtn.getAttribute('aria-expanded') === 'true';
-
                         if (!isExpanded) {
                             extras.forEach(b => { b.hidden = false; });
-                            moreBtn.textContent = 'Show fewer';
+                            moreBtn.textContent = 'show fewer';
                             moreBtn.setAttribute('aria-expanded', 'true');
                         } else {
                             extras.forEach(b => { b.hidden = true; });
-                            moreBtn.textContent = `and ${hiddenCount} more`;
+                            moreBtn.textContent = `+${hiddenCount} more`;
                             moreBtn.setAttribute('aria-expanded', 'false');
                         }
                     });
@@ -248,35 +293,45 @@
                 inner.appendChild(badgeWrap);
 
                 if (Array.isArray(p.coauthors) && p.coauthors.length) {
-                    const people = document.createElement('div'); people.className = 'people';
+                    const people = document.createElement('div');
+                    people.className = 'people';
                     p.coauthors.forEach(c => {
                         const el = document.createElement(c.url ? 'a' : 'span');
                         if (c.url) { el.href = c.url; el.target = '_blank'; el.rel = 'noopener noreferrer'; }
                         el.className = 'person';
-                        const av = document.createElement('span'); av.className = 'avatar';
+                        const av = document.createElement('span');
+                        av.className = 'avatar';
                         const initials = (c.initials || (c.name || '').split(' ').map(w => w[0]).join('').slice(0, 2) || '?').toUpperCase();
                         av.textContent = initials;
-                        const label = document.createElement('span'); label.textContent = c.role ? `${c.name} - ${c.role}` : c.name;
-                        el.appendChild(av); el.appendChild(label); people.appendChild(el);
+                        const label = document.createElement('span');
+                        label.textContent = c.role ? `${c.name} · ${c.role}` : c.name;
+                        el.appendChild(av);
+                        el.appendChild(label);
+                        people.appendChild(el);
                     });
                     inner.appendChild(people);
                 }
 
-                const links = document.createElement('div'); links.className = 'links';
-                if (p.links?.demo) links.appendChild(linkBtn(p.links.demo, 'Try it out'));
+                const links = document.createElement('div');
+                links.className = 'links';
+                if (p.links?.demo) links.appendChild(linkBtn(p.links.demo, 'Try it'));
                 if (p.links?.video) links.appendChild(linkBtn(p.links.video, 'Video'));
                 if (p.links?.repo) links.appendChild(linkBtn(p.links.repo, 'Source'));
-                if (p.links?.documentation) links.appendChild(linkBtn(p.links.documentation, 'Documentation'));
-                inner.appendChild(links);
+                if (p.links?.documentation) links.appendChild(linkBtn(p.links.documentation, 'Docs'));
+                if (links.children.length) inner.appendChild(links);
 
-                card.appendChild(inner); grid.appendChild(card);
+                card.appendChild(inner);
+                grid.appendChild(card);
             });
         }
 
         function linkBtn(href, label) {
-            const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+            const a = document.createElement('a');
+            a.href = href;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
             a.className = 'link';
-            a.innerHTML = `<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 3h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 3 10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="10" width="8" height="11" rx="2" stroke="currentColor" stroke-width="2"/></svg> ${label}`;
+            a.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7" stroke-width="2" stroke-linecap="round"/><path d="M21 3 10 14" stroke-width="2" stroke-linecap="round"/><rect x="3" y="10" width="8" height="11" rx="2" stroke-width="2"/></svg> ${label}`;
             return a;
         }
 
@@ -312,10 +367,11 @@
         function restoreOpenStates() {
             const about = $('#about');
             const filters = $('#filters-panel');
-            const aboutOpen = localStorage.getItem(ABOUT_KEY);
-            const filtersOpen = localStorage.getItem(FILTERS_KEY);
-            if (aboutOpen !== null) about.open = aboutOpen === 'true';
-            if (filtersOpen !== null) filters.open = filtersOpen === 'true';
+            const aboutStored = localStorage.getItem(ABOUT_KEY);
+            const filtersStored = localStorage.getItem(FILTERS_KEY);
+            const isMobile = window.matchMedia('(max-width: 720px)').matches;
+            about.open = aboutStored === null ? false : aboutStored === 'true';
+            filters.open = filtersStored === null ? !isMobile : filtersStored === 'true';
         }
         function wireOpenStatePersistence() {
             $('#about').addEventListener('toggle', () => localStorage.setItem(ABOUT_KEY, String($('#about').open)));
@@ -324,13 +380,12 @@
         function updateFilterSummary() {
             const count = state.selected.languages.size + state.selected.skills.size + state.selected.types.size;
             const pill = $('#pill-count'); if (!pill) return;
-            pill.textContent = `${count} selected`;
+            pill.textContent = count === 0 ? 'none' : `${count} active`;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             restoreOpenStates();
             wireOpenStatePersistence();
-
             renderAllChips();
 
             const q = $('#q');
@@ -346,8 +401,8 @@
             $('#btn-copy').addEventListener('click', async () => {
                 try {
                     await navigator.clipboard.writeText(location.href);
-                    toast('Filter URL copied to clipboard');
-                } catch { toast('Could not copy - select the URL in your address bar'); }
+                    toast('Filter URL copied');
+                } catch { toast("Couldn't copy - select the URL in your address bar"); }
             });
 
             render();
@@ -355,11 +410,8 @@
 
         function toast(msg) {
             const t = document.createElement('div');
+            t.className = 'toast';
             t.textContent = msg;
-            t.style.position = 'fixed'; t.style.left = '50%'; t.style.bottom = '30px';
-            t.style.transform = 'translateX(-50%)'; t.style.background = 'rgba(17,24,39,.9)';
-            t.style.color = 'white'; t.style.padding = '10px 14px'; t.style.borderRadius = '999px';
-            t.style.border = '1px solid #374151'; t.style.boxShadow = 'var(--shadow)'; t.style.zIndex = '9999';
             document.body.appendChild(t);
             setTimeout(() => t.remove(), 1800);
         }

@@ -3,15 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jack Sleath - Writing & Images</title>
-    <meta name="description" content="A static page matching the projects style, optimized for long-form paragraphs and images: side-by-side, full-width text, and full-width images." />
+    <title>Jack Sleath - Stickers</title>
+    <meta name="description" content="Word play, parody and silly ideas. Sticker designs by Jack Sleath." />
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-writing">
     <div class="wrap">
-        <header>
-            <div class="title" role="heading" aria-level="1"><span class="dot"></span> Creating Stickers</div>
+        <header class="site-header">
+            <div class="brand">
+                <span class="brand-dot" aria-hidden="true"></span>
+                <span class="brand-name">Jack Sleath</span>
+                <span class="brand-sep" aria-hidden="true">/</span>
+                <span class="brand-page">Stickers</span>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="./index.html">Projects</a>
+                <a href="./about.html">About</a>
+            </nav>
         </header>
+
+        <p class="tagline">Word play, parody, and silly ideas.</p>
+
+        <hr class="rule" />
 
         <!-- 2) FULL-WIDTH TEXT -->
         <section class="section card prose prose-card" aria-label="Full-width article">
@@ -32,7 +45,7 @@
                     <p>Aliquam erat volutpat. Suspendisse potenti. Sed vel accumsan augue. Vivamus vehicula, nisl a euismod tempor, quam nunc sagittis risus, quis euismod enim risus id odio. Integer gravida vulputate mauris, vitae volutpat felis euismod at.</p>
                     <span class="badge" aria-hidden="true">Example</span>
                 </div>
-                <figure class="media" aria-label="Illustrative image">
+                <figure class="media media--fixed" aria-label="Illustrative image">
                     <img alt="E.T. tu Brute?" src="images/et.png" style="background-color:black;"/>
                     <figcaption class="cap">A friendly placeholder image. Swap this for your own.</figcaption>
                 </figure>
@@ -42,7 +55,7 @@
         <!-- 1b) TEXT + IMAGE (right text, left image) -->
         <section class="section card">
             <div class="media-row reverse">
-                <figure class="media" aria-label="Illustrative image">
+                <figure class="media media--fixed" aria-label="Illustrative image">
                     <img alt="" src="images/dc.png" />
                     <figcaption class="cap">Left image / right text variant via <code>.reverse</code>.</figcaption>
                 </figure>
@@ -64,7 +77,7 @@
                     <p>Aliquam erat volutpat. Suspendisse potenti. Sed vel accumsan augue. Vivamus vehicula, nisl a euismod tempor, quam nunc sagittis risus, quis euismod enim risus id odio. Integer gravida vulputate mauris, vitae volutpat felis euismod at.</p>
                     <span class="badge" aria-hidden="true">Example</span>
                 </div>
-                <figure class="media" aria-label="Illustrative image">
+                <figure class="media media--fixed" aria-label="Illustrative image">
                     <img alt="" src="images/fn.png" />
                     <figcaption class="cap">A friendly placeholder image. Swap this for your own.</figcaption>
                 </figure>
@@ -74,7 +87,7 @@
         <!-- 1b) TEXT + IMAGE (right text, left image) -->
         <section class="section card">
             <div class="media-row reverse">
-                <figure class="media" aria-label="Illustrative image">
+                <figure class="media media--fixed" aria-label="Illustrative image">
                     <img alt="" src="images/s.png" />
                     <figcaption class="cap">Left image / right text variant via <code>.reverse</code>.</figcaption>
                 </figure>
