@@ -88,8 +88,8 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/datasetmaker/datasetmaker.html",
-      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/datasetmaker"
+      "demo": "https://jack-sleath.github.io/dataset-maker/",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/dataset-maker"
     },
     "thumb": "📤🧪"
   },
@@ -108,7 +108,7 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/csv-to-sql/index.html",
+      "demo": "https://jack-sleath.github.io/csv-to-sql/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/csv-to-sql"
     },
     "thumb": "📄📥"
@@ -128,8 +128,8 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/jsbookmarklet/jsbookmarklet.html",
-      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/jsbookmarklet"
+      "demo": "https://jack-sleath.github.io/js-bookmarklet/",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/js-bookmarklet"
     },
     "thumb": "🔖✨"
   },
@@ -148,8 +148,8 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/sqlinsert/sqlinsert.html",
-      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sqlinsert"
+      "demo": "https://jack-sleath.github.io/sql-insert/",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sql-insert"
     },
     "thumb": "📤📥"
   },
@@ -172,8 +172,8 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/starwars/charsheet.html",
-      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/starwars"
+      "demo": "https://jack-sleath.github.io/star-wars/",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/star-wars"
     },
     "thumb": "🎲✨"
   },
@@ -195,7 +195,7 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/code/code.html",
+      "demo": "https://jack-sleath.github.io/code/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/code"
     },
     "thumb": "✏️🖥️"
@@ -218,7 +218,7 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/sonic-font/sonic.html",
+      "demo": "https://jack-sleath.github.io/sonic-font/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sonic-font"
     },
     "thumb": "🎥🦔"
@@ -242,7 +242,7 @@
       "Legacy"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/weather/index.html",
+      "demo": "https://jack-sleath.github.io/weather/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/weather"
     },
     "thumb": "🌦️🗺️"
@@ -265,7 +265,7 @@
       "Legacy"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/intern/dashboard.html",
+      "demo": "https://jack-sleath.github.io/intern/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/intern"
     },
     "thumb": "🌡️💽"
@@ -289,7 +289,7 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/six-month-calendar/index.html",
+      "demo": "https://jack-sleath.github.io/six-month-calendar/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/six-month-calendar"
     },
     "thumb": "🌗🗓️"
@@ -306,7 +306,7 @@
     ],
     "types": [],
     "links": {
-      "repo": "https://github.com/jack-sleath/photoshop-actions/tree/main"
+      "repo": "https://github.com/jack-sleath/photoshop-actions"
     },
     "thumb": "🔁👾"
   },
@@ -325,7 +325,7 @@
     ],
     "types": [],
     "links": {
-      "repo": "https://github.com/jack-sleath/local-deepseek/tree/main"
+      "repo": "https://github.com/jack-sleath/local-deepseek"
     },
     "thumb": "🏠🤖"
   },
@@ -349,7 +349,7 @@
     "links": {
       "demo": "https://chromewebstore.google.com/detail/letterboxd-review-guesser/kobelcjkeeijadckpflngddlhceaooce",
       "video": "",
-      "repo": "https://github.com/jack-sleath/ReviewGuessingGame/tree/main"
+      "repo": "https://github.com/jack-sleath/ReviewGuessingGame"
     },
     "thumb": "🎬❓"
   },
@@ -371,7 +371,7 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/uk-prices-chart/index.html"
+      "demo": "https://jack-sleath.github.io/uk-prices-chart/"
     },
     "thumb": "📈🇬🇧"
   },
@@ -394,7 +394,7 @@
       "Game"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/bingo/index.html",
+      "demo": "https://jack-sleath.github.io/bingo/",
       "video": "",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/bingo",
       "documentation": ""
