@@ -439,22 +439,48 @@ details[open] .caret { transform: rotate(90deg); }
     }
 
 .thumb {
-    aspect-ratio: 16/9;
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6%;
+    padding: 12%;
     background:
-        linear-gradient(135deg, var(--surface-2), var(--surface)),
+        radial-gradient(ellipse at center,
+            color-mix(in srgb, var(--tile-tint, var(--accent)) 28%, transparent) 0%,
+            color-mix(in srgb, var(--tile-tint, var(--accent)) 8%, transparent) 55%,
+            transparent 100%),
         var(--surface);
-    display: grid;
-    place-items: center;
-    font-size: 44px;
-    line-height: 1;
     border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    /* Fallback sizing if Twemoji fails to load and OS emoji is shown */
+    font-size: clamp(48px, 11vw, 88px);
+    line-height: 1;
+    text-align: center;
 }
 
-    .thumb svg {
-        width: 38px;
-        height: 38px;
-        color: var(--faint);
+    /* Twemoji renders each emoji as <img class="emoji">. Two per thumb, side by side, scaling to fill. */
+    .thumb img.emoji {
+        height: 100%;
+        width: auto;
+        max-width: calc(50% - 3%);
+        max-height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.28));
     }
+
+    .thumb > svg {
+        width: 40%;
+        height: 40%;
+        color: var(--faint);
+        opacity: 0.7;
+    }
+
+@media (prefers-color-scheme: light) {
+    .thumb img.emoji {
+        filter: drop-shadow(0 3px 6px rgba(100, 70, 30, 0.20));
+    }
+}
 
 .tile-inner {
     padding: 16px;
@@ -680,6 +706,243 @@ footer {
         animation: none !important;
     }
 }
+
+/* ============================================================
+   TOOL PAGES (body.page-tool)
+============================================================ */
+body.page-tool .wrap {
+    max-width: 920px;
+}
+
+.tool {
+    margin-top: 4px;
+}
+
+.field {
+    display: block;
+    margin: 0 0 18px;
+}
+
+.field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+    margin: 0 0 6px;
+}
+
+.field-hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 6px 0 0;
+    line-height: 1.5;
+}
+
+    .field-hint code {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        background: var(--surface-2);
+        padding: 1px 5px;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+    }
+
+textarea,
+input[type="text"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+textarea[readonly] {
+    background: var(--surface-2);
+    color: var(--muted);
+}
+
+input[type="text"],
+input[type="file"],
+select {
+    font-family: var(--font-sans);
+    font-size: 14px;
+}
+
+input[type="file"] {
+    padding: 9px 12px;
+    cursor: pointer;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--ring);
+}
+
+textarea::placeholder,
+input::placeholder {
+    color: var(--faint);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 14px 0 18px;
+}
+
+.status {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 4px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #1a1612;
+    border-color: var(--accent);
+}
+
+    .btn-primary:hover {
+        background: var(--accent-dim);
+        border-color: var(--accent-dim);
+        color: #1a1612;
+    }
+
+/* Demo Code: editor + preview side by side */
+.code-pen {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    min-height: 70vh;
+}
+
+@media (max-width: 760px) {
+    .code-pen {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+}
+
+.code-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+}
+
+    .code-editor .field {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 0;
+        min-height: 0;
+    }
+
+        .code-editor .field textarea {
+            flex: 1 1 auto;
+            min-height: 80px;
+        }
+
+    .code-editor .row {
+        margin: 4px 0 0;
+        flex: 0 0 auto;
+    }
+
+.code-preview {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #ffffff;
+    min-height: 320px;
+}
+
+    .code-preview iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 320px;
+        border: 0;
+        display: block;
+    }
+
+.preview-fullscreen-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity .15s ease, color .15s ease, border-color .15s ease;
+}
+
+    .preview-fullscreen-btn:hover,
+    .preview-fullscreen-btn:focus-visible {
+        opacity: 1;
+        color: var(--accent);
+        border-color: var(--accent);
+        outline: none;
+    }
+
+    .preview-fullscreen-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .preview-fullscreen-btn .icon-collapse {
+        display: none;
+    }
+
+.code-preview.is-fullscreen,
+.code-preview:fullscreen {
+    border-radius: 0;
+    border: none;
+    background: #ffffff;
+}
+
+    .code-preview.is-fullscreen iframe,
+    .code-preview:fullscreen iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .code-preview.is-fullscreen .preview-fullscreen-btn .icon-expand,
+    .code-preview:fullscreen .preview-fullscreen-btn .icon-expand {
+        display: none;
+    }
+
+    .code-preview.is-fullscreen .preview-fullscreen-btn .icon-collapse,
+    .code-preview:fullscreen .preview-fullscreen-btn .icon-collapse {
+        display: block;
+    }
 
 /* ============================================================
    ABOUT PAGE (body.page-writing)

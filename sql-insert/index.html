@@ -1,39 +1,57 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-
-    <title>SQL Table to Insert Statement Converter</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Jack Sleath - SQL Insert Maker</title>
+    <meta name="description" content="Paste a SQL result table and turn it into INSERT statements." />
+    <link rel="stylesheet" href="../styles.css" />
 </head>
+<body class="page-tool">
+    <div class="wrap">
+        <header class="site-header">
+            <div class="brand">
+                <span class="brand-dot" aria-hidden="true"></span>
+                <span class="brand-name">Jack Sleath</span>
+                <span class="brand-sep" aria-hidden="true">/</span>
+                <span class="brand-page">SQL Insert Maker</span>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="../index.html">Projects</a>
+                <a href="../about.html">About</a>
+            </nav>
+        </header>
 
-<body>
-    <div class="container">
-        <h1>SQL Table to Insert Statement Converter</h1>
-        <p class="small">Paste a table result (headers + rows) and convert it into SQL INSERT statements.</p>
+        <p class="tagline">Paste a SQL result grid (headers and rows) and convert it into INSERT statements.</p>
 
-        <label for="tableName">Table name</label>
-        <input type="text" id="tableName" placeholder="Enter table name">
+        <hr class="rule" />
 
-        <label for="tableData">Results input</label>
-        <textarea id="tableData" placeholder="Paste your table data here (include header row)"></textarea>
+        <div class="tool">
+            <div class="field">
+                <label class="field-label" for="tableName">Table name</label>
+                <input type="text" id="tableName" placeholder="Enter table name..." />
+            </div>
 
-        <div class="row">
-            <button id="convertBtn" type="button">Convert</button>
-            <button id="copyBtn" type="button">Copy SQL</button>
-            <span id="status" class="small" aria-live="polite"></span>
+            <div class="field">
+                <label class="field-label" for="tableData">Results input</label>
+                <textarea id="tableData" placeholder="Paste your table data here, including the header row..."></textarea>
+            </div>
+
+            <div class="row">
+                <button id="convertBtn" class="btn btn-primary" type="button">Convert</button>
+                <button id="copyBtn" class="btn ghost" type="button">Copy SQL</button>
+                <span id="status" class="status" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+                <label class="field-label" for="output">INSERT statements</label>
+                <textarea id="output" readonly placeholder="Generated INSERT statements will appear here..."></textarea>
+            </div>
         </div>
-
-        <label for="output">Insert statements</label>
-        <textarea id="output" readonly placeholder="Generated INSERT statements will appear here..."></textarea>
-
-        <a class="home-link" href="https://jack-sleath.github.io/">Home...</a>
     </div>
 
     <script src="js/script.js"></script>
     <script>
-        // small helper for existing script to show transient messages
         function setStatus(message) {
             const el = document.getElementById('status');
             if (!el) return;
@@ -43,7 +61,6 @@
         }
         window.setStatus = setStatus;
 
-        // wire buttons to existing script functions if present
         document.getElementById('convertBtn').addEventListener('click', function () {
             if (typeof ConvertTable === 'function') ConvertTable();
         });

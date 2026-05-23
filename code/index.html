@@ -1,29 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My CodePen</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jack Sleath - Demo Code</title>
+    <meta name="description" content="A scratch pad for HTML, CSS, and JavaScript snippets with a live preview." />
+    <link rel="stylesheet" href="../styles.css" />
 </head>
-<body>
-    <div class="editor">
-        <div class="code-area">
-            <textarea id="html-code" placeholder="Enter HTML code here..."></textarea>
+<body class="page-tool">
+    <div class="wrap">
+        <header class="site-header">
+            <div class="brand">
+                <span class="brand-dot" aria-hidden="true"></span>
+                <span class="brand-name">Jack Sleath</span>
+                <span class="brand-sep" aria-hidden="true">/</span>
+                <span class="brand-page">Demo Code</span>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="../index.html">Projects</a>
+                <a href="../about.html">About</a>
+            </nav>
+        </header>
+
+        <p class="tagline">A scratch pad for HTML, CSS, and JavaScript. Pick an example or write your own and hit Run to see it.</p>
+
+        <hr class="rule" />
+
+        <div class="tool">
+            <div class="code-pen">
+                <div class="code-editor">
+                    <div class="field">
+                        <label class="field-label" for="html-code">HTML</label>
+                        <textarea id="html-code" placeholder="Enter HTML code here..."></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="css-code">CSS</label>
+                        <textarea id="css-code" placeholder="Enter CSS code here..."></textarea>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="js-code">JavaScript</label>
+                        <textarea id="js-code" placeholder="Enter JavaScript code here..."></textarea>
+                    </div>
+                    <div class="row">
+                        <select id="example-dropdown" aria-label="Example to load"></select>
+                        <button class="btn btn-primary" type="button" onclick="runCode()">Run</button>
+                    </div>
+                </div>
+                <div class="code-preview" id="preview-pane" aria-label="Live preview">
+                    <button class="preview-fullscreen-btn" id="fullscreen-btn" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">
+                        <svg class="icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+                            <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+                            <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+                            <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+                        </svg>
+                        <svg class="icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M3 8h3a2 2 0 0 0 2-2V3" />
+                            <path d="M16 3v3a2 2 0 0 0 2 2h3" />
+                            <path d="M8 21v-3a2 2 0 0 0-2-2H3" />
+                            <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
+                        </svg>
+                    </button>
+                    <iframe id="output-frame" title="Live preview"></iframe>
+                </div>
+            </div>
         </div>
-        <div class="code-area">
-            <textarea id="css-code" placeholder="Enter CSS code here..."></textarea>
-        </div>
-        <div class="code-area">
-            <textarea id="js-code" placeholder="Enter JavaScript code here..."></textarea>
-        </div>
-<select id="example-dropdown"></select>
-        <button onclick="runCode()">Run</button>
-    </div>
-    <div class="output">
-        <iframe id="output-frame"></iframe>
     </div>
 
     <script src="js/script.js"></script>
+    <script>
+        (function () {
+            const pane = document.getElementById('preview-pane');
+            const btn = document.getElementById('fullscreen-btn');
+            if (!pane || !btn) return;
+
+            btn.addEventListener('click', () => {
+                if (document.fullscreenElement === pane) {
+                    document.exitFullscreen();
+                } else if (pane.requestFullscreen) {
+                    pane.requestFullscreen().catch(err => {
+                        console.error('Fullscreen request failed:', err);
+                    });
+                }
+            });
+
+            document.addEventListener('fullscreenchange', () => {
+                const isFs = document.fullscreenElement === pane;
+                pane.classList.toggle('is-fullscreen', isFs);
+                btn.setAttribute('aria-label', isFs ? 'Exit fullscreen' : 'Toggle fullscreen');
+                btn.setAttribute('title', isFs ? 'Exit fullscreen' : 'Toggle fullscreen');
+            });
+        })();
+    </script>
 </body>
 </html>

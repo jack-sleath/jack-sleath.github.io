@@ -6,6 +6,7 @@
     <title>Jack Sleath - Projects</title>
     <meta name="description" content="A filterable, tile-based portfolio page to showcase projects by language, skills, and type." />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous" defer></script>
 </head>
 <body class="page-projects">
     <div class="wrap">
@@ -118,6 +119,14 @@
             return '#' + String(text).toLowerCase().replace(/[\s_/]+/g, '-');
         }
 
+        // Deterministic warm tint per project id (cycles through a curated palette).
+        const PROJECT_TINTS = ['#e08a4b', '#c2602f', '#8a6437', '#a07229', '#b87333', '#d49c5b'];
+        function projectTint(id) {
+            let h = 0;
+            for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) | 0;
+            return PROJECT_TINTS[Math.abs(h) % PROJECT_TINTS.length];
+        }
+
         function badge(text, kind) {
             const b = document.createElement('span');
             b.className = kind ? `badge badge--${kind}` : 'badge';
@@ -227,6 +236,7 @@
                 card.className = 'tile';
                 card.tabIndex = 0;
                 card.setAttribute('aria-label', p.title);
+                card.style.setProperty('--tile-tint', projectTint(p.id));
 
                 const th = document.createElement('div');
                 th.className = 'thumb';
@@ -323,6 +333,14 @@
                 card.appendChild(inner);
                 grid.appendChild(card);
             });
+
+            if (typeof twemoji !== 'undefined') {
+                twemoji.parse(grid, {
+                    base: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/',
+                    folder: 'svg',
+                    ext: '.svg'
+                });
+            }
         }
 
         function linkBtn(href, label) {
