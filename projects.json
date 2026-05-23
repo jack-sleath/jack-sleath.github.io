@@ -292,7 +292,7 @@
       "demo": "https://jack-sleath.github.io/six-month-calendar/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/six-month-calendar"
     },
-    "thumb": "🌗🗓️"
+    "thumb": "🌗📅"
   },
   {
     "id": "photoshop-actions",
@@ -399,6 +399,6 @@
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/bingo",
       "documentation": ""
     },
-    "thumb": "🎱📅"
+    "thumb": "🎱🗓️"
   }
 ]
