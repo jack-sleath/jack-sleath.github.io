@@ -88,7 +88,7 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/dataset-maker/",
+      "demo": "https://jack-sleath.dev/dataset-maker/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/dataset-maker"
     },
     "thumb": "📤🧪"
@@ -108,7 +108,7 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/csv-to-sql/",
+      "demo": "https://jack-sleath.dev/csv-to-sql/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/csv-to-sql"
     },
     "thumb": "📄📥"
@@ -128,7 +128,7 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/js-bookmarklet/",
+      "demo": "https://jack-sleath.dev/js-bookmarklet/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/js-bookmarklet"
     },
     "thumb": "🔖✨"
@@ -148,7 +148,7 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/sql-insert/",
+      "demo": "https://jack-sleath.dev/sql-insert/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sql-insert"
     },
     "thumb": "📤📥"
@@ -172,7 +172,7 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/star-wars/",
+      "demo": "https://jack-sleath.dev/star-wars/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/star-wars"
     },
     "thumb": "🎲✨"
@@ -195,7 +195,7 @@
       "Duct-Tape Utility"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/code/",
+      "demo": "https://jack-sleath.dev/code/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/code"
     },
     "thumb": "✏️🖥️"
@@ -218,7 +218,7 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/sonic-font/",
+      "demo": "https://jack-sleath.dev/sonic-font/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/sonic-font"
     },
     "thumb": "🎥🦔"
@@ -242,7 +242,7 @@
       "Legacy"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/weather/",
+      "demo": "https://jack-sleath.dev/weather/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/weather"
     },
     "thumb": "🌦️🗺️"
@@ -265,7 +265,7 @@
       "Legacy"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/intern/",
+      "demo": "https://jack-sleath.dev/intern/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/intern"
     },
     "thumb": "🌡️💽"
@@ -289,7 +289,7 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/six-month-calendar/",
+      "demo": "https://jack-sleath.dev/six-month-calendar/",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/six-month-calendar"
     },
     "thumb": "🌗📅"
@@ -371,7 +371,7 @@
       "Quick Idea"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/uk-prices-chart/"
+      "demo": "https://jack-sleath.dev/uk-prices-chart/"
     },
     "thumb": "📈🇬🇧"
   },
@@ -394,11 +394,34 @@
       "Game"
     ],
     "links": {
-      "demo": "https://jack-sleath.github.io/bingo/",
+      "demo": "https://jack-sleath.dev/bingo/",
       "video": "",
       "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/bingo",
       "documentation": ""
     },
     "thumb": "🎱🗓️"
+  },
+  {
+    "id": "small-indy-crossword",
+    "title": "Small Indy Crossword",
+    "description": "A lightweight, shareable 5x5 mini crossword for small private groups. Generate a puzzle, share a link via a short code, and race your friends to solve it. Seeds encode the word pool IDs so shared links stay stable, and there's a built-in timer, check, and reveal. The word pool lives in a JSON file so it's easy to add your own clues.",
+    "languages": [
+      "React",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "skills": [
+      "Frontend"
+    ],
+    "types": [
+      "Game",
+      "Quick Idea"
+    ],
+    "links": {
+      "demo": "https://small-indy.jack-sleath.dev/",
+      "repo": "https://github.com/jack-sleath/small-indy-crossword"
+    },
+    "thumb": "⬛⬜"
   }
 ]
