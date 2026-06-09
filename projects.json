@@ -423,5 +423,27 @@
       "repo": "https://github.com/jack-sleath/small-indy-crossword"
     },
     "thumb": "⬛⬜"
+  },
+  {
+    "id": "crochet-planner",
+    "title": "Crochet Planner",
+    "description": "A web tool for planning crochet projects from an image. Upload a picture, turn it into a numbered grid, count your stitches, and manage your colour palette with a picker that saves hex codes to local storage. Finishes with a high-res download of the final design.",
+    "languages": [
+      "TypeScript",
+      "CSS",
+      "HTML"
+    ],
+    "skills": [
+      "Frontend"
+    ],
+    "types": [
+      "Personal",
+      "Quick Idea"
+    ],
+    "links": {
+      "demo": "https://crochet.jack-sleath.dev/",
+      "repo": "https://github.com/jack-sleath/crochet-planner"
+    },
+    "thumb": "🧶📐"
   }
 ]
