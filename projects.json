@@ -445,5 +445,29 @@
       "repo": "https://github.com/jack-sleath/crochet-planner"
     },
     "thumb": "🧶📐"
+  },
+  {
+    "id": "gokart-plywood-planner",
+    "title": "Go-Kart Plywood Planner",
+    "description": "Works out the plywood panel sizes for a sloped-nose van body sitting on a go-kart chassis. Drag sliders for length, width, height, nose and windscreen and it instantly gives a cut list, a dimensioned side profile, a 3D preview, and a sheet-by-sheet cutting layout with a bin-packer. Units toggle between mm, cm and inches, and the full spec is shareable via the URL.",
+    "languages": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "skills": [
+      "Frontend",
+      "Data Visualisation"
+    ],
+    "types": [
+      "Personal",
+      "Quick Idea",
+      "Vibe-Coded"
+    ],
+    "links": {
+      "demo": "https://jack-sleath.dev/gokart-plywood/",
+      "repo": "https://github.com/jack-sleath/jack-sleath.github.io/tree/master/gokart-plywood"
+    },
+    "thumb": "🛻📐"
   }
 ]

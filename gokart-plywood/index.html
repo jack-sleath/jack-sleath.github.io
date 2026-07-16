@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Go-Kart Plywood Planner - Jack Sleath</title>
+    <meta name="description" content="Work out the plywood panel sizes for a sloped-nose van body on a go-kart chassis. Drag the dimensions, get a cut list, dimensioned drawings, and a sheet-cutting layout." />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jack Sleath" />
+    <meta property="og:title" content="Go-Kart Plywood Planner" />
+    <meta property="og:description" content="Work out the plywood panel sizes for a sloped-nose van body on a go-kart chassis." />
+    <meta property="og:url" content="https://jack-sleath.dev/gokart-plywood/" />
+
+    <style>
+        :root {
+            --bg:            #1a1612;
+            --surface:       #221c17;
+            --surface-2:     #2a221c;
+            --text:          #f3e9da;
+            --muted:         #a89684;
+            --faint:         #6b5d50;
+            --accent:        #e08a4b;
+            --accent-dim:    #b86a30;
+            --accent-soft:   rgba(224, 138, 75, 0.14);
+            --border:        #3a2e25;
+            --border-strong: #4d3f33;
+            --ring:          rgba(224, 138, 75, 0.32);
+            --shadow:        0 10px 30px rgba(0, 0, 0, 0.4);
+            --ok:            #7fbf6b;
+            --warn:          #e0a24b;
+            --radius-xl: 14px;
+            --radius-lg: 10px;
+            --radius-md: 8px;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+            --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+        }
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg:            #f4ece0;
+                --surface:       #fdf6e9;
+                --surface-2:     #ebe1cf;
+                --text:          #1f1812;
+                --muted:         #6b5b48;
+                --faint:         #a89684;
+                --accent:        #b8602a;
+                --accent-dim:    #8a4519;
+                --accent-soft:   rgba(184, 96, 42, 0.10);
+                --border:        #d8c8ae;
+                --border-strong: #bfa884;
+                --ring:          rgba(184, 96, 42, 0.3);
+                --shadow:        0 8px 24px rgba(100, 70, 30, 0.10);
+                --ok:            #4f8f3b;
+                --warn:          #a9731f;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: var(--font-sans);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(900px 500px at 8% -10%, var(--accent-soft), transparent 60%),
+                radial-gradient(700px 400px at 100% 0%, var(--accent-soft), transparent 70%);
+            z-index: 0;
+        }
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 24px 20px 56px;
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: clamp(19px, 2.4vw, 26px);
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+        .brand-dot {
+            width: 10px; height: 10px; border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-soft);
+        }
+        .brand-sep { color: var(--faint); font-weight: 500; }
+        .brand-page { color: var(--accent); }
+        .site-nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 6px 10px;
+            border-radius: var(--radius-md);
+        }
+        .site-nav a:hover { color: var(--text); background: var(--accent-soft); }
+
+        .tagline {
+            color: var(--muted);
+            margin: 4px 0 18px;
+            max-width: 70ch;
+        }
+        .rule { border: none; border-top: 1px solid var(--border); margin: 0 0 22px; }
+
+        .planner {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+        @media (max-width: 880px) {
+            .planner { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+        }
+        .controls { position: sticky; top: 16px; }
+        @media (max-width: 880px) { .controls { position: static; } }
+        .panel-body { padding: 18px; }
+        .panel h2 {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: 0 0 14px;
+            font-weight: 700;
+        }
+        .panel h2:not(:first-child) { margin-top: 26px; }
+
+        .unit-row { display: flex; gap: 6px; margin-bottom: 18px; }
+        .unit-btn {
+            flex: 1;
+            padding: 8px 0;
+            font: inherit;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--muted);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+        }
+        .unit-btn[aria-pressed="true"] {
+            color: #fff;
+            background: var(--accent);
+            border-color: var(--accent-dim);
+        }
+        @media (prefers-color-scheme: light) { .unit-btn[aria-pressed="true"] { color: #fff; } }
+
+        .field { margin-bottom: 16px; }
+        .field-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .field-top label { font-weight: 600; font-size: 14px; }
+        .field-val {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 3px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+        .field-val input {
+            width: 68px;
+            text-align: right;
+            font: inherit;
+            font-family: var(--font-mono);
+            color: var(--text);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 3px 6px;
+        }
+        .field-val .u { color: var(--muted); font-size: 12px; width: 22px; }
+        .field-hint { font-size: 12px; color: var(--faint); margin-top: 3px; }
+        input[type="range"] {
+            -webkit-appearance: none; appearance: none;
+            width: 100%; height: 5px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            outline: none;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 18px; height: 18px; border-radius: 999px;
+            background: var(--accent);
+            border: 2px solid var(--surface);
+            box-shadow: 0 1px 4px rgba(0,0,0,.35);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px; height: 18px; border-radius: 999px;
+            background: var(--accent); border: 2px solid var(--surface);
+        }
+        input[type="range"]:focus-visible { box-shadow: 0 0 0 3px var(--ring); }
+
+        .check {
+            display: flex; align-items: flex-start; gap: 9px;
+            font-size: 13.5px; margin-bottom: 12px; cursor: pointer;
+        }
+        .check input { margin-top: 3px; accent-color: var(--accent); width: 16px; height: 16px; }
+        .check .sub { color: var(--faint); font-size: 12px; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .mini-field label { font-size: 12px; color: var(--muted); font-weight: 600; display: block; margin-bottom: 4px; }
+        .mini-field input, .mini-field select {
+            width: 100%; font: inherit; font-family: var(--font-mono); font-size: 13px;
+            color: var(--text); background: var(--surface-2);
+            border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+        }
+
+        .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .btn {
+            font: inherit; font-weight: 700; font-size: 13px;
+            color: var(--text); background: var(--surface-2);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-md); padding: 9px 12px; cursor: pointer;
+        }
+        .btn:hover { border-color: var(--accent); color: var(--accent); }
+        .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent-dim); }
+        @media (prefers-color-scheme: light){ .btn.primary { color:#fff; } }
+        .btn.primary:hover { color: #fff; filter: brightness(1.05); }
+
+        .view-tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+        .view-tabs button {
+            font: inherit; font-weight: 700; font-size: 12.5px;
+            color: var(--muted); background: transparent;
+            border: 1px solid var(--border); border-radius: 999px;
+            padding: 5px 13px; cursor: pointer;
+        }
+        .view-tabs button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+
+        .drawing {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 8px;
+        }
+        .drawing svg { display: block; width: 100%; height: auto; }
+        .draw-hide { display: none; }
+
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap: 10px; margin: 18px 0 4px; }
+        .stat {
+            background: var(--surface-2); border: 1px solid var(--border);
+            border-radius: var(--radius-md); padding: 11px 13px;
+        }
+        .stat .k { font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+        .stat .v { font-size: 19px; font-weight: 800; font-family: var(--font-mono); margin-top: 2px; }
+        .stat .v small { font-size: 12px; font-weight: 600; color: var(--muted); }
+
+        table.cutlist { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 6px; }
+        table.cutlist th, table.cutlist td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--border); }
+        table.cutlist th { font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+        table.cutlist td.num, table.cutlist th.num { text-align: right; font-family: var(--font-mono); }
+        table.cutlist .swatch { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; border: 1px solid rgba(0,0,0,.25); }
+        table.cutlist .part-note { color: var(--faint); font-size: 12px; }
+        table.cutlist tfoot td { font-weight: 700; border-bottom: none; }
+
+        .sheets { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; }
+        .sheet-fig { flex: 1 1 300px; max-width: 460px; }
+        .sheet-fig .cap { font-size: 12px; color: var(--muted); margin: 6px 2px 0; font-family: var(--font-mono); }
+        .sheet-fig svg { display:block; width: 100%; height: auto; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-md); }
+
+        .warn {
+            display: flex; gap: 10px; align-items: flex-start;
+            background: rgba(224,162,75,.12); border: 1px solid var(--warn);
+            color: var(--text); border-radius: var(--radius-md);
+            padding: 11px 13px; font-size: 13.5px; margin-top: 14px;
+        }
+        .warn b { color: var(--warn); }
+
+        .section-title { font-size: 15px; font-weight: 800; margin: 26px 0 10px; }
+        .footer-note { color: var(--faint); font-size: 12.5px; margin-top: 26px; max-width: 74ch; }
+        .toast {
+            position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+            background: var(--surface); color: var(--text);
+            border: 1px solid var(--border-strong); box-shadow: var(--shadow);
+            padding: 10px 16px; border-radius: 999px; font-size: 14px; z-index: 20;
+        }
+
+        @media print {
+            body::before, .controls, .site-nav, .view-tabs, .actions, .footer-note { display: none !important; }
+            .planner { grid-template-columns: 1fr; }
+            .draw-hide { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="site-header">
+            <div class="brand">
+                <span class="brand-dot" aria-hidden="true"></span>
+                <span class="brand-name">Jack Sleath</span>
+                <span class="brand-sep" aria-hidden="true">/</span>
+                <span class="brand-page">Plywood Planner</span>
+            </div>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="../index.html">&larr; Projects</a>
+            </nav>
+        </header>
+
+        <p class="tagline">
+            You know the shape you want, a sloped-nose van body on your kart chassis, but not the exact size yet.
+            Drag the dimensions until it looks right and this works out every plywood panel you need to cut,
+            with a dimensioned drawing, a 3D preview, and a sheet-by-sheet cutting layout.
+        </p>
+        <hr class="rule" />
+
+        <div class="planner">
+            <!-- ============ CONTROLS ============ -->
+            <aside class="panel controls">
+                <div class="panel-body">
+                    <h2>Units</h2>
+                    <div class="unit-row" id="units" role="group" aria-label="Units">
+                        <button class="unit-btn" data-unit="mm" aria-pressed="true">mm</button>
+                        <button class="unit-btn" data-unit="cm" aria-pressed="false">cm</button>
+                        <button class="unit-btn" data-unit="in" aria-pressed="false">inches</button>
+                    </div>
+
+                    <h2>Body dimensions</h2>
+                    <div id="sliders"></div>
+
+                    <h2>Build options</h2>
+                    <label class="check">
+                        <input type="checkbox" id="opt-wind" checked />
+                        <span>Include windscreen panel<br><span class="sub">Uncheck to leave the sloped front open, the side panels are still cut to the slope</span></span>
+                    </label>
+                    <label class="check">
+                        <input type="checkbox" id="opt-floor" />
+                        <span>Include a floor panel<br><span class="sub">Skip it if the body sits straight on the chassis</span></span>
+                    </label>
+                    <label class="check">
+                        <input type="checkbox" id="opt-between" checked />
+                        <span>Panels fit between the sides<br><span class="sub">Roof, front, back &amp; floor are trimmed by 2&times; thickness so the side panels are the outer skins</span></span>
+                    </label>
+
+                    <h2>Plywood sheet</h2>
+                    <div class="two-col">
+                        <div class="mini-field">
+                            <label for="sheet-preset">Common size</label>
+                            <select id="sheet-preset"></select>
+                        </div>
+                        <div class="mini-field">
+                            <label for="sheet-kerf">Saw kerf / gap</label>
+                            <input type="number" id="sheet-kerf" min="0" step="1" />
+                        </div>
+                    </div>
+                    <div class="two-col" style="margin-top:10px">
+                        <div class="mini-field">
+                            <label for="sheet-w">Sheet length</label>
+                            <input type="number" id="sheet-w" min="1" step="1" />
+                        </div>
+                        <div class="mini-field">
+                            <label for="sheet-h">Sheet width</label>
+                            <input type="number" id="sheet-h" min="1" step="1" />
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn primary" id="btn-copy">Copy cut list</button>
+                        <button class="btn" id="btn-share">Copy link</button>
+                        <button class="btn" id="btn-print">Print</button>
+                        <button class="btn" id="btn-reset">Reset</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ============ RESULTS ============ -->
+            <section class="results">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="view-tabs" role="group" aria-label="Preview">
+                            <button data-view="side" aria-pressed="true">Side profile</button>
+                            <button data-view="iso" aria-pressed="false">3D preview</button>
+                        </div>
+                        <div class="drawing">
+                            <div id="view-side"></div>
+                            <div id="view-iso" class="draw-hide"></div>
+                        </div>
+
+                        <div class="stats" id="stats"></div>
+
+                        <div class="section-title">Cut list</div>
+                        <div style="overflow-x:auto">
+                            <table class="cutlist" id="cutlist"></table>
+                        </div>
+
+                        <div id="warnings"></div>
+
+                        <div class="section-title">Cutting layout</div>
+                        <p style="color:var(--muted); font-size:13px; margin:0 0 4px;" id="layout-summary"></p>
+                        <div class="sheets" id="sheets"></div>
+
+                        <p class="footer-note" id="notes"></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        "use strict";
+        const $ = s => document.querySelector(s);
+
+        // ---- units (canonical state is always in mm) --------------------------
+        const UNITS = {
+            mm: { f: 1,    dp: 0, step: 10 },
+            cm: { f: 10,   dp: 1, step: 1  },
+            in: { f: 25.4, dp: 2, step: 0.5 }
+        };
+
+        // slider definitions, ranges in mm
+        const SLIDERS = [
+            { key: "L",     label: "Length (front to back)", min: 500,  max: 3000, hint: "The longest bottom edge" },
+            { key: "W",     label: "Width (side to side)",   min: 400,  max: 1500, hint: "The gap between the two side panels" },
+            { key: "H",     label: "Height (floor to roof)", min: 400,  max: 2000, hint: "Total height of the roof above the floor" },
+            { key: "nose",  label: "Nose height",            min: 0,    max: 1500, hint: "Vertical front before the windscreen starts. 0 = full wedge" },
+            { key: "slope", label: "Windscreen run",         min: 0,    max: 2000, hint: "How far back the sloped front reaches" },
+            { key: "thick", label: "Plywood thickness",      min: 3,    max: 30,   hint: "Nominal board thickness" }
+        ];
+
+        const SHEET_PRESETS = [
+            { label: "Standard 8×4 ft (2440×1220)", w: 2440, h: 1220 },
+            { label: "Metric 2400×1200", w: 2400, h: 1200 },
+            { label: "Half sheet 1220×610", w: 1220, h: 610 },
+            { label: "1220×2440 (portrait)", w: 1220, h: 2440 },
+            { label: "Custom", w: null, h: null }
+        ];
+
+        const DEFAULTS = {
+            unit: "mm",
+            L: 1600, W: 900, H: 1100, nose: 350, slope: 450, thick: 12,
+            kerf: 4, sheetW: 2440, sheetH: 1220, floor: false, between: true, wind: true
+        };
+
+        // panel colours (kept in sync between table + layout)
+        const COLORS = {
+            side:  "#e08a4b",
+            roof:  "#8a6437",
+            wind:  "#c98a3f",
+            nose:  "#a5673a",
+            back:  "#6f8a5a",
+            floor: "#5a7d8a",
+            front: "#a5673a"
+        };
+
+        let state = Object.assign({}, DEFAULTS);
+
+        // ---- helpers ----------------------------------------------------------
+        function u() { return UNITS[state.unit]; }
+        function toDisp(mm) {
+            const v = mm / u().f;
+            return Number(v.toFixed(u().dp));
+        }
+        function fromDisp(v) { return v * u().f; }
+        // format an mm length as a display string (no unit suffix)
+        function fmt(mm) {
+            const v = mm / u().f;
+            let s = v.toFixed(u().dp);
+            if (u().dp > 0) s = s.replace(/\.?0+$/, "");
+            return s;
+        }
+        function fmtU(mm) { return fmt(mm) + " " + state.unit; }
+        function round(v, dp) { const p = Math.pow(10, dp); return Math.round(v * p) / p; }
+
+        // ---- geometry ---------------------------------------------------------
+        // returns everything derived, in mm
+        function geometry() {
+            const L = state.L, W = state.W, H = state.H;
+            const nose = Math.min(state.nose, H);
+            const slopeRun = Math.min(state.slope, L);
+            const rise = Math.max(0, H - nose);
+            const hasWindscreen = slopeRun > 0.5 && rise > 0.5;
+            const slopeLen = hasWindscreen ? Math.sqrt(slopeRun * slopeRun + rise * rise) : 0;
+            const roofLen = Math.max(0, L - (hasWindscreen ? slopeRun : 0));
+            const angle = hasWindscreen ? Math.atan2(rise, slopeRun) * 180 / Math.PI : 90;
+            return { L, W, H, nose, slopeRun, rise, hasWindscreen, slopeLen, roofLen, angle };
+        }
+
+        // width of the "between the sides" panels
+        function innerW(g) {
+            return state.between ? Math.max(1, g.W - 2 * state.thick) : g.W;
+        }
+
+        // list of panels; each: {name, key, qty, a, b, note}  (a×b in mm, a = "width", b = "length")
+        function panels() {
+            const g = geometry();
+            const iw = innerW(g);
+            const list = [];
+            // Side panels: bounding rectangle L × H (pentagon cut from it)
+            list.push({
+                name: "Side", key: "side", qty: 2, a: g.H, b: g.L,
+                note: g.hasWindscreen
+                    ? "Cut the top-front corner off: from " + fmtU(g.nose) + " up the front to " + fmtU(g.slopeRun) + " along the top"
+                    : "Plain rectangle"
+            });
+            // Roof
+            list.push({ name: "Roof", key: "roof", qty: 1, a: iw, b: g.roofLen, note: "Flat top" });
+            if (g.hasWindscreen) {
+                if (state.wind)
+                    list.push({ name: "Windscreen", key: "wind", qty: 1, a: iw, b: g.slopeLen,
+                        note: "Sloped front, " + round(g.angle, 0) + "° from floor" });
+                if (g.nose > 0.5)
+                    list.push({ name: "Nose", key: "nose", qty: 1, a: iw, b: g.nose, note: "Vertical front below the windscreen" });
+            } else {
+                list.push({ name: "Front", key: "front", qty: 1, a: iw, b: g.H, note: "Full-height vertical front" });
+            }
+            // Back
+            list.push({ name: "Back", key: "back", qty: 1, a: iw, b: g.H, note: "Full-height vertical back" });
+            // Floor
+            if (state.floor)
+                list.push({ name: "Floor", key: "floor", qty: 1, a: iw, b: g.L, note: "Sits on the chassis" });
+            return list;
+        }
+
+        // ---- SVG side profile -------------------------------------------------
+        function svgSide() {
+            const g = geometry();
+            const maxW = 560, maxH = 340, pad = 70;
+            const s = Math.min(maxW / g.L, maxH / g.H);
+            const w = g.L * s, h = g.H * s;
+            const X = x => pad + x * s;
+            const Y = z => pad + (g.H - z) * s;   // flip so floor is at bottom
+            const vbW = w + pad * 2, vbH = h + pad * 2;
+
+            // profile points (x = front..back, z = floor..roof)
+            const P = {
+                fb: [0, 0],
+                nt: [0, g.nose],
+                rf: [g.hasWindscreen ? g.slopeRun : 0, g.H],
+                rb: [g.L, g.H],
+                bb: [g.L, 0]
+            };
+            const poly = [P.fb, P.nt, P.rf, P.rb, P.bb]
+                .map(p => X(p[0]) + "," + Y(p[1])).join(" ");
+
+            const parts = [];
+            parts.push('<svg viewBox="0 0 ' + vbW + ' ' + vbH + '" role="img" aria-label="Side profile of the van body with dimensions">');
+            parts.push('<style>.dim{stroke:var(--faint);stroke-width:1}.dt{fill:var(--muted);font:600 12px var(--font-mono)}.el{fill:var(--muted);font:700 11px var(--font-sans)}.en{fill:var(--faint);font:600 10px var(--font-mono)}</style>');
+
+            // side polygon
+            parts.push('<polygon points="' + poly + '" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>');
+
+            // centre label
+            parts.push('<text x="' + X(g.L * 0.55) + '" y="' + Y(g.H * 0.42) + '" text-anchor="middle" class="el">SIDE PANEL ×2</text>');
+            parts.push('<text x="' + X(g.L * 0.55) + '" y="' + (Y(g.H * 0.42) + 15) + '" text-anchor="middle" class="en">' + fmt(g.L) + ' × ' + fmt(g.H) + ' ' + state.unit + '</text>');
+
+            // edge label helper: midpoint of edge, offset outward by (ox,oy)px
+            function edgeLabel(p1, p2, ox, oy, name, dim, anchor) {
+                const mx = (X(p1[0]) + X(p2[0])) / 2 + ox;
+                const my = (Y(p1[1]) + Y(p2[1])) / 2 + oy;
+                parts.push('<text x="' + mx + '" y="' + my + '" text-anchor="' + anchor + '" class="el">' + name + '</text>');
+                parts.push('<text x="' + mx + '" y="' + (my + 14) + '" text-anchor="' + anchor + '" class="en">' + fmt(dim) + ' ' + state.unit + '</text>');
+            }
+            // Floor (bottom)
+            edgeLabel(P.fb, P.bb, 0, 40, "Floor length", g.L, "middle");
+            // Back (right)
+            edgeLabel(P.rb, P.bb, 46, 4, "Back", g.H, "middle");
+            // Roof (top-back segment)
+            edgeLabel(P.rf, P.rb, 0, -34, "Roof", g.roofLen, "middle");
+            if (g.hasWindscreen) {
+                // Windscreen slope
+                const mx = (X(P.nt[0]) + X(P.rf[0])) / 2 - 12;
+                const my = (Y(P.nt[1]) + Y(P.rf[1])) / 2;
+                parts.push('<text x="' + mx + '" y="' + (my - 4) + '" text-anchor="end" class="el">Windscreen' + (state.wind ? '' : ' (open)') + '</text>');
+                parts.push('<text x="' + mx + '" y="' + (my + 11) + '" text-anchor="end" class="en">' + fmt(g.slopeLen) + ' ' + state.unit + '</text>');
+                parts.push('<text x="' + mx + '" y="' + (my + 25) + '" text-anchor="end" class="en">' + round(g.angle, 0) + '°</text>');
+                // Nose (left vertical)
+                if (g.nose > 0.5) edgeLabel(P.fb, P.nt, -46, 4, "Nose", g.nose, "middle");
+            } else {
+                edgeLabel(P.fb, P.nt, -46, 4, "Front", g.H, "middle");
+            }
+
+            // front / back markers
+            parts.push('<text x="' + X(0) + '" y="' + (Y(0) + 58) + '" text-anchor="middle" class="en">FRONT</text>');
+            parts.push('<text x="' + X(g.L) + '" y="' + (Y(0) + 58) + '" text-anchor="middle" class="en">BACK</text>');
+
+            parts.push('</svg>');
+            return parts.join("");
+        }
+
+        // ---- SVG isometric preview -------------------------------------------
+        function svgIso() {
+            const g = geometry();
+            const kx = 0.55, kz = 0.34;      // depth screen offset per unit width
+            // 3D point (x along length, y along width/depth, z height) -> screen
+            function pr(x, y, z) {
+                return { X: x + y * kx, Y: z + y * kz };
+            }
+            const sx = g.hasWindscreen ? g.slopeRun : 0;
+            // profile verts (near y=0, far y=W)
+            const prof = [[0,0],[0,g.nose],[sx,g.H],[g.L,g.H],[g.L,0]];
+            const near = prof.map(p => pr(p[0], 0, p[1]));
+            const far  = prof.map(p => pr(p[0], g.W, p[1]));
+            const all = near.concat(far);
+            let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9;
+            all.forEach(p => { minX=Math.min(minX,p.X);maxX=Math.max(maxX,p.X);minY=Math.min(minY,p.Y);maxY=Math.max(maxY,p.Y); });
+            const boxW = 540, boxH = 360, pad = 30;
+            const s = Math.min((boxW-pad*2)/(maxX-minX), (boxH-pad*2)/(maxY-minY));
+            const w = (maxX-minX)*s + pad*2, h = (maxY-minY)*s + pad*2;
+            const sc = p => (pad + (p.X-minX)*s) + "," + (pad + (maxY-p.Y)*s);
+            const quad = (a,b) => [near[a],near[b],far[b],far[a]].map(sc).join(" ");
+
+            const P = [];
+            P.push('<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="3D preview of the van body">');
+            // far pentagon (faint)
+            P.push('<polygon points="' + far.map(sc).join(" ") + '" fill="var(--accent)" fill-opacity="0.05" stroke="var(--border-strong)" stroke-width="1"/>');
+            // back face (rb-bb)
+            P.push('<polygon points="' + quad(3,4) + '" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent-dim)" stroke-width="1.5" stroke-linejoin="round"/>');
+            // roof (rf-rb)
+            P.push('<polygon points="' + quad(2,3) + '" fill="var(--accent)" fill-opacity="0.30" stroke="var(--accent-dim)" stroke-width="1.5" stroke-linejoin="round"/>');
+            // windscreen (nt-rf)
+            if (g.hasWindscreen)
+                P.push('<polygon points="' + quad(1,2) + '" fill="var(--accent)" fill-opacity="' + (state.wind ? '0.22' : '0') + '" stroke="var(--accent-dim)" stroke-width="1.5" stroke-linejoin="round"' + (state.wind ? '' : ' stroke-dasharray="6 5"') + '/>');
+            // nose (fb-nt)
+            if (g.nose > 0.5)
+                P.push('<polygon points="' + quad(0,1) + '" fill="var(--accent)" fill-opacity="0.38" stroke="var(--accent-dim)" stroke-width="1.5" stroke-linejoin="round"/>');
+            // near side pentagon (on top)
+            P.push('<polygon points="' + near.map(sc).join(" ") + '" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>');
+            P.push('</svg>');
+            return P.join("");
+        }
+
+        // ---- rectangle packing (guillotine, best short-side fit, rotation) ----
+        function pack(rects, sheetW, sheetH, gap) {
+            const sheets = [], free = [], unplaced = [];
+            function addSheet() { sheets.push([]); free.push([{ x: 0, y: 0, w: sheetW, h: sheetH }]); }
+            const items = rects.slice().sort((a, b) =>
+                Math.max(b.w, b.h) - Math.max(a.w, a.h) || (b.w * b.h) - (a.w * a.h));
+            const E = 1e-6;
+            for (const it of items) {
+                const fw = it.w + gap, fh = it.h + gap;
+                const fitsN = fw <= sheetW + E && fh <= sheetH + E;
+                const fitsR = fh <= sheetW + E && fw <= sheetH + E;
+                if (!fitsN && !fitsR) { unplaced.push(it); continue; }
+                let best = null;
+                for (let s = 0; s < sheets.length; s++) {
+                    const fr = free[s];
+                    for (let i = 0; i < fr.length; i++) {
+                        const f = fr[i];
+                        if (fw <= f.w + E && fh <= f.h + E) {
+                            const sc = Math.min(f.w - fw, f.h - fh);
+                            if (!best || sc < best.sc) best = { s, i, rot: false, sc };
+                        }
+                        if (fh <= f.w + E && fw <= f.h + E) {
+                            const sc = Math.min(f.w - fh, f.h - fw);
+                            if (!best || sc < best.sc) best = { s, i, rot: true, sc };
+                        }
+                    }
+                }
+                if (!best) {
+                    addSheet();
+                    const s = sheets.length - 1;
+                    best = { s, i: 0, rot: !fitsN, sc: 0 };
+                }
+                const fr = free[best.s], f = fr[best.i];
+                const pw = best.rot ? fh : fw, ph = best.rot ? fw : fh;
+                sheets[best.s].push({
+                    label: it.label, kind: it.kind, x: f.x, y: f.y,
+                    w: best.rot ? it.h : it.w, h: best.rot ? it.w : it.h, rot: best.rot
+                });
+                const right = { x: f.x + pw, y: f.y, w: f.w - pw, h: ph };
+                const bottom = { x: f.x, y: f.y + ph, w: f.w, h: f.h - ph };
+                fr.splice(best.i, 1);
+                if (right.w > gap + E && right.h > gap + E) fr.push(right);
+                if (bottom.w > gap + E && bottom.h > gap + E) fr.push(bottom);
+            }
+            return { sheets, unplaced };
+        }
+
+        // ---- render everything ------------------------------------------------
+        function render() {
+            const g = geometry();
+
+            // preview
+            $("#view-side").innerHTML = svgSide();
+            $("#view-iso").innerHTML = svgIso();
+
+            // stats
+            const pl = panels();
+            const totalAreaMm = pl.reduce((t, p) => t + p.qty * p.a * p.b, 0);
+            const m2 = totalAreaMm / 1e6, ft2 = totalAreaMm / 92903.04;
+
+            // packing (in mm)
+            const rects = [];
+            pl.forEach(p => { for (let i = 0; i < p.qty; i++) rects.push({ label: p.name, kind: p.key, w: p.a, h: p.b }); });
+            const packed = pack(rects, state.sheetW, state.sheetH, state.kerf);
+            const sheetCount = packed.sheets.length;
+            const sheetArea = state.sheetW * state.sheetH;
+            const eff = sheetCount ? Math.round(100 * totalAreaMm / (sheetCount * sheetArea)) : 0;
+
+            $("#stats").innerHTML =
+                stat("Plywood sheets", sheetCount, fmt(state.sheetW) + "×" + fmt(state.sheetH) + " " + state.unit) +
+                stat("Board area", (m2 < 10 ? m2.toFixed(2) : m2.toFixed(1)), "m²  ·  " + ft2.toFixed(1) + " ft²") +
+                stat("Windscreen", g.hasWindscreen ? fmt(g.slopeLen) : "—", g.hasWindscreen ? state.unit + " @ " + round(g.angle, 0) + "°" : "no slope") +
+                stat("Sheet use", eff + "%", "of " + sheetCount + " sheet" + (sheetCount === 1 ? "" : "s"));
+
+            // cut list
+            const head = '<thead><tr><th>Panel</th><th class="num">Qty</th><th class="num">Width</th><th class="num">Length</th><th>Notes</th></tr></thead>';
+            let rows = "";
+            pl.forEach(p => {
+                const c = COLORS[p.key] || "var(--accent)";
+                rows += '<tr>' +
+                    '<td><span class="swatch" style="background:' + c + '"></span>' + p.name + '</td>' +
+                    '<td class="num">' + p.qty + '</td>' +
+                    '<td class="num">' + fmt(p.a) + '</td>' +
+                    '<td class="num">' + fmt(p.b) + '</td>' +
+                    '<td class="part-note">' + p.note + '</td></tr>';
+            });
+            const totalPieces = pl.reduce((t, p) => t + p.qty, 0);
+            const foot = '<tfoot><tr><td>Total</td><td class="num">' + totalPieces + '</td><td class="num" colspan="2">' +
+                m2.toFixed(2) + ' m²</td><td class="part-note">all sizes in ' + state.unit + '</td></tr></tfoot>';
+            $("#cutlist").innerHTML = head + '<tbody>' + rows + '</tbody>' + foot;
+
+            // warnings
+            let warnHTML = "";
+            if (packed.unplaced.length) {
+                const names = Array.from(new Set(packed.unplaced.map(r => r.label))).join(", ");
+                warnHTML += '<div class="warn"><span>⚠️</span><span><b>Too big for one sheet:</b> ' +
+                    names + '. These are larger than your ' + fmt(state.sheetW) + '×' + fmt(state.sheetH) + ' ' + state.unit +
+                    ' sheet, so you\'ll need to join boards or use a bigger sheet. They\'re left out of the layout below.</span></div>';
+            }
+            if (state.nose > state.H)
+                warnHTML += '<div class="warn"><span>⚠️</span><span>Nose height is taller than the body, so it\'s been capped at the roof (flat front).</span></div>';
+            if (state.slope >= state.L && g.hasWindscreen)
+                warnHTML += '<div class="warn"><span>⚠️</span><span>Windscreen run reaches the very back, there\'s no flat roof left.</span></div>';
+            $("#warnings").innerHTML = warnHTML;
+
+            // layout
+            renderSheets(packed.sheets);
+            $("#layout-summary").textContent = sheetCount === 0
+                ? "Nothing to lay out yet."
+                : "Packed into " + sheetCount + " sheet" + (sheetCount === 1 ? "" : "s") +
+                  " of " + fmt(state.sheetW) + "×" + fmt(state.sheetH) + " " + state.unit +
+                  " (" + eff + "% used, includes a " + fmt(state.kerf) + " " + state.unit + " saw gap).";
+
+            // notes
+            $("#notes").innerHTML =
+                "Sizes are outer dimensions. " +
+                (state.between
+                    ? "The roof, front, back and floor panels are trimmed by 2× thickness (" + fmtU(2 * state.thick) + ") so they slot between the side panels. "
+                    : "No thickness allowance is applied, panels are shown at full width. ") +
+                "Side panels are shown as their bounding rectangle, cut the sloped corner off after. Always double-check against your real chassis before cutting.";
+
+            updateURL();
+        }
+
+        function stat(k, v, sub) {
+            return '<div class="stat"><div class="k">' + k + '</div><div class="v">' + v +
+                (sub ? ' <small>' + sub + '</small>' : '') + '</div></div>';
+        }
+
+        function renderSheets(sheets) {
+            const host = $("#sheets");
+            if (!sheets.length) { host.innerHTML = ""; return; }
+            const dispW = 440;
+            let html = "";
+            sheets.forEach((parts, idx) => {
+                const s = dispW / state.sheetW;
+                const w = state.sheetW * s, h = state.sheetH * s;
+                let inner = '<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="none" stroke="var(--border-strong)" stroke-width="1.5"/>';
+                parts.forEach(p => {
+                    const c = COLORS[p.kind] || "var(--accent)";
+                    const px = p.x * s, py = p.y * s, pw = p.w * s, ph = p.h * s;
+                    inner += '<rect x="' + px + '" y="' + py + '" width="' + pw + '" height="' + ph + '" fill="' + c + '" fill-opacity="0.55" stroke="' + c + '" stroke-width="1"/>';
+                    if (pw > 34 && ph > 16) {
+                        const cx = px + pw / 2, cy = py + ph / 2;
+                        inner += '<text x="' + cx + '" y="' + (cy - 2) + '" text-anchor="middle" style="fill:var(--text);font:700 10px var(--font-sans)">' + p.label + (p.rot ? " ↻" : "") + '</text>';
+                        inner += '<text x="' + cx + '" y="' + (cy + 10) + '" text-anchor="middle" style="fill:var(--text);opacity:.75;font:600 9px var(--font-mono)">' + fmt(p.w) + '×' + fmt(p.h) + '</text>';
+                    }
+                });
+                html += '<figure class="sheet-fig" style="margin:0"><svg viewBox="0 0 ' + w + ' ' + h + '">' + inner +
+                    '</svg><figcaption class="cap">Sheet ' + (idx + 1) + ' · ' + fmt(state.sheetW) + '×' + fmt(state.sheetH) + ' ' + state.unit + '</figcaption></figure>';
+            });
+            host.innerHTML = html;
+        }
+
+        // ---- build the control UI --------------------------------------------
+        function buildSliders() {
+            const host = $("#sliders");
+            host.innerHTML = SLIDERS.map(sd =>
+                '<div class="field" data-key="' + sd.key + '">' +
+                    '<div class="field-top">' +
+                        '<label for="rng-' + sd.key + '">' + sd.label + '</label>' +
+                        '<span class="field-val"><input type="number" id="num-' + sd.key + '" /><span class="u">' + '</span></span>' +
+                    '</div>' +
+                    '<input type="range" id="rng-' + sd.key + '" />' +
+                    '<div class="field-hint">' + sd.hint + '</div>' +
+                '</div>'
+            ).join("");
+        }
+
+        function refreshControls() {
+            // sliders + number inputs (ranges live in mm; display converts)
+            SLIDERS.forEach(sd => {
+                const rng = $("#rng-" + sd.key), num = $("#num-" + sd.key);
+                rng.min = sd.min; rng.max = sd.max; rng.step = u().step * u().f;
+                rng.value = state[sd.key];
+                num.step = u().step; num.value = toDisp(state[sd.key]);
+                const uEl = $("#num-" + sd.key).parentElement.querySelector(".u");
+                if (uEl) uEl.textContent = state.unit;
+            });
+            // units buttons
+            document.querySelectorAll(".unit-btn").forEach(b =>
+                b.setAttribute("aria-pressed", String(b.dataset.unit === state.unit)));
+            // sheet fields
+            $("#sheet-w").value = toDisp(state.sheetW);
+            $("#sheet-h").value = toDisp(state.sheetH);
+            $("#sheet-kerf").value = toDisp(state.kerf);
+            $("#sheet-w").step = $("#sheet-h").step = u().step;
+            // sheet preset select
+            matchPreset();
+            // options
+            $("#opt-wind").checked = state.wind;
+            $("#opt-floor").checked = state.floor;
+            $("#opt-between").checked = state.between;
+        }
+
+        function buildPresetSelect() {
+            $("#sheet-preset").innerHTML = SHEET_PRESETS.map((p, i) =>
+                '<option value="' + i + '">' + p.label + '</option>').join("");
+        }
+        function matchPreset() {
+            const idx = SHEET_PRESETS.findIndex(p => p.w === state.sheetW && p.h === state.sheetH);
+            $("#sheet-preset").value = idx >= 0 ? idx : (SHEET_PRESETS.length - 1);
+        }
+
+        // ---- URL state --------------------------------------------------------
+        const URLKEYS = ["unit","L","W","H","nose","slope","thick","kerf","sheetW","sheetH"];
+        function updateURL() {
+            const p = new URLSearchParams();
+            URLKEYS.forEach(k => p.set(k, state[k]));
+            p.set("floor", state.floor ? 1 : 0);
+            p.set("between", state.between ? 1 : 0);
+            p.set("wind", state.wind ? 1 : 0);
+            history.replaceState(null, "", location.pathname + "?" + p.toString());
+        }
+        function loadURL() {
+            const p = new URLSearchParams(location.search);
+            if (![...p.keys()].length) return;
+            if (UNITS[p.get("unit")]) state.unit = p.get("unit");
+            ["L","W","H","nose","slope","thick","kerf","sheetW","sheetH"].forEach(k => {
+                const v = parseFloat(p.get(k));
+                if (!isNaN(v)) state[k] = v;
+            });
+            if (p.has("floor")) state.floor = p.get("floor") === "1";
+            if (p.has("between")) state.between = p.get("between") === "1";
+            if (p.has("wind")) state.wind = p.get("wind") === "1";
+        }
+
+        // ---- events -----------------------------------------------------------
+        function wire() {
+            SLIDERS.forEach(sd => {
+                const rng = $("#rng-" + sd.key), num = $("#num-" + sd.key);
+                rng.addEventListener("input", () => {
+                    state[sd.key] = parseFloat(rng.value);
+                    num.value = toDisp(state[sd.key]);
+                    render();
+                });
+                num.addEventListener("change", () => {
+                    let mm = fromDisp(parseFloat(num.value) || 0);
+                    mm = Math.max(sd.min, Math.min(sd.max, mm));
+                    state[sd.key] = mm;
+                    rng.value = mm; num.value = toDisp(mm);
+                    render();
+                });
+            });
+
+            document.querySelectorAll(".unit-btn").forEach(b => {
+                b.addEventListener("click", () => {
+                    state.unit = b.dataset.unit;   // canonical is mm, so nothing to convert
+                    refreshControls();
+                    render();
+                });
+            });
+
+            $("#opt-wind").addEventListener("change", e => { state.wind = e.target.checked; render(); });
+            $("#opt-floor").addEventListener("change", e => { state.floor = e.target.checked; render(); });
+            $("#opt-between").addEventListener("change", e => { state.between = e.target.checked; render(); });
+
+            $("#sheet-preset").addEventListener("change", e => {
+                const p = SHEET_PRESETS[+e.target.value];
+                if (p.w) { state.sheetW = p.w; state.sheetH = p.h; refreshControls(); render(); }
+            });
+            $("#sheet-w").addEventListener("change", e => { state.sheetW = Math.max(1, fromDisp(parseFloat(e.target.value) || 1)); matchPreset(); render(); });
+            $("#sheet-h").addEventListener("change", e => { state.sheetH = Math.max(1, fromDisp(parseFloat(e.target.value) || 1)); matchPreset(); render(); });
+            $("#sheet-kerf").addEventListener("change", e => { state.kerf = Math.max(0, fromDisp(parseFloat(e.target.value) || 0)); render(); });
+
+            // view tabs
+            document.querySelectorAll(".view-tabs button").forEach(b => {
+                b.addEventListener("click", () => {
+                    document.querySelectorAll(".view-tabs button").forEach(x => x.setAttribute("aria-pressed", "false"));
+                    b.setAttribute("aria-pressed", "true");
+                    const side = b.dataset.view === "side";
+                    $("#view-side").classList.toggle("draw-hide", !side);
+                    $("#view-iso").classList.toggle("draw-hide", side);
+                });
+            });
+
+            $("#btn-reset").addEventListener("click", () => {
+                state = Object.assign({}, DEFAULTS);
+                refreshControls(); render();
+            });
+            $("#btn-share").addEventListener("click", async () => {
+                updateURL();
+                try { await navigator.clipboard.writeText(location.href); toast("Link copied"); }
+                catch { toast("Copy the address bar URL to share"); }
+            });
+            $("#btn-print").addEventListener("click", () => window.print());
+            $("#btn-copy").addEventListener("click", async () => {
+                try { await navigator.clipboard.writeText(cutListText()); toast("Cut list copied"); }
+                catch { toast("Couldn't copy to clipboard"); }
+            });
+        }
+
+        function cutListText() {
+            const g = geometry();
+            const pl = panels();
+            const lines = [];
+            lines.push("GO-KART VAN BODY — PLYWOOD CUT LIST");
+            lines.push("Body: " + fmtU(g.L) + " L × " + fmtU(g.W) + " W × " + fmtU(g.H) + " H");
+            lines.push("Nose " + fmtU(g.nose) + ", windscreen run " + fmtU(g.slopeRun) +
+                (g.hasWindscreen ? " (" + fmt(g.slopeLen) + " " + state.unit + " @ " + round(g.angle,0) + "°)" : "") );
+            lines.push("Thickness " + fmtU(state.thick) + (state.between ? ", panels fit between sides" : "") + ". Sizes in " + state.unit + ".");
+            lines.push("");
+            lines.push("PANEL           QTY   WIDTH x LENGTH   NOTES");
+            pl.forEach(p => {
+                const nm = (p.name).padEnd(14).slice(0,14);
+                const size = (fmt(p.a) + " x " + fmt(p.b)).padEnd(15);
+                lines.push(nm + "  " + String(p.qty).padStart(2) + "   " + size + "  " + p.note);
+            });
+            lines.push("");
+            const rects = [];
+            pl.forEach(p => { for (let i=0;i<p.qty;i++) rects.push({label:p.name,kind:p.key,w:p.a,h:p.b}); });
+            const packed = pack(rects, state.sheetW, state.sheetH, state.kerf);
+            lines.push("Plywood sheets needed: " + packed.sheets.length + " × " + fmt(state.sheetW) + "×" + fmt(state.sheetH) + " " + state.unit);
+            return lines.join("\n");
+        }
+
+        function toast(msg) {
+            const t = document.createElement("div");
+            t.className = "toast"; t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 1700);
+        }
+
+        // ---- init -------------------------------------------------------------
+        loadURL();
+        buildSliders();
+        buildPresetSelect();
+        refreshControls();
+        wire();
+        render();
+    })();
+    </script>
+</body>
+</html>
