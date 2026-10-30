@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visualiser - Jack Sleath</title>
+    <meta name="description" content="Paste a YouTube or YouTube Music playlist and watch an old-school audio visualiser react to it." />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jack Sleath" />
+    <meta property="og:title" content="Visualiser" />
+    <meta property="og:description" content="Paste a YouTube or YouTube Music playlist and watch an old-school audio visualiser react to it." />
+    <meta property="og:url" content="https://jack-sleath.dev/visualiser/" />
+
+    <style>
+        :root {
+            --panel:        rgba(12, 14, 22, 0.82);
+            --panel-solid:  #0c0e16;
+            --text:         #e9ecf5;
+            --muted:        #8b93a7;
+            --accent:       #7cf0c8;
+            --accent-dim:   #3fae8c;
+            --accent-soft:  rgba(124, 240, 200, 0.14);
+            --danger:       #ff7a8a;
+            --border:       rgba(255, 255, 255, 0.10);
+            --border-strong:rgba(255, 255, 255, 0.20);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+            background: #000;
+            color: var(--text);
+            font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        #mdCanvas { display: none; }
+        body.milkdrop #mdCanvas { display: block; }
+        body.milkdrop #cv { display: none; }
+
+        .ui { transition: opacity 0.5s ease; }
+        body.idle .ui { opacity: 0; pointer-events: none; }
+        body.idle { cursor: none; }
+
+        .panel {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 12px;
+            background: var(--panel);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            display: grid;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .row .grow { flex: 1 1 220px; min-width: 0; }
+
+        input[type="text"], select {
+            height: 36px;
+            padding: 0 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            border: 1px solid var(--border-strong);
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        select option { background: var(--panel-solid); }
+
+        input[type="text"]:focus, select:focus, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 1px;
+        }
+
+        button {
+            height: 36px;
+            min-width: 36px;
+            padding: 0 12px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+            border: 1px solid var(--border-strong);
+            border-radius: 8px;
+            font: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        button:hover { background: rgba(255, 255, 255, 0.12); }
+        button:disabled { opacity: 0.4; cursor: default; }
+
+        button.primary {
+            background: var(--accent);
+            color: #04140e;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        button.primary:hover { background: #a2f7da; }
+
+        button.on {
+            background: var(--accent-soft);
+            border-color: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .now {
+            flex: 1 1 200px;
+            min-width: 0;
+            color: var(--muted);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .now strong { color: var(--text); font-weight: 600; }
+
+        .status {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .status.live { color: var(--accent); }
+        .status.error { color: var(--danger); }
+
+        label.check {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--muted);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .md-only { display: none; }
+        body.milkdrop .md-only { display: inline-flex; }
+        body.milkdrop select.md-only { display: inline-block; }
+
+        #presetSelect { max-width: 260px; }
+
+        .player-card {
+            position: fixed;
+            left: 16px;
+            bottom: 16px;
+            width: 288px;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #000;
+            z-index: 10;
+        }
+
+        .player-card.empty { display: none; }
+
+        .player-card iframe, .player-card #player {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: 0;
+        }
+
+        .hint {
+            position: fixed;
+            left: 50%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+            width: min(520px, calc(100% - 32px));
+            padding: 18px 20px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--muted);
+            line-height: 1.55;
+            z-index: 5;
+        }
+
+        .hint h1 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            color: var(--text);
+        }
+
+        .hint ol { margin: 0; padding-left: 20px; }
+        .hint kbd, .keys kbd {
+            padding: 1px 6px;
+            border: 1px solid var(--border-strong);
+            border-radius: 4px;
+            font: 12px ui-monospace, Consolas, monospace;
+            color: var(--text);
+        }
+
+        .hint.hidden { display: none; }
+
+        .keys {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right;
+            line-height: 1.9;
+            z-index: 10;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%);
+            padding: 8px 14px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .toast.show { opacity: 1; }
+
+        @media (max-width: 640px) {
+            .panel { top: 8px; left: 8px; right: 8px; }
+            .player-card { width: 200px; left: 8px; bottom: 8px; }
+            .keys { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+<canvas id="mdCanvas"></canvas>
+
+<div class="panel ui" id="panel">
+    <form class="row" id="loadForm">
+        <input type="text" class="grow" id="urlInput" placeholder="Paste a YouTube or YouTube Music playlist (or video) link" autocomplete="off" spellcheck="false" />
+        <button type="submit" class="primary">Load</button>
+    </form>
+
+    <div class="row">
+        <button type="button" id="prevBtn" title="Previous (P)" disabled>&#9198;</button>
+        <button type="button" id="playBtn" title="Play / pause (Space)" disabled>&#9654;</button>
+        <button type="button" id="nextBtn" title="Next (N)" disabled>&#9197;</button>
+        <button type="button" id="shuffleBtn" title="Shuffle" disabled>Shuffle</button>
+        <div class="now" id="nowPlaying">Nothing loaded</div>
+    </div>
+
+    <div class="row">
+        <button type="button" class="primary" id="captureBtn">Capture tab audio</button>
+        <button type="button" id="micBtn" title="Use microphone input instead">Mic</button>
+        <button type="button" id="stopBtn" title="Stop listening" disabled>Stop</button>
+        <span class="status" id="status">Not listening</span>
+    </div>
+
+    <div class="row">
+        <select id="modeSelect" title="Visual (V)">
+            <option value="spectrum">Spectrum</option>
+            <option value="scope">Scope</option>
+            <option value="swirl">Swirl</option>
+            <option value="tunnel">Tunnel</option>
+            <option value="milkdrop">MilkDrop</option>
+        </select>
+        <select id="presetSelect" class="md-only" title="MilkDrop preset"></select>
+        <button type="button" id="randomBtn" class="md-only" title="Random preset (R)">Random</button>
+        <label class="check md-only"><input type="checkbox" id="cycleCheck" checked /> Auto-change</label>
+        <span style="flex:1"></span>
+        <button type="button" id="fsBtn" title="Fullscreen (F)">Fullscreen</button>
+    </div>
+</div>
+
+<div class="hint ui" id="hint">
+    <h1>Visualiser</h1>
+    <ol>
+        <li>Paste a YouTube or YouTube Music playlist link above and press <strong>Load</strong>.</li>
+        <li>Press <strong>Capture tab audio</strong>, choose <em>this tab</em>, and make sure <strong>Also share tab audio</strong> is ticked.</li>
+        <li>Pick a visual, hit <kbd>F</kbd> for fullscreen, and leave the mouse alone.</li>
+    </ol>
+    <p style="margin:10px 0 0">Works in Chrome and Edge. YouTube won't let pages read its audio directly, so the visualiser listens to the tab instead.</p>
+</div>
+
+<div class="player-card ui empty" id="playerCard"><div id="player"></div></div>
+
+<div class="keys ui">
+    <kbd>Space</kbd> play/pause &middot; <kbd>N</kbd>/<kbd>P</kbd> track<br />
+    <kbd>V</kbd> visual &middot; <kbd>R</kbd> random preset &middot; <kbd>F</kbd> fullscreen &middot; <kbd>H</kbd> hide UI
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+    const $ = (s) => document.querySelector(s);
+
+    const store = {
+        get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+        set(k, v) { try { localStorage.setItem(k, v); } catch { /* private mode etc */ } },
+    };
+
+    const BUTTERCHURN_JS = 'https://cdn.jsdelivr.net/npm/butterchurn@2.6.7/lib/butterchurn.min.js';
+    const PRESETS_JS = 'https://cdn.jsdelivr.net/npm/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js';
+    const PRESET_SECONDS = 25;
+
+    const els = {
+        urlInput: $('#urlInput'), loadForm: $('#loadForm'),
+        prev: $('#prevBtn'), play: $('#playBtn'), next: $('#nextBtn'), shuffle: $('#shuffleBtn'),
+        now: $('#nowPlaying'),
+        capture: $('#captureBtn'), mic: $('#micBtn'), stop: $('#stopBtn'), status: $('#status'),
+        mode: $('#modeSelect'), preset: $('#presetSelect'), random: $('#randomBtn'), cycle: $('#cycleCheck'),
+        fs: $('#fsBtn'), hint: $('#hint'), playerCard: $('#playerCard'), toast: $('#toast'),
+        cv: $('#cv'), md: $('#mdCanvas'),
+    };
+
+    let toastTimer;
+    function toast(msg) {
+        els.toast.textContent = msg;
+        els.toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => els.toast.classList.remove('show'), 2200);
+    }
+
+    function setStatus(text, kind = '') {
+        els.status.textContent = text;
+        els.status.className = 'status' + (kind ? ' ' + kind : '');
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* YouTube                                                             */
+    /* ------------------------------------------------------------------ */
+
+    // Accepts youtube.com, music.youtube.com, youtu.be, m.youtube.com links,
+    // bare playlist IDs and bare video IDs.
+    function parseYouTube(raw) {
+        const input = raw.trim();
+        if (!input) return null;
+        if (/^[\w-]{11}$/.test(input)) return { video: input };
+        if (/^(VL)?(PL|OLAK5uy_|RDCLAK5uy_|UU|FL|OL|RD)[\w-]+$/.test(input)) return { list: input.replace(/^VL/, '') };
+
+        let url;
+        try { url = new URL(/^\w+:\/\//.test(input) ? input : 'https://' + input); } catch { return null; }
+        if (!/(^|\.)youtube\.com$|(^|\.)youtu\.be$|(^|\.)youtube-nocookie\.com$/.test(url.hostname)) return null;
+
+        let list = url.searchParams.get('list');
+        let video = url.searchParams.get('v');
+        const index = parseInt(url.searchParams.get('index'), 10);
+
+        // music.youtube.com/browse/VLPLxxxx
+        const browse = url.pathname.match(/^\/browse\/VL([\w-]+)/);
+        if (!list && browse) list = browse[1];
+
+        if (!video && /youtu\.be$/.test(url.hostname)) video = url.pathname.slice(1, 12);
+        if (!video) {
+            const m = url.pathname.match(/\/(?:embed|shorts|live|v)\/([\w-]{11})/);
+            if (m) video = m[1];
+        }
+
+        if (list) list = list.replace(/^VL/, '');
+        if (list === 'LM' || list === 'LL' || list === 'WL') return { error: 'private' };
+        if (!list && !video) return null;
+        return { list, video, index: Number.isFinite(index) && index > 0 ? index - 1 : 0 };
+    }
+
+    let player = null;
+    let playerReady = false;
+    let pending = null;
+    let shuffleOn = false;
+    let errorSkips = 0;
+
+    function loadYouTubeApi() {
+        if (window.YT || document.querySelector('script[data-yt]')) return;
+        const s = document.createElement('script');
+        s.src = 'https://www.youtube.com/iframe_api';
+        s.dataset.yt = '1';
+        document.head.append(s);
+    }
+
+    window.onYouTubeIframeAPIReady = () => {
+        player = new YT.Player('player', {
+            width: '100%',
+            height: '100%',
+            playerVars: { playsinline: 1, rel: 0, autoplay: 0 },
+            events: {
+                onReady() {
+                    playerReady = true;
+                    if (pending) { loadSource(pending.src, pending.autoplay); pending = null; }
+                },
+                onStateChange: onPlayerState,
+                onError: onPlayerError,
+            },
+        });
+    };
+
+    function loadSource(src, autoplay = true) {
+        els.playerCard.classList.remove('empty');
+        if (!playerReady) {
+            pending = { src, autoplay };
+            loadYouTubeApi();
+            return;
+        }
+        errorSkips = 0;
+        if (src.list) {
+            const opts = { listType: 'playlist', list: src.list, index: src.index || 0 };
+            autoplay ? player.loadPlaylist(opts) : player.cuePlaylist(opts);
+        } else {
+            autoplay ? player.loadVideoById(src.video) : player.cueVideoById(src.video);
+        }
+        [els.prev, els.play, els.next].forEach((b) => (b.disabled = false));
+        els.shuffle.disabled = !src.list;
+        els.prev.disabled = els.next.disabled = !src.list;
+        els.now.textContent = 'Loading...';
+    }
+
+    function onPlayerState(e) {
+        const playing = e.data === YT.PlayerState.PLAYING;
+        els.play.innerHTML = playing ? '&#10074;&#10074;' : '&#9654;';
+        if (playing) errorSkips = 0;
+        updateNowPlaying();
+    }
+
+    function onPlayerError(e) {
+        // 100: removed/private, 101/150: owner disabled embedding. Skip ahead in a playlist.
+        const list = player.getPlaylist && player.getPlaylist();
+        if (list && list.length > 1 && errorSkips < list.length) {
+            errorSkips++;
+            toast("That one can't be embedded, skipping");
+            setTimeout(() => player.nextVideo(), 800);
+        } else if (e.data === 101 || e.data === 150) {
+            toast("The uploader doesn't allow this to be played outside YouTube");
+        } else {
+            toast("YouTube couldn't play that (it may be private or removed)");
+        }
+    }
+
+    function updateNowPlaying() {
+        if (!playerReady) return;
+        const data = player.getVideoData ? player.getVideoData() : null;
+        const title = data && data.title;
+        const list = player.getPlaylist && player.getPlaylist();
+        const idx = player.getPlaylistIndex ? player.getPlaylistIndex() : -1;
+        const pos = list && list.length && idx >= 0 ? `${idx + 1}/${list.length} &middot; ` : '';
+        if (title) {
+            els.now.innerHTML = pos + '<strong></strong>' + (data.author ? ' &middot; <span></span>' : '');
+            els.now.querySelector('strong').textContent = title;
+            if (data.author) els.now.querySelector('span').textContent = data.author;
+            els.now.title = title;
+        }
+    }
+
+    function togglePlay() {
+        if (!playerReady) return;
+        player.getPlayerState() === YT.PlayerState.PLAYING ? player.pauseVideo() : player.playVideo();
+    }
+
+    els.loadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const src = parseYouTube(els.urlInput.value);
+        if (!src) { toast("That doesn't look like a YouTube link"); return; }
+        if (src.error === 'private') { toast("Liked/Watch Later lists are private, so they can't be embedded"); return; }
+        store.set('viz.url', els.urlInput.value.trim());
+        loadSource(src, true);
+        els.urlInput.blur();
+    });
+
+    els.prev.addEventListener('click', () => playerReady && player.previousVideo());
+    els.next.addEventListener('click', () => playerReady && player.nextVideo());
+    els.play.addEventListener('click', togglePlay);
+    els.shuffle.addEventListener('click', () => {
+        if (!playerReady) return;
+        shuffleOn = !shuffleOn;
+        player.setShuffle(shuffleOn);
+        els.shuffle.classList.toggle('on', shuffleOn);
+        if (shuffleOn) player.playVideoAt(0);
+        toast(shuffleOn ? 'Shuffle on' : 'Shuffle off');
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Audio                                                               */
+    /* ------------------------------------------------------------------ */
+
+    let actx = null;
+    let analyser = null;
+    let sourceNode = null;
+    let stream = null;
+    let freq, wave;
+
+    function ensureAudio() {
+        if (!actx) {
+            actx = new AudioContext();
+            analyser = actx.createAnalyser();
+            analyser.fftSize = 2048;
+            analyser.smoothingTimeConstant = 0.75;
+            freq = new Uint8Array(analyser.frequencyBinCount);
+            wave = new Uint8Array(analyser.fftSize);
+        }
+        if (actx.state === 'suspended') actx.resume();
+    }
+
+    function stopSource() {
+        if (sourceNode) {
+            try { sourceNode.disconnect(); } catch { /* already gone */ }
+            sourceNode = null;
+        }
+        if (stream) {
+            stream.getTracks().forEach((t) => t.stop());
+            stream = null;
+        }
+        els.stop.disabled = true;
+        els.capture.classList.remove('on');
+        els.mic.classList.remove('on');
+    }
+
+    function useStream(s, label, btn) {
+        stopSource();
+        stream = s;
+        sourceNode = actx.createMediaStreamSource(s);
+        sourceNode.connect(analyser);
+        if (md) md.connectAudio(sourceNode);
+        s.getAudioTracks()[0].addEventListener('ended', () => {
+            if (stream === s) { stopSource(); setStatus('Stopped (sharing ended)'); }
+        });
+        els.stop.disabled = false;
+        btn.classList.add('on');
+        setStatus(label, 'live');
+        els.hint.classList.add('hidden');
+    }
+
+    async function captureTab() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+            setStatus('Tab capture needs Chrome or Edge', 'error');
+            return;
+        }
+        ensureAudio();
+        let s;
+        try {
+            s = await navigator.mediaDevices.getDisplayMedia({
+                video: { displaySurface: 'browser', frameRate: { ideal: 1 } },
+                audio: {
+                    echoCancellation: false,
+                    noiseSuppression: false,
+                    autoGainControl: false,
+                    suppressLocalAudioPlayback: false,
+                },
+                preferCurrentTab: true,
+                selfBrowserSurface: 'include',
+                surfaceSwitching: 'exclude',
+                systemAudio: 'include',
+            });
+        } catch (err) {
+            setStatus(err.name === 'NotAllowedError' ? 'Capture cancelled' : 'Capture failed: ' + err.message, 'error');
+            return;
+        }
+        if (!s.getAudioTracks().length) {
+            s.getTracks().forEach((t) => t.stop());
+            setStatus('No audio shared. Tick "Also share tab audio" and try again', 'error');
+            return;
+        }
+        // The video track has to exist for getDisplayMedia, but we only want the audio.
+        // Keep it alive (stopping it can end the whole capture) and just ignore it.
+        useStream(s, 'Listening to this tab', els.capture);
+        if (playerReady && player.getPlayerState() !== YT.PlayerState.PLAYING) player.playVideo();
+    }
+
+    async function useMic() {
+        ensureAudio();
+        try {
+            const s = await navigator.mediaDevices.getUserMedia({
+                audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false },
+            });
+            useStream(s, 'Listening to the microphone', els.mic);
+        } catch (err) {
+            setStatus('Microphone blocked: ' + err.message, 'error');
+        }
+    }
+
+    els.capture.addEventListener('click', captureTab);
+    els.mic.addEventListener('click', useMic);
+    els.stop.addEventListener('click', () => { stopSource(); setStatus('Not listening'); });
+
+    // Per-frame audio features, shared by all built-in visuals.
+    const audio = { level: 0, bass: 0, mid: 0, treble: 0, beat: 0, bassAvg: 0, lastBeat: 0 };
+
+    function bandAvg(from, to) {
+        let sum = 0;
+        for (let i = from; i < to; i++) sum += freq[i];
+        return sum / ((to - from) * 255);
+    }
+
+    function analyse(now) {
+        if (!analyser) {
+            audio.level = audio.bass = audio.mid = audio.treble = 0;
+            audio.beat *= 0.9;
+            return;
+        }
+        analyser.getByteFrequencyData(freq);
+        analyser.getByteTimeDomainData(wave);
+        // ~23Hz per bin at 48kHz: bass ~20-190Hz, mid ~190Hz-2.8kHz, treble ~2.8-11kHz
+        audio.bass = bandAvg(1, 8);
+        audio.mid = bandAvg(8, 120);
+        audio.treble = bandAvg(120, 480);
+        audio.level = audio.bass * 0.5 + audio.mid * 0.35 + audio.treble * 0.15;
+        audio.bassAvg = audio.bassAvg * 0.95 + audio.bass * 0.05;
+        if (audio.bass > audio.bassAvg * 1.25 && audio.bass > 0.3 && now - audio.lastBeat > 220) {
+            audio.beat = 1;
+            audio.lastBeat = now;
+        } else {
+            audio.beat *= 0.88;
+        }
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Canvas + built-in visuals                                           */
+    /* ------------------------------------------------------------------ */
+
+    const g = els.cv.getContext('2d');
+    const buffer = document.createElement('canvas');
+    const bg = buffer.getContext('2d');
+    let W = 0, H = 0, DPR = 1;
+
+    function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = Math.floor(window.innerWidth * DPR);
+        H = Math.floor(window.innerHeight * DPR);
+        els.cv.width = buffer.width = W;
+        els.cv.height = buffer.height = H;
+        g.fillStyle = '#000';
+        g.fillRect(0, 0, W, H);
+        if (md) {
+            els.md.width = W;
+            els.md.height = H;
+            md.setRendererSize(window.innerWidth, window.innerHeight, { pixelRatio: DPR });
+        }
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    let hue = 180;
+
+    function fade(alpha) {
+        g.globalCompositeOperation = 'source-over';
+        g.fillStyle = `rgba(0,0,0,${alpha})`;
+        g.fillRect(0, 0, W, H);
+    }
+
+    // Log-spaced bars with falling peak caps and a reflection.
+    const BARS = 72;
+    const peaks = new Float32Array(BARS);
+    const barVals = new Float32Array(BARS);
+
+    function drawSpectrum() {
+        fade(0.35);
+        const minBin = 2, maxBin = 700;
+        const baseY = H * 0.72;
+        const gap = Math.max(1, W / BARS * 0.18);
+        const bw = W / BARS - gap;
+        for (let i = 0; i < BARS; i++) {
+            const a = Math.floor(minBin * Math.pow(maxBin / minBin, i / BARS));
+            const b = Math.max(a + 1, Math.floor(minBin * Math.pow(maxBin / minBin, (i + 1) / BARS)));
+            let v = 0;
+            if (freq) for (let k = a; k < b; k++) v = Math.max(v, freq[k]);
+            v = Math.pow(v / 255, 1.6);
+            barVals[i] = v;
+            peaks[i] = v > peaks[i] ? v : Math.max(0, peaks[i] - 0.008);
+        }
+        for (let i = 0; i < BARS; i++) {
+            const x = i * (bw + gap) + gap / 2;
+            const h = barVals[i] * H * 0.62;
+            const c = (hue + i * 2.2) % 360;
+            const grad = g.createLinearGradient(0, baseY - h, 0, baseY);
+            grad.addColorStop(0, `hsl(${c},95%,70%)`);
+            grad.addColorStop(1, `hsl(${(c + 40) % 360},90%,35%)`);
+            g.fillStyle = grad;
+            g.fillRect(x, baseY - h, bw, h);
+            g.fillStyle = `hsla(${c},90%,45%,0.25)`;
+            g.fillRect(x, baseY + 4 * DPR, bw, h * 0.35);
+            g.fillStyle = `hsl(${c},100%,85%)`;
+            g.fillRect(x, baseY - peaks[i] * H * 0.62 - 4 * DPR, bw, 3 * DPR);
+        }
+        hue = (hue + 0.3) % 360;
+    }
+
+    // Glowing oscilloscope with motion trails.
+    function drawScope() {
+        fade(0.2);
+        const mid = H / 2;
+        const amp = H * 0.38;
+        g.lineWidth = (2 + audio.level * 6) * DPR;
+        g.lineJoin = 'round';
+        g.shadowBlur = 18 * DPR;
+        for (let pass = 0; pass < 2; pass++) {
+            const c = (hue + pass * 160) % 360;
+            g.strokeStyle = `hsla(${c},100%,${pass ? 55 : 65}%,${pass ? 0.45 : 1})`;
+            g.shadowColor = `hsl(${c},100%,60%)`;
+            g.beginPath();
+            const n = wave ? wave.length : 2;
+            for (let i = 0; i < n; i += 2) {
+                const v = wave ? (wave[i] - 128) / 128 : 0;
+                const x = (i / (n - 1)) * W;
+                const y = mid + (pass ? -v : v) * amp * (pass ? 0.6 : 1);
+                i ? g.lineTo(x, y) : g.moveTo(x, y);
+            }
+            g.stroke();
+        }
+        g.shadowBlur = 0;
+        hue = (hue + 0.6 + audio.beat * 6) % 360;
+    }
+
+    // Feedback zoom/rotate with a radial waveform painted in each frame.
+    let swirlAngle = 0;
+    function drawSwirl() {
+        bg.clearRect(0, 0, W, H);
+        bg.drawImage(els.cv, 0, 0);
+        g.globalCompositeOperation = 'source-over';
+        g.fillStyle = '#000';
+        g.fillRect(0, 0, W, H);
+        g.save();
+        g.translate(W / 2, H / 2);
+        g.rotate(0.004 + audio.mid * 0.03 + audio.beat * 0.02);
+        const z = 1.012 + audio.bass * 0.04 + audio.beat * 0.03;
+        g.scale(z, z);
+        g.globalAlpha = 0.93;
+        g.drawImage(buffer, -W / 2, -H / 2);
+        g.restore();
+        g.globalAlpha = 1;
+
+        g.save();
+        g.translate(W / 2, H / 2);
+        swirlAngle += 0.01 + audio.treble * 0.05;
+        g.rotate(swirlAngle);
+        const base = Math.min(W, H) * (0.12 + audio.bass * 0.12);
+        const n = 180;
+        g.lineWidth = (1.5 + audio.level * 4) * DPR;
+        g.globalCompositeOperation = 'lighter';
+        for (let arm = 0; arm < 3; arm++) {
+            g.strokeStyle = `hsl(${(hue + arm * 120) % 360},100%,60%)`;
+            g.beginPath();
+            for (let i = 0; i <= n; i++) {
+                const t = (i / n) * Math.PI * 2;
+                const v = wave ? (wave[Math.floor((i % n) / n * 1024 + arm * 300) % wave.length] - 128) / 128 : 0;
+                const r = base * (1 + arm * 0.35) + v * base * 0.9;
+                const x = Math.cos(t) * r, y = Math.sin(t) * r;
+                i ? g.lineTo(x, y) : g.moveTo(x, y);
+            }
+            g.stroke();
+        }
+        g.restore();
+        g.globalCompositeOperation = 'source-over';
+        hue = (hue + 0.4 + audio.beat * 8) % 360;
+    }
+
+    // Spinning polygons flying out of the centre, spawned by the music.
+    const rings = [];
+    const stars = [];
+    let ringClock = 0;
+    function drawTunnel() {
+        fade(0.28);
+        const cx = W / 2, cy = H / 2;
+        const maxR = Math.hypot(W, H) / 2;
+        const speed = 1.025 + audio.bass * 0.05 + audio.beat * 0.04;
+
+        ringClock += 0.25 + audio.level * 1.5;
+        if (ringClock > 1 || audio.beat > 0.95) {
+            ringClock = 0;
+            rings.push({ r: 8 * DPR, hue: hue, sides: audio.beat > 0.95 ? 3 : 6, rot: Math.random() * Math.PI, w: 1 + audio.level * 5 });
+        }
+        for (let i = 0; i < 2 + audio.treble * 12; i++) {
+            const a = Math.random() * Math.PI * 2;
+            stars.push({ x: Math.cos(a), y: Math.sin(a), d: 4 * DPR, hue: hue + 60 });
+        }
+
+        g.globalCompositeOperation = 'lighter';
+        for (let i = rings.length - 1; i >= 0; i--) {
+            const ring = rings[i];
+            ring.r *= speed;
+            ring.rot += 0.01 + audio.mid * 0.04;
+            if (ring.r > maxR * 1.3) { rings.splice(i, 1); continue; }
+            const alpha = Math.min(1, ring.r / (maxR * 0.25));
+            g.strokeStyle = `hsla(${ring.hue % 360},100%,60%,${alpha})`;
+            g.lineWidth = ring.w * DPR * (ring.r / maxR) * 4 + DPR;
+            g.beginPath();
+            for (let s = 0; s <= ring.sides; s++) {
+                const t = ring.rot + (s / ring.sides) * Math.PI * 2;
+                const x = cx + Math.cos(t) * ring.r, y = cy + Math.sin(t) * ring.r;
+                s ? g.lineTo(x, y) : g.moveTo(x, y);
+            }
+            g.stroke();
+        }
+        for (let i = stars.length - 1; i >= 0; i--) {
+            const st = stars[i];
+            st.d *= 1.06 + audio.bass * 0.05;
+            if (st.d > maxR) { stars.splice(i, 1); continue; }
+            const size = (st.d / maxR) * 3 * DPR + 0.5;
+            g.fillStyle = `hsla(${st.hue % 360},80%,80%,${Math.min(1, st.d / (maxR * 0.2))})`;
+            g.fillRect(cx + st.x * st.d, cy + st.y * st.d, size, size);
+        }
+        g.globalCompositeOperation = 'source-over';
+        hue = (hue + 0.5 + audio.beat * 10) % 360;
+    }
+
+    const visuals = { spectrum: drawSpectrum, scope: drawScope, swirl: drawSwirl, tunnel: drawTunnel };
+
+    /* ------------------------------------------------------------------ */
+    /* MilkDrop (butterchurn)                                              */
+    /* ------------------------------------------------------------------ */
+
+    let md = null;
+    let mdLoading = null;
+    let presets = null;
+    let presetNames = [];
+    let presetChangedAt = 0;
+
+    function loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = src;
+            s.onload = resolve;
+            s.onerror = () => reject(new Error('Could not load ' + src));
+            document.head.append(s);
+        });
+    }
+
+    function initMilkdrop() {
+        if (!mdLoading) {
+            mdLoading = (async () => {
+                await Promise.all([loadScript(BUTTERCHURN_JS), loadScript(PRESETS_JS)]);
+                const bc = window.butterchurn.default || window.butterchurn;
+                const bcp = window.butterchurnPresets.default || window.butterchurnPresets;
+                presets = bcp.getPresets();
+                presetNames = Object.keys(presets).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+                ensureAudio();
+                els.md.width = W;
+                els.md.height = H;
+                md = bc.createVisualizer(actx, els.md, {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    pixelRatio: DPR,
+                    textureRatio: 1,
+                });
+                if (sourceNode) md.connectAudio(sourceNode);
+
+                const frag = document.createDocumentFragment();
+                presetNames.forEach((name, i) => {
+                    const o = document.createElement('option');
+                    o.value = i;
+                    o.textContent = name;
+                    frag.append(o);
+                });
+                els.preset.append(frag);
+
+                const saved = presetNames.indexOf(store.get('viz.preset'));
+                loadPreset(saved >= 0 ? saved : Math.floor(Math.random() * presetNames.length), 0);
+            })().catch((err) => {
+                mdLoading = null;
+                toast('MilkDrop failed to load');
+                console.error(err);
+                setMode('spectrum');
+            });
+        }
+        return mdLoading;
+    }
+
+    function loadPreset(i, blend = 2.5) {
+        if (!md) return;
+        const name = presetNames[i];
+        md.loadPreset(presets[name], blend);
+        els.preset.value = i;
+        store.set('viz.preset', name);
+        presetChangedAt = performance.now();
+    }
+
+    function randomPreset() {
+        if (!md) return;
+        loadPreset(Math.floor(Math.random() * presetNames.length));
+    }
+
+    els.preset.addEventListener('change', () => loadPreset(+els.preset.value));
+    els.random.addEventListener('click', randomPreset);
+    els.cycle.addEventListener('change', () => {
+        presetChangedAt = performance.now();
+        store.set('viz.cycle', els.cycle.checked ? '1' : '0');
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Modes, loop, UI chrome                                              */
+    /* ------------------------------------------------------------------ */
+
+    let mode = 'spectrum';
+    const modeOrder = ['spectrum', 'scope', 'swirl', 'tunnel', 'milkdrop'];
+
+    function setMode(m) {
+        if (!modeOrder.includes(m)) m = 'spectrum';
+        mode = m;
+        els.mode.value = m;
+        document.body.classList.toggle('milkdrop', m === 'milkdrop');
+        store.set('viz.mode', m);
+        if (m === 'milkdrop') {
+            initMilkdrop();
+        } else {
+            g.fillStyle = '#000';
+            g.fillRect(0, 0, W, H);
+            rings.length = stars.length = 0;
+        }
+    }
+
+    els.mode.addEventListener('change', () => setMode(els.mode.value));
+
+    function frame(now) {
+        analyse(now);
+        if (mode === 'milkdrop') {
+            if (md) {
+                if (els.cycle.checked && now - presetChangedAt > PRESET_SECONDS * 1000) randomPreset();
+                md.render();
+            }
+        } else {
+            visuals[mode]();
+        }
+        requestAnimationFrame(frame);
+    }
+
+    function toggleFullscreen() {
+        document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+    }
+
+    els.fs.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', () => {
+        els.fs.textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen';
+    });
+
+    // Fade the UI out after a few seconds without the mouse moving.
+    let idleTimer;
+    let forceHidden = false;
+    let overPanel = false;
+    function wake() {
+        if (!forceHidden) document.body.classList.remove('idle');
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+            const busy = document.activeElement && ['INPUT', 'SELECT'].includes(document.activeElement.tagName);
+            if (!busy && !overPanel) document.body.classList.add('idle');
+        }, 3000);
+    }
+    const panel = $('#panel');
+    panel.addEventListener('mouseenter', () => { overPanel = true; });
+    panel.addEventListener('mouseleave', () => { overPanel = false; wake(); });
+    ['mousemove', 'mousedown', 'touchstart'].forEach((ev) => window.addEventListener(ev, () => { forceHidden = false; wake(); }, { passive: true }));
+
+    window.addEventListener('keydown', (e) => {
+        if (e.target.matches('input[type="text"], select') || e.ctrlKey || e.metaKey || e.altKey) return;
+        switch (e.key.toLowerCase()) {
+            case ' ': e.preventDefault(); togglePlay(); break;
+            case 'n': playerReady && player.nextVideo(); break;
+            case 'p': playerReady && player.previousVideo(); break;
+            case 'f': toggleFullscreen(); break;
+            case 'r': if (mode === 'milkdrop') randomPreset(); break;
+            case 'v': setMode(modeOrder[(modeOrder.indexOf(mode) + 1) % modeOrder.length]); toast(els.mode.selectedOptions[0].textContent); break;
+            case 'h':
+                forceHidden = !document.body.classList.contains('idle');
+                document.body.classList.toggle('idle', forceHidden);
+                break;
+            default: return;
+        }
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Start-up                                                            */
+    /* ------------------------------------------------------------------ */
+
+    els.cycle.checked = store.get('viz.cycle') !== '0';
+    setMode(store.get('viz.mode') || 'spectrum');
+
+    // ?list=... or ?url=... in the page URL wins over the last-used link.
+    const params = new URLSearchParams(location.search);
+    const startUrl = params.get('url') || (params.get('list') && 'https://www.youtube.com/playlist?list=' + params.get('list')) || store.get('viz.url');
+    if (startUrl) {
+        els.urlInput.value = startUrl;
+        const src = parseYouTube(startUrl);
+        if (src && !src.error) loadSource(src, false);
+    }
+
+    wake();
+    requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
